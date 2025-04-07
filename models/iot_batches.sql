@@ -1,10 +1,13 @@
 {{
   config({    
     "materialized": "incremental",
-    "incremental_predicates": [],
-    "incremental_strategy": "delete+insert",
+    "batch_size": "day",
+    "begin": "2025-04-07",
+    "event_time": "LOADED_AT",
+    "incremental_strategy": "microbatch",
+    "lookback": 0,
     "on_schema_change": 'fail',
-    "unique_key": ["LOADED_AT"]
+    "post_hook": "{{ log_results(results)}}"
   })
 }}
 

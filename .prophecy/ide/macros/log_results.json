@@ -1,0 +1,42 @@
+{
+  "log_results" : {
+    "name" : "log_results",
+    "macroType" : "expression",
+    "definition" : "\n    {% if execute %}\n        {{ log(\"updating audit table\", info=True) }}\n        {% for res in results %}\n  \n            {% set load_log_query %}\n            INSERT INTO AUDIT.EDW_LOAD_LOG (\n                EDW_TABLE_NAME, LOAD_START, LOAD_END, LOAD_STATUS, ERROR_MESSAGE, CREATE_DATE, UPDATE_DATE, CREATED_BY_USER)\n            VALUES (\n                SPLIT_PART('{{ res.node.unique_id }}', '.', -1), \n                DATEADD(SECOND, -{{ res.execution_time }}, CURRENT_TIMESTAMP()),\n                CURRENT_TIMESTAMP(), \n                '{{ res.status }}',\n                '{{ res.message }}',\n                CURRENT_TIMESTAMP(),\n                CURRENT_TIMESTAMP(),\n                CURRENT_USER)\n            {% endset %}\n  \n            {% do run_query(load_log_query) %}\n\n            {% set run_id_query %}\n            SELECT RUN_ID FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))\n            {% endset %}\n  \n            {% set run_id_result = run_query(run_id_query) %}\n            {% set run_id = run_id_result['data'][0][0] %}\n\n            {% if res.status != 'success' %}\n                {% set error_log_query %}\n                INSERT INTO AUDIT.EDW_ERROR_LOG (\n                    ERROR_MESSAGE, ORIGINAL_RUN_ID)\n                VALUES (\n                    '{{ res.message }}', '{{ run_id }}')\n                {% endset %}\n    \n                {% do run_query(error_log_query) %}\n            {% endif %}\n\n            {{ log(\"Inserted row with RUN_ID: \" ~ run_id, info=True) }}\n            {{ log(\"operated on \" ~ res.adapter_response.rows_affected ~ \" rows\", info=True) }}\n        {% endfor %}\n        {{ log(\"finished updating audit table\", info=True) }}\n    {% endif %}",
+    "parameters" : {
+      "type" : "record",
+      "fields" : [ {
+        "name" : "results",
+        "kind" : {
+          "type" : "table"
+        },
+        "optional" : false,
+        "comment" : "",
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      } ]
+    },
+    "staleState" : "none",
+    "propertiesFile" : {
+      "name" : "macros",
+      "content" : "---\nversion: 2\nmacros:\n- name: \"log_results\"\n  arguments:\n  - name: \"results\"\n    type: \"table\"\n    description: \"{\\\"ProphecyType\\\": \\\"table\\\"}\"\n  macroType: \"expression\"\n",
+      "path" : "Onbe_microbatchSnowflake/macros/macros.yml",
+      "projectConfiguration" : null,
+      "folderConfiguration" : {
+        "version" : 2,
+        "macros" : [ {
+          "name" : "log_results",
+          "arguments" : [ {
+            "name" : "results",
+            "type" : "table",
+            "description" : "{\"ProphecyType\": \"table\"}"
+          } ],
+          "macroType" : "expression"
+        } ]
+      },
+      "packagesYml" : null,
+      "editable" : true
+    },
+    "version" : 0
+  }
+}

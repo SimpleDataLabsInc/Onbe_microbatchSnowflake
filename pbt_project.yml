@@ -67,6 +67,16 @@ sqlMacros:
     - macros/generate_schema_name.sql
     - .prophecy/ide/macros/generate_schema_name.json
     createdAt: '2025-04-04 20:09:25'
+  .prophecy/metadata/sqlmacros/log_results:
+    name: log_results
+    macroType: expression
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - macros/log_results.sql
+    - .prophecy/ide/macros/log_results.json
+    - macros/macros.yml
+    createdAt: '2025-04-07 20:21:17'
 sqlSeeds: {}
 sqlSources:
   .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:

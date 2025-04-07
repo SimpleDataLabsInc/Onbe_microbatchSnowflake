@@ -1,0 +1,18 @@
+---
+version: 2
+models:
+- name: "iot_batches"
+  columns:
+  - name: "LOADED_AT"
+    dataType:
+      type: "Timestamp"
+  - name: "YEAR"
+    dataType:
+      type: "Number"
+  - name: "MONTH"
+    dataType:
+      type: "Number"
+  - name: "N_RECORDS_LOADED"
+    dataType:
+      type: "Number"
+  tests: []

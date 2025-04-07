@@ -1,0 +1,123 @@
+name: Onbe_microbatchSnowflake
+description: ''
+version: 0.0.1
+author: best.neil@prophecy.io
+language: sql
+buildSystem: ''
+buildSystemDetails: null
+pipelines: {}
+datasets: {}
+templates: {}
+jobs: {}
+gemContainer:
+  languageVersion: ''
+  gemLibsVersion: ''
+  gems: {}
+  dependencies: null
+functions:
+  author: null
+  createdAt: '2025-04-04 20:09:22'
+  udfs: {}
+  udafs: {}
+  expressions: {}
+  airflowFunctions: {}
+  businessRules: {}
+subgraphs: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/iot_batches:
+    name: iot_batches
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
+      - name: YEAR
+        dataType:
+          type: Number
+      - name: MONTH
+        dataType:
+          type: Number
+      - name: N_RECORDS_LOADED
+        dataType:
+          type: Number
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - models/iot_batches.sql
+    - .prophecy/ide/models/iot_batches.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+      seeds: []
+      sources: []
+      snapshots: []
+    createdAt: '2025-04-07 16:07:48'
+sqlSnapshots: {}
+sqlTests: {}
+sqlMacros:
+  .prophecy/metadata/sqlmacros/generate_schema_name:
+    name: generate_schema_name
+    macroType: expression
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - macros/generate_schema_name.sql
+    - .prophecy/ide/macros/generate_schema_name.json
+    createdAt: '2025-04-04 20:09:25'
+sqlSeeds: {}
+sqlSources:
+  .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:
+    name: ONBE_DEMO_DEV.PUBLIC
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2025-04-07 15:59:33'
+    tables:
+    - name: IOT
+      schema:
+        entityType: ''
+        providerType: snowflake
+        fields:
+        - name: DEVICE_ID
+          dataType:
+            type: String
+        - name: PLANT_ID
+          dataType:
+            type: String
+        - name: TAG_NAME
+          dataType:
+            type: String
+        - name: TS
+          dataType:
+            type: Timestamp
+        - name: VALUE
+          dataType:
+            type: Float
+        - name: ENGINEERING_UNITS
+          dataType:
+            type: String
+        - name: DATE
+          dataType:
+            type: Date
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
+      description: IoT sensor data capturing measurements from devices across various
+        plants, enabling real-time monitoring and analysis of operational metrics.
+      author: best.neil@prophecy.io
+      createdAt: '2025-04-07 15:59:33'
+sqlUnreferencedSources: {}
+sqlPipeline:
+  name: sqlPipeline
+  description: null
+  author: best.neil@prophecy.io
+  createdAt: '2025-04-04 20:09:22'
+dependencies: []
+projectDependencies: {}
+flags:
+  shouldAddDefaultDependenciesIfAbsent: true
+pipelineConfigurations: {}

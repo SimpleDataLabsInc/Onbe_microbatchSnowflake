@@ -16,3 +16,32 @@ models:
     dataType:
       type: "Number"
   tests: []
+- name: "iot"
+  config:
+      event_time: LOADED_AT
+  columns:
+  - name: "PLANT_ID"
+    dataType:
+      type: "String"
+  - name: "VALUE"
+    dataType:
+      type: "Float"
+  - name: "DEVICE_ID"
+    dataType:
+      type: "String"
+  - name: "TAG_NAME"
+    dataType:
+      type: "String"
+  - name: "LOADED_AT"
+    dataType:
+      type: "Timestamp"
+  - name: "ENGINEERING_UNITS"
+    dataType:
+      type: "String"
+  - name: "DATE"
+    dataType:
+      type: "Date"
+  - name: "TS"
+    dataType:
+      type: "Timestamp"
+  tests: []

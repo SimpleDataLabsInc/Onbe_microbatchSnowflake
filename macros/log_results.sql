@@ -1,10 +1,11 @@
 {% macro log_results(results) %}
+
     {% if execute %}
         {{ log("updating audit table", info=True) }}
         {% for res in results %}
   
             {% set load_log_query %}
-            INSERT INTO AUDIT.EDW_LOAD_LOG (
+            INSERT INTO EDW_LOAD_LOG (
                 EDW_TABLE_NAME, LOAD_START, LOAD_END, LOAD_STATUS, ERROR_MESSAGE, CREATE_DATE, UPDATE_DATE, CREATED_BY_USER)
             VALUES (
                 SPLIT_PART('{{ res.node.unique_id }}', '.', -1), 
@@ -43,3 +44,5 @@
         {{ log("finished updating audit table", info=True) }}
     {% endif %}
 {% endmacro %}
+
+ 

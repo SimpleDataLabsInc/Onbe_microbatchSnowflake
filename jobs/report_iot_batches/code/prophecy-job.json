@@ -1,0 +1,142 @@
+{
+  "metainfo" : {
+    "type" : "Composer",
+    "fabricId" : "23283",
+    "jobId" : "jobs/report_iot_batches",
+    "name" : "report_iot_batches",
+    "dagName" : "best_neil_Onbe_microbatchSnowflake_report_iot_batches",
+    "schedule" : "None",
+    "enabled" : false,
+    "alerting" : {
+      "emails" : "",
+      "onStart" : false,
+      "onSuccess" : false,
+      "onFailure" : false
+    },
+    "maxConcurrentRuns" : 1,
+    "processDefaultSettings" : {
+      "ignore_first_depends_on_past" : true,
+      "do_xcom_push" : true
+    },
+    "maxActiveRuns" : 1,
+    "catchup" : false,
+    "scheduleTimeZone" : "UTC",
+    "dagParams" : {
+      "instances" : {
+        "default" : { }
+      },
+      "params" : { },
+      "selected" : "default"
+    },
+    "airflowFunctions" : [ ],
+    "dynamicPipelineStatus" : {
+      "databricks" : false,
+      "dataproc" : false,
+      "emr" : false,
+      "onprem" : false
+    }
+  },
+  "processes" : {
+    "bzScJC7_BoRBM7ReW73E8$$n_UEXMERGVbRUUJ-_PQd6" : {
+      "id" : "bzScJC7_BoRBM7ReW73E8$$n_UEXMERGVbRUUJ-_PQd6",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "iot_batches",
+        "slug" : "iot_batches",
+        "x" : -680,
+        "y" : -280
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OgTIZ7KfP7TzNnRxAyeDs$$fbgk9bdFKhdGUs-8dqRaH",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "fs6FT9Hz22GPyKDvH8Tg1$$mdsGEj7F48IPXBglMYc4i",
+          "slug" : ""
+        } ]
+      },
+      "settings" : { },
+      "properties" : {
+        "entityId" : "44652/.prophecy/metadata/sqlmodels/iot_batches",
+        "cacheSelectedOnly" : null,
+        "gitSubPath" : null,
+        "runModelWithParents" : false,
+        "defer" : null,
+        "noDefer" : null,
+        "runSeed" : true,
+        "gitEntity" : "branch",
+        "noPartialParse" : null,
+        "model" : null,
+        "warnErrorOptions" : null,
+        "gitTokenSecret" : null,
+        "state" : null,
+        "useExperimentalParser" : null,
+        "currentProjectSnapshots" : null,
+        "gitSshUrl" : null,
+        "indirectSelection" : null,
+        "partialParse" : null,
+        "vars" : null,
+        "isAdhocRunFromSameProject" : null,
+        "noPrint" : null,
+        "quiet" : null,
+        "projectId" : "44652",
+        "runMode" : "model",
+        "runOnlyModel" : false,
+        "favorState" : null,
+        "failFast" : null,
+        "noStaticParser" : null,
+        "loadingModels" : false,
+        "runTest" : true,
+        "select" : null,
+        "recordTimingInfo" : null,
+        "fullRefresh" : null,
+        "entityName" : "iot_batches",
+        "noCacheSelectedOnly" : null,
+        "gitEntityValueTag" : null,
+        "noFavorState" : null,
+        "snapshot" : null,
+        "isProphecyManaged" : false,
+        "profile" : null,
+        "noVersionCheck" : null,
+        "noWriteJson" : null,
+        "printerWidth" : null,
+        "sqlFabricId" : "22696",
+        "gitEntityValue" : null,
+        "logFormat" : null,
+        "runModelWithChildren" : false,
+        "dbtProfileSecret" : null,
+        "gitEntityValueCommit" : null,
+        "target" : null,
+        "exclude" : null,
+        "runDeps" : null,
+        "loadingSnapshots" : false,
+        "gitEntityValueBranch" : null,
+        "noAnonymousUsageStats" : null,
+        "selector" : null,
+        "targetPath" : null,
+        "threads" : null,
+        "warnError" : null,
+        "currentProjectModels" : [ {
+          "label" : "iot",
+          "value" : "iot",
+          "id" : "44652/.prophecy/metadata/sqlmodels/iot",
+          "name" : "iot"
+        }, {
+          "label" : "iot_batches",
+          "value" : "iot_batches",
+          "id" : "44652/.prophecy/metadata/sqlmodels/iot_batches",
+          "name" : "iot_batches"
+        } ],
+        "profilesDir" : null,
+        "taskId" : null,
+        "logPath" : null,
+        "storeFailures" : null,
+        "entityKind" : "model"
+      },
+      "connections" : [ ],
+      "processes" : { }
+    }
+  },
+  "connections" : [ ]
+}

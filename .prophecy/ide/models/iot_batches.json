@@ -13,9 +13,8 @@
         "event_time" : "\"LOADED_AT\"",
         "begin" : "\"2025-04-07\"",
         "materialized" : "incremental",
-        "post_hook" : "\"{{ log_results(results)}}\"",
         "batch_size" : "\"day\"",
-        "on_schema_change" : "'fail'",
+        "on_schema_change" : "'append_new_columns'",
         "incremental_strategy" : "\"microbatch\"",
         "type" : "ModelConfig"
       },
@@ -26,11 +25,11 @@
     "version" : 3
   },
   "processes" : {
-    "IOT##hSXojlEo" : {
-      "id" : "IOT##hSXojlEo",
-      "component" : "Source",
+    "iot##ZU2Xbj9R" : {
+      "id" : "iot##ZU2Xbj9R",
+      "component" : "Model",
       "metadata" : {
-        "label" : "IOT",
+        "label" : "iot",
         "x" : 20,
         "y" : 20,
         "phase" : 0,
@@ -38,15 +37,14 @@
       },
       "properties" : {
         "table" : {
-          "name" : "IOT",
-          "sourceType" : "Source",
-          "sourceName" : "ONBE_DEMO_DEV.PUBLIC"
+          "name" : "iot",
+          "sourceType" : "Model"
         }
       },
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "btakj6MQ",
+          "id" : "aMATl930",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
@@ -54,8 +52,8 @@
       },
       "index" : 0
     },
-    "count_by_date##LbrbVg8d" : {
-      "id" : "count_by_date##LbrbVg8d",
+    "count_by_date##F3k1TGKI" : {
+      "id" : "count_by_date##F3k1TGKI",
       "component" : "Aggregate",
       "metadata" : {
         "label" : "count_by_date",
@@ -72,25 +70,25 @@
             "expression" : "LOADED_AT"
           },
           "alias" : "LOADED_AT",
-          "_row_id" : "10987492"
+          "_row_id" : "1166932389"
         }, {
           "expression" : {
             "expression" : "YEAR(TS)"
           },
           "alias" : "YEAR",
-          "_row_id" : "1235465761"
+          "_row_id" : "576278966"
         }, {
           "expression" : {
             "expression" : "MONTH(TS)"
           },
           "alias" : "MONTH",
-          "_row_id" : "1774331291"
+          "_row_id" : "2144830562"
         }, {
           "expression" : {
             "expression" : "COUNT(*)"
           },
           "alias" : "N_RECORDS_LOADED",
-          "_row_id" : "945717793"
+          "_row_id" : "542937603"
         } ],
         "allowSelection" : true,
         "condition" : {
@@ -102,26 +100,26 @@
           "expression" : {
             "expression" : "LOADED_AT"
           },
-          "_row_id" : "2108187099"
+          "_row_id" : "302649417"
         }, {
           "expression" : {
             "expression" : "YEAR(TS)"
           },
-          "_row_id" : "85301577"
+          "_row_id" : "1076820255"
         }, {
           "expression" : {
             "expression" : "MONTH(TS)"
           },
-          "_row_id" : "791110055"
+          "_row_id" : "242207102"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "n0BsC7hm",
+          "id" : "Qhdt1H6S",
           "slug" : "in0"
         } ],
         "outputs" : [ {
-          "id" : "c0sBpt6q",
+          "id" : "TlFbU6DH",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
@@ -129,21 +127,84 @@
       },
       "index" : 1
     },
-    "final##NMB80n0c" : {
-      "id" : "final##NMB80n0c",
-      "component" : "TargetModel",
+    "reported_at##w7DGlMzJ" : {
+      "id" : "reported_at##w7DGlMzJ",
+      "component" : "Reformat",
       "metadata" : {
-        "label" : "iot_batches",
+        "label" : "reported_at",
         "x" : 420,
         "y" : 20,
         "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Formats data to include loading timestamps and record counts for reporting.",
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "LOADED_AT"
+          },
+          "alias" : "LOADED_AT",
+          "_row_id" : "1215650762"
+        }, {
+          "expression" : {
+            "expression" : "YEAR"
+          },
+          "alias" : "YEAR",
+          "_row_id" : "890717197"
+        }, {
+          "expression" : {
+            "expression" : "MONTH"
+          },
+          "alias" : "MONTH",
+          "_row_id" : "1943232998"
+        }, {
+          "expression" : {
+            "expression" : "N_RECORDS_LOADED"
+          },
+          "alias" : "N_RECORDS_LOADED",
+          "_row_id" : "1537356262"
+        }, {
+          "expression" : {
+            "expression" : "current_timestamp()"
+          },
+          "alias" : "REPORTED_AT",
+          "_row_id" : "1674740793"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "nqeBaZlg",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "K6GR5tz2",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "index" : 2
+    },
+    "final##OSXmGPTm" : {
+      "id" : "final##OSXmGPTm",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "iot_batches",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Collects all reported IoT data for analysis.",
+        "autoUpdateComment" : true,
         "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM count_by_date\n",
+        "query" : "SELECT * \n\nFROM reported_at\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -151,31 +212,36 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "BdQcoih1",
-          "slug" : "count_by_date"
+          "id" : "QRlkEFRs",
+          "slug" : "reported_at"
         } ],
         "outputs" : [ {
-          "id" : "Ts2reaNV",
+          "id" : "oDCOovPs",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 2
+      }
     }
   },
   "connections" : [ {
-    "id" : "x8zSZylY",
-    "source" : "IOT##hSXojlEo",
-    "sourcePort" : "btakj6MQ",
-    "target" : "count_by_date##LbrbVg8d",
-    "targetPort" : "n0BsC7hm"
+    "id" : "m4FMCkoo",
+    "source" : "iot##ZU2Xbj9R",
+    "sourcePort" : "aMATl930",
+    "target" : "count_by_date##F3k1TGKI",
+    "targetPort" : "Qhdt1H6S"
   }, {
-    "id" : "zS1r26NP",
-    "source" : "count_by_date##LbrbVg8d",
-    "sourcePort" : "c0sBpt6q",
-    "target" : "final##NMB80n0c",
-    "targetPort" : "BdQcoih1"
+    "id" : "fyfhtJ8U",
+    "source" : "count_by_date##F3k1TGKI",
+    "sourcePort" : "TlFbU6DH",
+    "target" : "reported_at##w7DGlMzJ",
+    "targetPort" : "nqeBaZlg"
+  }, {
+    "id" : "OtQw5sFq",
+    "source" : "reported_at##w7DGlMzJ",
+    "sourcePort" : "K6GR5tz2",
+    "target" : "final##OSXmGPTm",
+    "targetPort" : "QRlkEFRs"
   } ],
   "component" : "Model"
 }

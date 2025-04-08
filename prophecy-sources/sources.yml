@@ -8,8 +8,6 @@ sources:
     enabled: true
   tables:
   - name: "IOT"
-    config:
-      event_time: "LOADED_AT"
     description: "IoT sensor data capturing measurements from devices across various\
       \ plants, enabling real-time monitoring and analysis of operational metrics."
     quoting:

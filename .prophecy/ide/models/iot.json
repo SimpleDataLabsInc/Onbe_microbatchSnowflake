@@ -1,0 +1,96 @@
+{
+  "id" : "iot",
+  "metainfo" : {
+    "label" : "iot",
+    "autoLayout" : false,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "entityConfig" : {
+        "alias" : "\"iot_v\"",
+        "materialized" : "view",
+        "type" : "ModelConfig"
+      },
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "IOT##LBlyaNJl" : {
+      "id" : "IOT##LBlyaNJl",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IOT",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT",
+          "sourceType" : "Source",
+          "sourceName" : "ONBE_DEMO_DEV.PUBLIC"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Bs6XxoKk",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "index" : 0
+    },
+    "final##eq2HX26O" : {
+      "id" : "final##eq2HX26O",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "iot",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Retrieves all data from the IoT database for comprehensive analysis.",
+        "autoUpdateComment" : true,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM IOT\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "N3rcfLRn",
+          "slug" : "IOT"
+        } ],
+        "outputs" : [ {
+          "id" : "s2xQqZxf",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "Ag3IvICo",
+    "source" : "IOT##LBlyaNJl",
+    "sourcePort" : "Bs6XxoKk",
+    "target" : "final##eq2HX26O",
+    "targetPort" : "N3rcfLRn"
+  } ],
+  "component" : "Model"
+}

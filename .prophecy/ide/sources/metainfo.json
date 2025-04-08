@@ -189,6 +189,96 @@
               }
             } ]
           },
+          "EDW_LOAD_LOG" : {
+            "entityType" : "TABLE",
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "EDW_TABLE_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "LOAD_START",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            }, {
+              "name" : "LOAD_END",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            }, {
+              "name" : "LOAD_STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "ERROR_MESSAGE",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "CREATE_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "UPDATE_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "CREATED_BY_USER",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "IOT_V" : {
+            "entityType" : "VIEW",
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "DEVICE_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "PLANT_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TAG_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TS",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            }, {
+              "name" : "VALUE",
+              "dataType" : {
+                "type" : "Float"
+              }
+            }, {
+              "name" : "ENGINEERING_UNITS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "LOADED_AT",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            } ]
+          },
           "CUSTOMERS" : {
             "entityType" : "TABLE",
             "providerType" : "Snowflake",
@@ -314,6 +404,36 @@
               }
             }, {
               "name" : "LOADED_AT",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            } ]
+          },
+          "IOT_BATCHES" : {
+            "entityType" : "TABLE",
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "LOADED_AT",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            }, {
+              "name" : "YEAR",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "MONTH",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "N_RECORDS_LOADED",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "REPORTED_AT",
               "dataType" : {
                 "type" : "Timestamp"
               }

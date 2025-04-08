@@ -25,7 +25,7 @@
       "component" : "Source",
       "metadata" : {
         "label" : "IOT",
-        "x" : 20,
+        "x" : -100,
         "y" : 20,
         "phase" : 0,
         "isLabelGrayed" : false
@@ -65,7 +65,7 @@
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT * \n\nFROM IOT\n",
+        "query" : "SELECT * \n\nFROM gt_max_loaded_at\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -74,7 +74,7 @@
       "ports" : {
         "inputs" : [ {
           "id" : "N3rcfLRn",
-          "slug" : "IOT"
+          "slug" : "gt_max_loaded_at"
         } ],
         "outputs" : [ {
           "id" : "s2xQqZxf",
@@ -83,12 +83,51 @@
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
       }
+    },
+    "oBBwEBsXSrFWssovhIxyR$$RMBtFyERmfaUPBxREb6RU" : {
+      "id" : "oBBwEBsXSrFWssovhIxyR$$RMBtFyERmfaUPBxREb6RU",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "gt_max_loaded_at",
+        "slug" : "gt_max_loaded_at",
+        "x" : 60,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Fetches the latest IoT entries since the last recorded load time.",
+        "autoUpdateComment" : true,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "IXF92k2u9byk5uxpQzr28$$-e9K8k_7ifWAJjATrFtsu##LOADED_AT" ],
+        "condition" : {
+          "expression" : "LOADED_AT > (SELECT MAX_LOADED_AT FROM {{ ref( 'iot_max_loaded_at')}})"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "IXF92k2u9byk5uxpQzr28$$-e9K8k_7ifWAJjATrFtsu",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "tSmcK720X7mrBmFo5uVeU$$T3FA9FXr_PzUvxaR7H6EY",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
     }
   },
   "connections" : [ {
-    "id" : "Ag3IvICo",
+    "id" : "T-RX9uiuwO_fY19cTh4yT$$qS9Nh-O0AwbVkUOqsEkI5",
     "source" : "IOT##LBlyaNJl",
     "sourcePort" : "Bs6XxoKk",
+    "target" : "oBBwEBsXSrFWssovhIxyR$$RMBtFyERmfaUPBxREb6RU",
+    "targetPort" : "IXF92k2u9byk5uxpQzr28$$-e9K8k_7ifWAJjATrFtsu"
+  }, {
+    "id" : "ruLuJKu6Mj5BOvIAjfsxv",
+    "source" : "oBBwEBsXSrFWssovhIxyR$$RMBtFyERmfaUPBxREb6RU",
+    "sourcePort" : "tSmcK720X7mrBmFo5uVeU$$T3FA9FXr_PzUvxaR7H6EY",
     "target" : "final##eq2HX26O",
     "targetPort" : "N3rcfLRn"
   } ],

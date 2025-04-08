@@ -19,8 +19,8 @@
             {% endset %}
   
             {% do run_query(load_log_query) %}
-
-            {% set run_id_query %}
+            
+                        {% set run_id_query %}
             SELECT RUN_ID FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
             {% endset %}
   

@@ -127,6 +127,28 @@ sqlModels:
       sources: []
       snapshots: []
     createdAt: '2025-04-07 16:07:48'
+  .prophecy/metadata/sqlmodels/iot_max_loaded_at:
+    name: iot_max_loaded_at
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: MAX_LOADED_AT
+        dataType:
+          type: Timestamp
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - models/iot_max_loaded_at.sql
+    - .prophecy/ide/models/iot_max_loaded_at.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+      seeds: []
+      sources: []
+      snapshots: []
+    createdAt: '2025-04-08 18:34:51'
 sqlSnapshots: {}
 sqlTests: {}
 sqlMacros:
@@ -192,6 +214,30 @@ sqlSources:
         plants, enabling real-time monitoring and analysis of operational metrics.
       author: best.neil@prophecy.io
       createdAt: '2025-04-07 15:59:33'
+    - name: IOT_BATCHES
+      schema:
+        entityType: ''
+        providerType: snowflake
+        fields:
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
+        - name: YEAR
+          dataType:
+            type: Number
+        - name: MONTH
+          dataType:
+            type: Number
+        - name: N_RECORDS_LOADED
+          dataType:
+            type: Number
+        - name: REPORTED_AT
+          dataType:
+            type: Timestamp
+      description: Records of IoT data batches, capturing the volume of data loaded
+        and the associated timestamps for reporting and loading activities.
+      author: best.neil@prophecy.io
+      createdAt: '2025-04-08 18:33:22'
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

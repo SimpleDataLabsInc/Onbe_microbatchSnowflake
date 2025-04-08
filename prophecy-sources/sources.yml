@@ -45,3 +45,27 @@ sources:
       description: "Timestamp indicating when the data was loaded into the system"
       dataType:
         type: "Timestamp"
+  - name: "IOT_BATCHES"
+    description: "Records of IoT data batches, capturing the volume of data loaded\
+      \ and the associated timestamps for reporting and loading activities."
+    columns:
+    - name: "LOADED_AT"
+      description: "Timestamp indicating when the batch was loaded"
+      dataType:
+        type: "Timestamp"
+    - name: "YEAR"
+      description: "The year in which the records were loaded"
+      dataType:
+        type: "Number"
+    - name: "MONTH"
+      description: "The month during which the records were loaded"
+      dataType:
+        type: "Number"
+    - name: "N_RECORDS_LOADED"
+      description: "Total number of records successfully loaded in the batch"
+      dataType:
+        type: "Number"
+    - name: "REPORTED_AT"
+      description: "Timestamp indicating when the batch was reported"
+      dataType:
+        type: "Timestamp"

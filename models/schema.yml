@@ -18,7 +18,7 @@ models:
   tests: []
 - name: "iot"
   config:
-      event_time: LOADED_AT
+    event_time: "LOADED_AT"
   columns:
   - name: "PLANT_ID"
     dataType:
@@ -42,6 +42,12 @@ models:
     dataType:
       type: "Date"
   - name: "TS"
+    dataType:
+      type: "Timestamp"
+  tests: []
+- name: "iot_max_loaded_at"
+  columns:
+  - name: "MAX_LOADED_AT"
     dataType:
       type: "Timestamp"
   tests: []

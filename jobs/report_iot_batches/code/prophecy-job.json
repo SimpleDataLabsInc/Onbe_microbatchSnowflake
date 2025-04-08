@@ -15,6 +15,7 @@
     },
     "maxConcurrentRuns" : 1,
     "processDefaultSettings" : {
+      "retries" : 0,
       "ignore_first_depends_on_past" : true,
       "do_xcom_push" : true
     },

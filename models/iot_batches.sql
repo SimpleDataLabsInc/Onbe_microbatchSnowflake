@@ -1,11 +1,7 @@
 {{
   config({    
     "materialized": "incremental",
-    "batch_size": "day",
-    "begin": "2025-04-07",
-    "event_time": "LOADED_AT",
     "incremental_strategy": "delete+insert",
-    "lookback": 0,
     "on_schema_change": 'append_new_columns',
     "unique_key": ["LOADED_AT", "YEAR", "MONTH"]
   })
@@ -19,14 +15,6 @@ WITH IOT AS (
 
 ),
 
-IOT_BATCHES AS (
-
-  SELECT * 
-  
-  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}
-
-),
-
 incremental_iot_data AS (
 
   SELECT *
@@ -35,7 +23,7 @@ incremental_iot_data AS (
   
   {% if is_incremental() %}
     WHERE 
-      loaded_at > (SELECT MAX(loaded_at) FROM {{ this }})
+      LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})
   {% endif %}
 
 ),

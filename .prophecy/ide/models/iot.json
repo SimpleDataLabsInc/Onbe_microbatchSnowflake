@@ -10,7 +10,7 @@
     "graphConfig" : {
       "entityConfig" : {
         "alias" : "\"iot_v\"",
-        "materialized" : "view",
+        "materialized" : "ephemeral",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -57,7 +57,7 @@
         "y" : 20,
         "phase" : 0,
         "macroDependencies" : [ ],
-        "comment" : "Retrieves all data from the IoT database for comprehensive analysis.",
+        "comment" : "Retrieves the latest data from the IoT system for analysis.",
         "autoUpdateComment" : true,
         "isLabelGrayed" : false
       },

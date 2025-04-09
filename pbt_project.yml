@@ -50,49 +50,6 @@ functions:
   businessRules: {}
 subgraphs: {}
 sqlModels:
-  .prophecy/metadata/sqlmodels/iot:
-    name: iot
-    schema:
-      entityType: ''
-      providerType: Snowflake
-      fields:
-      - name: DEVICE_ID
-        dataType:
-          type: String
-      - name: PLANT_ID
-        dataType:
-          type: String
-      - name: TAG_NAME
-        dataType:
-          type: String
-      - name: TS
-        dataType:
-          type: Timestamp
-      - name: VALUE
-        dataType:
-          type: Float
-      - name: ENGINEERING_UNITS
-        dataType:
-          type: String
-      - name: DATE
-        dataType:
-          type: Date
-      - name: LOADED_AT
-        dataType:
-          type: Timestamp
-    description: null
-    author: best.neil@prophecy.io
-    files:
-    - models/iot.sql
-    - .prophecy/ide/models/iot.json
-    - models/schema.yml
-    sqlDependencies:
-      models: []
-      datasets: []
-      seeds: []
-      sources: []
-      snapshots: []
-    createdAt: '2025-04-07 21:20:15'
   .prophecy/metadata/sqlmodels/iot_batches:
     name: iot_batches
     schema:
@@ -127,28 +84,6 @@ sqlModels:
       sources: []
       snapshots: []
     createdAt: '2025-04-07 16:07:48'
-  .prophecy/metadata/sqlmodels/iot_max_loaded_at:
-    name: iot_max_loaded_at
-    schema:
-      entityType: ''
-      providerType: Snowflake
-      fields:
-      - name: MAX_LOADED_AT
-        dataType:
-          type: Timestamp
-    description: null
-    author: best.neil@prophecy.io
-    files:
-    - models/iot_max_loaded_at.sql
-    - .prophecy/ide/models/iot_max_loaded_at.json
-    - models/schema.yml
-    sqlDependencies:
-      models: []
-      datasets: []
-      seeds: []
-      sources: []
-      snapshots: []
-    createdAt: '2025-04-08 18:34:51'
 sqlSnapshots: {}
 sqlTests: {}
 sqlMacros:

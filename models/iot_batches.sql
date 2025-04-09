@@ -4,17 +4,39 @@
     "batch_size": "day",
     "begin": "2025-04-07",
     "event_time": "LOADED_AT",
-    "incremental_strategy": "microbatch",
+    "incremental_strategy": "delete+insert",
     "lookback": 0,
-    "on_schema_change": 'append_new_columns'
+    "on_schema_change": 'append_new_columns',
+    "unique_key": ["LOADED_AT", "YEAR", "MONTH"]
   })
 }}
 
-WITH iot AS (
+WITH IOT AS (
 
   SELECT * 
   
-  FROM {{ ref('iot')}}
+  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}
+
+),
+
+IOT_BATCHES AS (
+
+  SELECT * 
+  
+  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}
+
+),
+
+incremental_iot_data AS (
+
+  SELECT *
+  
+  FROM IOT
+  
+  {% if is_incremental() %}
+    WHERE 
+      loaded_at > (SELECT MAX(loaded_at) FROM {{ this }})
+  {% endif %}
 
 ),
 
@@ -27,7 +49,7 @@ count_by_date AS (
     MONTH(TS) AS MONTH,
     COUNT(*) AS N_RECORDS_LOADED
   
-  FROM iot AS in0
+  FROM incremental_iot_data AS in0
   
   GROUP BY 
     LOADED_AT, YEAR(TS), MONTH(TS)

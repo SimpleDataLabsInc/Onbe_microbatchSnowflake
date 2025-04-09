@@ -15,39 +15,7 @@ models:
   - name: "N_RECORDS_LOADED"
     dataType:
       type: "Number"
-  tests: []
-- name: "iot"
-  config:
-    event_time: "LOADED_AT"
-  columns:
-  - name: "PLANT_ID"
-    dataType:
-      type: "String"
-  - name: "VALUE"
-    dataType:
-      type: "Float"
-  - name: "DEVICE_ID"
-    dataType:
-      type: "String"
-  - name: "TAG_NAME"
-    dataType:
-      type: "String"
-  - name: "LOADED_AT"
-    dataType:
-      type: "Timestamp"
-  - name: "ENGINEERING_UNITS"
-    dataType:
-      type: "String"
-  - name: "DATE"
-    dataType:
-      type: "Date"
-  - name: "TS"
-    dataType:
-      type: "Timestamp"
-  tests: []
-- name: "iot_max_loaded_at"
-  columns:
-  - name: "MAX_LOADED_AT"
+  - name: "REPORTED_AT"
     dataType:
       type: "Timestamp"
   tests: []

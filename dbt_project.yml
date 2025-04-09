@@ -26,12 +26,6 @@ macro-paths:
 target-path: "target"
 
 # ============
-# Run Hooks
-# ============
-on-run-end:
-- "{{ log_results( results) }}"
-
-# ============
 # Misc
 # ============
 dispatch: []

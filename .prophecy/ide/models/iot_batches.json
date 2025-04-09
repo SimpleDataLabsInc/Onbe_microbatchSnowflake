@@ -9,6 +9,7 @@
     },
     "graphConfig" : {
       "entityConfig" : {
+        "incremental_predicates" : "[]",
         "materialized" : "incremental",
         "on_schema_change" : "'append_new_columns'",
         "unique_key" : "[\"LOADED_AT\", \"YEAR\", \"MONTH\"]",
@@ -22,134 +23,8 @@
     "version" : 3
   },
   "processes" : {
-    "final##aHFHJA0R" : {
-      "id" : "final##aHFHJA0R",
-      "component" : "TargetModel",
-      "metadata" : {
-        "label" : "iot_batches",
-        "x" : 820,
-        "y" : 20,
-        "phase" : 0,
-        "isLabelGrayed" : false
-      },
-      "properties" : {
-        "customQueryDisabled" : true,
-        "customQuery" : false,
-        "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM reported_at\n",
-        "incrementalKey" : false,
-        "incremental" : {
-          "expression" : "true"
-        }
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "Iid6W9Ue",
-          "slug" : "reported_at"
-        } ],
-        "outputs" : [ {
-          "id" : "AhTCov2J",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      },
-      "index" : 4
-    },
-    "reported_at##DepCLMRc" : {
-      "id" : "reported_at##DepCLMRc",
-      "component" : "Reformat",
-      "metadata" : {
-        "label" : "reported_at",
-        "x" : 620,
-        "y" : 20,
-        "phase" : 0,
-        "macroDependencies" : [ ],
-        "comment" : "Formats data to include loading timestamps and record counts for reporting.",
-        "isLabelGrayed" : false
-      },
-      "properties" : {
-        "columnsSelector" : [ ],
-        "expressions" : [ {
-          "expression" : {
-            "expression" : "LOADED_AT"
-          },
-          "alias" : "LOADED_AT",
-          "_row_id" : "1306262003"
-        }, {
-          "expression" : {
-            "expression" : "YEAR"
-          },
-          "alias" : "YEAR",
-          "_row_id" : "1500746667"
-        }, {
-          "expression" : {
-            "expression" : "MONTH"
-          },
-          "alias" : "MONTH",
-          "_row_id" : "1844191232"
-        }, {
-          "expression" : {
-            "expression" : "N_RECORDS_LOADED"
-          },
-          "alias" : "N_RECORDS_LOADED",
-          "_row_id" : "750866750"
-        }, {
-          "expression" : {
-            "expression" : "current_timestamp()"
-          },
-          "alias" : "REPORTED_AT",
-          "_row_id" : "306922071"
-        } ]
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "eZ5iYNkt",
-          "slug" : "in0"
-        } ],
-        "outputs" : [ {
-          "id" : "JPLpuFOQ",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      },
-      "index" : 3
-    },
-    "incremental_iot_##KSfel2mB" : {
-      "id" : "incremental_iot_##KSfel2mB",
-      "component" : "SQLStatement",
-      "metadata" : {
-        "label" : "incremental_iot_data",
-        "x" : 220,
-        "y" : 20,
-        "phase" : 0,
-        "isLabelGrayed" : false
-      },
-      "properties" : {
-        "fileTabs" : [ {
-          "path" : "out",
-          "id" : "out",
-          "language" : "sql",
-          "content" : "SELECT *\n\nFROM IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
-        } ]
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "dv42OceB",
-          "slug" : "IOT"
-        } ],
-        "outputs" : [ {
-          "id" : "Zmzvzfp4",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      },
-      "index" : 1
-    },
-    "IOT##SgbNBoL0" : {
-      "id" : "IOT##SgbNBoL0",
+    "IOT##THLiGdMe" : {
+      "id" : "IOT##THLiGdMe",
       "component" : "Source",
       "metadata" : {
         "label" : "IOT",
@@ -168,7 +43,7 @@
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "lo3uZxc8",
+          "id" : "R9mU7Xt5",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
@@ -176,13 +51,253 @@
       },
       "index" : 0
     },
-    "count_by_date##ytRcPsPw" : {
-      "id" : "count_by_date##ytRcPsPw",
+    "reported_at##Zv4mluvw" : {
+      "id" : "reported_at##Zv4mluvw",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "reported_at",
+        "x" : 920,
+        "y" : 40,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Formats data to include loading timestamps and record counts for reporting.",
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "bGczNV3N##LOADED_AT", "bGczNV3N##N_RECORDS_LOADED" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "COALESCE(LOADED_AT, '1900-01-01')"
+          },
+          "alias" : "LOADED_AT",
+          "_row_id" : "1710808017"
+        }, {
+          "expression" : {
+            "expression" : "YEAR"
+          },
+          "alias" : "YEAR",
+          "_row_id" : "1831307198"
+        }, {
+          "expression" : {
+            "expression" : "MONTH"
+          },
+          "alias" : "MONTH",
+          "_row_id" : "1734180341"
+        }, {
+          "expression" : {
+            "expression" : "N_RECORDS_LOADED"
+          },
+          "alias" : "N_RECORDS_LOADED",
+          "_row_id" : "593277303"
+        }, {
+          "expression" : {
+            "expression" : "current_timestamp()"
+          },
+          "alias" : "REPORTED_AT",
+          "_row_id" : "1916849005"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "bGczNV3N",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "IoCkJWsP",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "Je2WlYhfujHpeBnh3M8N7" : {
+      "id" : "Je2WlYhfujHpeBnh3M8N7",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IOT_BATCHES",
+        "slug" : "IOT_BATCHES",
+        "x" : 20,
+        "y" : 200,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT_BATCHES",
+          "sourceType" : "Source",
+          "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "34IbNo7mKBoZ_KXXM32I4",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "final##Sl7cZidW" : {
+      "id" : "final##Sl7cZidW",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "iot_batches",
+        "x" : 1120,
+        "y" : 40,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Collects all reported IoT data for analysis.",
+        "autoUpdateComment" : true,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM reported_at\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "LOADED_AT > (\n  SELECT MAX(LOADED_AT)\n  \n  FROM {{this}}\n )"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "wEOzntKF",
+          "slug" : "reported_at"
+        } ],
+        "outputs" : [ {
+          "id" : "uUjKnzDy",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "9WN5FPilwhEDvev3B74ko$$HeThD9B3p4AaND_mYvXSG" : {
+      "id" : "9WN5FPilwhEDvev3B74ko$$HeThD9B3p4AaND_mYvXSG",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "max_loaded_at",
+        "slug" : "max_loaded_at",
+        "x" : 180,
+        "y" : 200,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Identifies the most recent data load timestamp from IoT batches.",
+        "autoUpdateComment" : true,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "aggregate" : [ {
+          "expression" : {
+            "expression" : "MAX(LOADED_AT)"
+          },
+          "alias" : "max_loaded_at",
+          "_row_id" : "SU4Vrk_iHR"
+        } ],
+        "allowSelection" : true,
+        "condition" : {
+          "expression" : ""
+        },
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "HxFFCsR5PMtRDPb83riWG$$xy_1JEdxtUuU12kohrDwL##LOADED_AT" ],
+        "groupBy" : [ ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "HxFFCsR5PMtRDPb83riWG$$xy_1JEdxtUuU12kohrDwL",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "LChDq_sy26rP5OfV9I44M$$TxMjw9azVak2aPCQhtjwz",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "jEBtVDS8q4my_ASGRRjJ0$$9ANZ5wA3kFaFOY6NpbY0I" : {
+      "id" : "jEBtVDS8q4my_ASGRRjJ0$$9ANZ5wA3kFaFOY6NpbY0I",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "default_loaded_at",
+        "slug" : "default_loaded_at",
+        "x" : 340,
+        "y" : 200,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Determines the most recent loading date, defaulting to a historical date if no data is available.",
+        "autoUpdateComment" : true,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "B2r8pbl4S7t_x1_lqd6g0$$ofKw1bnORi0KzwQs11V0S##max_loaded_at" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "coalesce( max_loaded_at, '1900-01-01')"
+          },
+          "alias" : "max_loaded_at",
+          "_row_id" : "fNep1pbKJ2"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "B2r8pbl4S7t_x1_lqd6g0$$ofKw1bnORi0KzwQs11V0S",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "6m9r4nUewE1-GIU0rOjDn$$A7DVhwbmOq6P9etfkuoF4",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "SQLStatement_1##lIEWUg5Y" : {
+      "id" : "SQLStatement_1##lIEWUg5Y",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "SQLStatement_1",
+        "x" : 520,
+        "y" : 40,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Retrieves new IoT data entries since the last update.",
+        "autoUpdateComment" : true,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "out",
+          "language" : "sql",
+          "content" : "SELECT *\n\nFROM IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (\n      SELECT MAX_LOADED_AT\n      FROM default_loaded_at)\n{% endif %}"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "nsEF61Ig",
+          "slug" : "IOT"
+        }, {
+          "id" : "x51K44v3fFwklcHj7d9zO$$HzpwDywNRQCv_d6UYg56e",
+          "slug" : "default_loaded_at"
+        } ],
+        "outputs" : [ {
+          "id" : "MOpZhGCf",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "count_by_date##BqLuhBGt" : {
+      "id" : "count_by_date##BqLuhBGt",
       "component" : "Aggregate",
       "metadata" : {
         "label" : "count_by_date",
-        "x" : 420,
-        "y" : 20,
+        "x" : 720,
+        "y" : 40,
         "phase" : 0,
         "macroDependencies" : [ ],
         "comment" : "Tracks the number of records loaded over time, organized by year and month.",
@@ -194,88 +309,105 @@
             "expression" : "LOADED_AT"
           },
           "alias" : "LOADED_AT",
-          "_row_id" : "2137446417"
+          "_row_id" : "1173519249"
         }, {
           "expression" : {
             "expression" : "YEAR(TS)"
           },
           "alias" : "YEAR",
-          "_row_id" : "1611859266"
+          "_row_id" : "899659022"
         }, {
           "expression" : {
             "expression" : "MONTH(TS)"
           },
           "alias" : "MONTH",
-          "_row_id" : "26718423"
+          "_row_id" : "695659101"
         }, {
           "expression" : {
             "expression" : "COUNT(*)"
           },
           "alias" : "N_RECORDS_LOADED",
-          "_row_id" : "362753336"
+          "_row_id" : "1819065485"
         } ],
         "allowSelection" : true,
         "condition" : {
           "expression" : ""
         },
         "activeTab" : "aggregate",
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "D6y4KX4r##LOADED_AT", "D6y4KX4r##TS" ],
         "groupBy" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
           },
-          "_row_id" : "1901137992"
+          "_row_id" : "923264637"
         }, {
           "expression" : {
             "expression" : "YEAR(TS)"
           },
-          "_row_id" : "1366381186"
+          "_row_id" : "182534326"
         }, {
           "expression" : {
             "expression" : "MONTH(TS)"
           },
-          "_row_id" : "953992567"
+          "_row_id" : "1541728633"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "Cj21Y8Dg",
+          "id" : "D6y4KX4r",
           "slug" : "in0"
         } ],
         "outputs" : [ {
-          "id" : "txw7SDYm",
+          "id" : "R2NcvMtU",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 2
+      }
     }
   },
   "connections" : [ {
-    "id" : "jFYIwQM2",
-    "source" : "IOT##SgbNBoL0",
-    "sourcePort" : "lo3uZxc8",
-    "target" : "incremental_iot_##KSfel2mB",
-    "targetPort" : "dv42OceB"
+    "id" : "TBPMw151",
+    "source" : "IOT##THLiGdMe",
+    "sourcePort" : "R9mU7Xt5",
+    "target" : "SQLStatement_1##lIEWUg5Y",
+    "targetPort" : "nsEF61Ig"
   }, {
-    "id" : "dypyct9s",
-    "source" : "incremental_iot_##KSfel2mB",
-    "sourcePort" : "Zmzvzfp4",
-    "target" : "count_by_date##ytRcPsPw",
-    "targetPort" : "Cj21Y8Dg"
+    "id" : "fF8kwHR6",
+    "source" : "SQLStatement_1##lIEWUg5Y",
+    "sourcePort" : "MOpZhGCf",
+    "target" : "count_by_date##BqLuhBGt",
+    "targetPort" : "D6y4KX4r"
   }, {
-    "id" : "kd3SP273",
-    "source" : "count_by_date##ytRcPsPw",
-    "sourcePort" : "txw7SDYm",
-    "target" : "reported_at##DepCLMRc",
-    "targetPort" : "eZ5iYNkt"
+    "id" : "K6OtutRy",
+    "source" : "count_by_date##BqLuhBGt",
+    "sourcePort" : "R2NcvMtU",
+    "target" : "reported_at##Zv4mluvw",
+    "targetPort" : "bGczNV3N"
   }, {
-    "id" : "jKsDp16C",
-    "source" : "reported_at##DepCLMRc",
-    "sourcePort" : "JPLpuFOQ",
-    "target" : "final##aHFHJA0R",
-    "targetPort" : "Iid6W9Ue"
+    "id" : "hbAMhWuY",
+    "source" : "reported_at##Zv4mluvw",
+    "sourcePort" : "IoCkJWsP",
+    "target" : "final##Sl7cZidW",
+    "targetPort" : "wEOzntKF"
+  }, {
+    "id" : "Tr7S9qm5O08PeoCURfyEh$$Bwsz3Qmk-w9NAvbGxQfkq",
+    "source" : "Je2WlYhfujHpeBnh3M8N7",
+    "sourcePort" : "34IbNo7mKBoZ_KXXM32I4",
+    "target" : "9WN5FPilwhEDvev3B74ko$$HeThD9B3p4AaND_mYvXSG",
+    "targetPort" : "HxFFCsR5PMtRDPb83riWG$$xy_1JEdxtUuU12kohrDwL"
+  }, {
+    "id" : "TKNKYRRkcaI03Rt6vHv9J",
+    "source" : "9WN5FPilwhEDvev3B74ko$$HeThD9B3p4AaND_mYvXSG",
+    "sourcePort" : "LChDq_sy26rP5OfV9I44M$$TxMjw9azVak2aPCQhtjwz",
+    "target" : "jEBtVDS8q4my_ASGRRjJ0$$9ANZ5wA3kFaFOY6NpbY0I",
+    "targetPort" : "B2r8pbl4S7t_x1_lqd6g0$$ofKw1bnORi0KzwQs11V0S"
+  }, {
+    "id" : "9s_F2NMDtIeJyGDN27EgR",
+    "source" : "jEBtVDS8q4my_ASGRRjJ0$$9ANZ5wA3kFaFOY6NpbY0I",
+    "sourcePort" : "6m9r4nUewE1-GIU0rOjDn$$A7DVhwbmOq6P9etfkuoF4",
+    "target" : "SQLStatement_1##lIEWUg5Y",
+    "targetPort" : "x51K44v3fFwklcHj7d9zO$$HzpwDywNRQCv_d6UYg56e"
   } ],
   "component" : "Model"
 }

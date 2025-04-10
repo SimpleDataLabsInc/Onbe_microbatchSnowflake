@@ -50,29 +50,14 @@ functions:
   businessRules: {}
 subgraphs: {}
 sqlModels:
-  .prophecy/metadata/sqlmodels/iot_batches:
-    name: iot_batches
-    schema:
-      entityType: ''
-      providerType: Snowflake
-      fields:
-      - name: LOADED_AT
-        dataType:
-          type: Timestamp
-      - name: DATE
-        dataType:
-          type: Date
-      - name: N_RECORDS_LOADED
-        dataType:
-          type: Number
-      - name: REPORTED_AT
-        dataType:
-          type: Timestamp
+  .prophecy/metadata/sqlmodels/IOT_BATCHES:
+    name: IOT_BATCHES
+    schema: null
     description: null
     author: best.neil@prophecy.io
     files:
-    - models/iot_batches.sql
-    - .prophecy/ide/models/iot_batches.json
+    - models/IOT_BATCHES.sql
+    - .prophecy/ide/models/IOT_BATCHES.json
     - models/schema.yml
     sqlDependencies:
       models: []
@@ -80,7 +65,7 @@ sqlModels:
       seeds: []
       sources: []
       snapshots: []
-    createdAt: '2025-04-07 16:07:48'
+    createdAt: '2025-04-10 14:07:33'
 sqlSnapshots: {}
 sqlTests: {}
 sqlMacros:

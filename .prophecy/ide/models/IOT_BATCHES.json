@@ -1,0 +1,43 @@
+{
+  "id" : "IOT_BATCHES",
+  "metainfo" : {
+    "label" : "IOT_BATCHES",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "HkRtuskJ" : {
+      "id" : "HkRtuskJ",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "IOT_BATCHES",
+        "phase" : 0
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : true,
+        "incrementalEditorDisabled" : true,
+        "query" : "{{\n  config({    \n    \"materialized\": \"incremental\",\n    \"alias\": \"IOT_BATCHES\",\n    \"incremental_predicates\": [],\n    \"incremental_strategy\": \"merge\",\n    \"on_schema_change\": 'append_new_columns',\n    \"unique_key\": [\"LOADED_AT\", \"DATE\"]\n  })\n}}\n\nWITH iot_incremental AS (\n\n  SELECT *\n  \n  FROM IOT\n  \n  {% if is_incremental() %}\n    WHERE \n      LOADED_AT > (\n        SELECT COALESCE( MAX(LOADED_AT), '1900-01-01')\n        FROM IOT_BATCHES\n  {% endif %}\n\n),\n\ncount_by_date AS (\n\n  SELECT \n    LOADED_AT AS LOADED_AT,\n    DATE(ts) AS DATE,\n    COUNT(*) AS N_RECORDS_LOADED\n  \n  FROM iot_incremental\n  \n  GROUP BY \n    LOADED_AT, DATE(TS)\n\n),\n\nreported_at AS (\n\n  SELECT \n    LOADED_AT,\n    DATE,\n    N_RECORDS_LOADED,\n    current_timestamp() AS REPORTED_AT\n  \n  FROM count_by_date\n\n)\n\nSELECT *\n\nFROM reported_at\n\nWITH IOT AS (\n\n  SELECT * \n  \n  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}\n\n),\n\nIOT_BATCHES AS (\n\n  SELECT * \n  \n  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}\n\n)\n\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "zgAsn08E",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ ],
+  "component" : "Model"
+}

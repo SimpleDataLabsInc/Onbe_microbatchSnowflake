@@ -1,24 +1,30 @@
 {{
   config({    
     "materialized": "incremental",
+    "incremental_predicates": [],
     "incremental_strategy": "merge",
     "on_schema_change": 'fail',
     "unique_key": ["LOADED_AT", "DATE"]
   })
 }}
 
-{{
-  config({    
-    "materialized": "incremental",
-    "alias": "IOT_BATCHES",
-    "incremental_predicates": [],
-    "incremental_strategy": "merge",
-    "on_schema_change": 'append_new_columns',
-    "unique_key": ["LOADED_AT", "DATE"]
-  })
-}}
+WITH IOT AS (
 
-WITH iot_incremental AS (
+  SELECT *
+
+  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}
+
+),
+
+IOT_BATCHES_1 AS (
+
+  SELECT *
+
+  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}
+
+),
+
+iot_incremental AS (
 
   SELECT *
   
@@ -62,21 +68,3 @@ reported_at AS (
 SELECT *
 
 FROM reported_at
-
-
-WITH IOT AS (
-
-  SELECT * 
-  
-  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}
-
-),
-
-IOT_BATCHES_1 AS (
-
-  SELECT * 
-  
-  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}
-
-)
-

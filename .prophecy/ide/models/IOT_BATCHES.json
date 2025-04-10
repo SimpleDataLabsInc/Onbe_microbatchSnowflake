@@ -2,111 +2,35 @@
   "id" : "IOT_BATCHES",
   "metainfo" : {
     "label" : "IOT_BATCHES",
-    "autoLayout" : false,
+    "autoLayout" : true,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
-    "graphConfig" : {
-      "entityConfig" : {
-        "materialized" : "incremental",
-        "on_schema_change" : "'fail'",
-        "unique_key" : [ "\"LOADED_AT\"", "\"DATE\"" ],
-        "incremental_strategy" : "\"merge\"",
-        "type" : "ModelConfig"
-      }
-    },
     "version" : 3
   },
   "processes" : {
-    "HkRtuskJ" : {
-      "id" : "HkRtuskJ",
+    "fzsOthEN" : {
+      "id" : "fzsOthEN",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "IOT_BATCHES",
-        "x" : 220,
-        "y" : 120,
-        "phase" : 0,
-        "macroDependencies" : [ ],
-        "comment" : "Tracks and reports the number of IoT records loaded over time, enabling better monitoring of data ingestion.",
-        "autoUpdateComment" : true
+        "phase" : 0
       },
       "properties" : {
-        "customQueryDisabled" : false,
+        "customQueryDisabled" : true,
         "customQuery" : true,
         "incrementalEditorDisabled" : true,
-        "query" : "{{\n  config({    \n    \"materialized\": \"incremental\",\n    \"alias\": \"IOT_BATCHES\",\n    \"incremental_predicates\": [],\n    \"incremental_strategy\": \"merge\",\n    \"on_schema_change\": 'append_new_columns',\n    \"unique_key\": [\"LOADED_AT\", \"DATE\"]\n  })\n}}\n\nWITH iot_incremental AS (\n\n  SELECT *\n  \n  FROM IOT\n  \n  {% if is_incremental() %}\n    WHERE \n      LOADED_AT > (\n        SELECT COALESCE( MAX(LOADED_AT), '1900-01-01')\n        FROM IOT_BATCHES_1\n  {% endif %}\n\n),\n\ncount_by_date AS (\n\n  SELECT \n    LOADED_AT AS LOADED_AT,\n    DATE(ts) AS DATE,\n    COUNT(*) AS N_RECORDS_LOADED\n  \n  FROM iot_incremental\n  \n  GROUP BY \n    LOADED_AT, DATE(TS)\n\n),\n\nreported_at AS (\n\n  SELECT \n    LOADED_AT,\n    DATE,\n    N_RECORDS_LOADED,\n    current_timestamp() AS REPORTED_AT\n  \n  FROM count_by_date\n\n)\n\nSELECT *\n\nFROM reported_at\n\n\n",
+        "query" : "{{\n  config({    \n    \"materialized\": \"incremental\",\n    \"incremental_predicates\": [],\n    \"incremental_strategy\": \"merge\",\n    \"on_schema_change\": 'fail',\n    \"unique_key\": [\"LOADED_AT\", \"DATE\"]\n  })\n}}\n\nWITH IOT AS (\n\n  SELECT *\n\n  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}\n\n),\n\nIOT_BATCHES_1 AS (\n\n  SELECT *\n\n  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}\n\n),\n\niot_incremental AS (\n\n  SELECT *\n  \n  FROM IOT\n  \n  {% if is_incremental() %}\n    WHERE \n      LOADED_AT > (\n        SELECT COALESCE( MAX(LOADED_AT), '1900-01-01')\n        FROM IOT_BATCHES_1\n  {% endif %}\n\n),\n\ncount_by_date AS (\n\n  SELECT \n    LOADED_AT AS LOADED_AT,\n    DATE(ts) AS DATE,\n    COUNT(*) AS N_RECORDS_LOADED\n  \n  FROM iot_incremental\n  \n  GROUP BY \n    LOADED_AT, DATE(TS)\n\n),\n\nreported_at AS (\n\n  SELECT \n    LOADED_AT,\n    DATE,\n    N_RECORDS_LOADED,\n    current_timestamp() AS REPORTED_AT\n  \n  FROM count_by_date\n\n)\n\nSELECT *\n\nFROM reported_at\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
         }
       },
       "ports" : {
-        "inputs" : [ {
-          "id" : "OpluQdKes0RkzSw0gQVNy$$ZLWGrCfpzO3F7b7A1eZFA",
-          "slug" : "IOT"
-        }, {
-          "id" : "6zA8Oal7Wj8-wqFWs72fD$$okXwnx-WJy3rQNYO9UCi6",
-          "slug" : "IOT_BATCHES_1"
-        } ],
-        "outputs" : [ {
-          "id" : "zgAsn08E",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      }
-    },
-    "hWlBr0HSWhocjRggHaqZs" : {
-      "id" : "hWlBr0HSWhocjRggHaqZs",
-      "component" : "Source",
-      "metadata" : {
-        "label" : "IOT",
-        "slug" : "IOT",
-        "x" : 20,
-        "y" : 20,
-        "phase" : 0
-      },
-      "properties" : {
-        "table" : {
-          "name" : "IOT",
-          "sourceType" : "Source",
-          "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
-          "alias" : ""
-        }
-      },
-      "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "56q6lQ769f9Hi1MP2an_k",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      }
-    },
-    "L4oMEsGX5hVE_KyggfU4z" : {
-      "id" : "L4oMEsGX5hVE_KyggfU4z",
-      "component" : "Source",
-      "metadata" : {
-        "label" : "IOT_BATCHES_1",
-        "slug" : "IOT_BATCHES_1",
-        "x" : 20,
-        "y" : 220,
-        "phase" : 0
-      },
-      "properties" : {
-        "table" : {
-          "name" : "IOT_BATCHES",
-          "sourceType" : "Source",
-          "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
-          "alias" : ""
-        }
-      },
-      "ports" : {
-        "inputs" : [ ],
-        "outputs" : [ {
-          "id" : "g1lqjmbSMy0u7J6BPF0E6",
+          "id" : "T6WBrJ7I",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
@@ -114,18 +38,6 @@
       }
     }
   },
-  "connections" : [ {
-    "id" : "sMtKEwFcIXw7tsjixL_ST$$_iyUvbzQUittGe7CIvZhF",
-    "source" : "hWlBr0HSWhocjRggHaqZs",
-    "sourcePort" : "56q6lQ769f9Hi1MP2an_k",
-    "target" : "HkRtuskJ",
-    "targetPort" : "OpluQdKes0RkzSw0gQVNy$$ZLWGrCfpzO3F7b7A1eZFA"
-  }, {
-    "id" : "2QxfCKXp7UFiL4tsBBqIr$$vZY_BCHjdhmL2TGOf9NgK",
-    "source" : "L4oMEsGX5hVE_KyggfU4z",
-    "sourcePort" : "g1lqjmbSMy0u7J6BPF0E6",
-    "target" : "HkRtuskJ",
-    "targetPort" : "6zA8Oal7Wj8-wqFWs72fD$$okXwnx-WJy3rQNYO9UCi6"
-  } ],
+  "connections" : [ ],
   "component" : "Model"
 }

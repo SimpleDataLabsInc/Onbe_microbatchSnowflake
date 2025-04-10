@@ -5,7 +5,7 @@
     "incremental_predicates": [],
     "incremental_strategy": "merge",
     "on_schema_change": 'append_new_columns',
-    "unique_key": ["LOADED_AT", "YEAR", "MONTH"]
+    "unique_key": ["LOADED_AT", "DATE"]
   })
 }}
 

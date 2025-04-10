@@ -15,29 +15,6 @@ WITH IOT AS (
 
 ),
 
-IOT_BATCHES_1 AS (
-
-  SELECT * 
-  
-  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}
-
-),
-
-iot_incremental AS (
-
-  SELECT *
-  
-  FROM IOT
-  
-  {% if is_incremental() %}
-    WHERE 
-      LOADED_AT > (
-        SELECT COALESCE( MAX(LOADED_AT), '1900-01-01')
-        FROM IOT_BATCHES_1)
-  {% endif %}
-
-),
-
 count_by_date AS (
 
   SELECT 
@@ -45,7 +22,7 @@ count_by_date AS (
     DATE(ts) AS DATE,
     COUNT(*) AS N_RECORDS_LOADED
   
-  FROM iot_incremental
+  FROM IOT AS iot_incremental
   
   GROUP BY 
     LOADED_AT, DATE(TS)
@@ -54,8 +31,9 @@ count_by_date AS (
 
 reported_at AS (
 
+  {#Generates a report of records loaded by date, ensuring all dates are accounted for.#}
   SELECT 
-    LOADED_AT,
+    COALESCE(LOADED_AT, '1900-01-01') AS LOADED_AT,
     DATE,
     N_RECORDS_LOADED,
     current_timestamp() AS REPORTED_AT
@@ -67,3 +45,8 @@ reported_at AS (
 SELECT *
 
 FROM reported_at
+
+{% if is_incremental() %}
+  WHERE 
+    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})
+{% endif %}

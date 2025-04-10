@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Composer",
-    "fabricId" : "23283",
+    "fabricId" : "62",
     "jobId" : "jobs/report_iot_batches",
     "name" : "report_iot_batches",
     "dagName" : "best_neil_Onbe_microbatchSnowflake_report_iot_batches",
@@ -59,13 +59,13 @@
       },
       "settings" : { },
       "properties" : {
-        "entityId" : "44652/.prophecy/metadata/sqlmodels/IOT_BATCHES",
+        "entityId" : "78/.prophecy/metadata/sqlmodels/IOT_BATCHES",
         "cacheSelectedOnly" : null,
         "gitSubPath" : null,
         "runModelWithParents" : false,
         "defer" : null,
         "noDefer" : null,
-        "runSeed" : true,
+        "runSeed" : false,
         "gitEntity" : "branch",
         "noPartialParse" : null,
         "model" : null,
@@ -81,7 +81,7 @@
         "isAdhocRunFromSameProject" : null,
         "noPrint" : null,
         "quiet" : null,
-        "projectId" : "44652",
+        "projectId" : "78",
         "runMode" : "model",
         "runOnlyModel" : false,
         "favorState" : null,
@@ -102,7 +102,7 @@
         "noVersionCheck" : null,
         "noWriteJson" : null,
         "printerWidth" : null,
-        "sqlFabricId" : "22696",
+        "sqlFabricId" : "61",
         "gitEntityValue" : null,
         "logFormat" : null,
         "runModelWithChildren" : false,
@@ -111,6 +111,7 @@
         "target" : "DEV",
         "exclude" : null,
         "runDeps" : null,
+        "sqlProjectType" : "snowflake",
         "loadingSnapshots" : false,
         "gitEntityValueBranch" : null,
         "noAnonymousUsageStats" : null,
@@ -119,15 +120,10 @@
         "threads" : null,
         "warnError" : null,
         "currentProjectModels" : [ {
-          "label" : "iot",
-          "value" : "iot",
-          "id" : "44652/.prophecy/metadata/sqlmodels/iot",
-          "name" : "iot"
-        }, {
-          "label" : "iot_batches",
-          "value" : "iot_batches",
-          "id" : "44652/.prophecy/metadata/sqlmodels/iot_batches",
-          "name" : "iot_batches"
+          "label" : "IOT_BATCHES",
+          "value" : "IOT_BATCHES",
+          "id" : "78/.prophecy/metadata/sqlmodels/IOT_BATCHES",
+          "name" : "IOT_BATCHES"
         } ],
         "profilesDir" : null,
         "taskId" : null,

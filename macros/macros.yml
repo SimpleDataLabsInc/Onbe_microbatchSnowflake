@@ -1,0 +1,9 @@
+---
+version: 2
+macros:
+- name: "log_results"
+  arguments:
+  - name: "results"
+    type: "table"
+    description: "{\"ProphecyType\": \"table\"}"
+  macroType: "expression"

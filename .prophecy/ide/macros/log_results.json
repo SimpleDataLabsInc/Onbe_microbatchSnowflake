@@ -1,0 +1,42 @@
+{
+  "log_results" : {
+    "name" : "log_results",
+    "macroType" : "expression",
+    "definition" : "\n\n    {% if execute %}\n        {{ log(\"updating audit table\", info=True) }}\n        {% for res in results %}\n\n            {{ print( \"result:\\n\" ~ res|pprint) }}\n\n            {% set load_log_select %}\n            SELECT\n                -- SPLIT_PART('{{ res.unique_id }}', '.', -1)\n                '{{ res.node.relation_name }}'\n                  AS edw_table_name,\n                -- DATEADD(SECOND, -{{ res.execution_time }}, CURRENT_TIMESTAMP())\n                '{{ res.timing|map(attribute=\"started_at\")|min }}'\n                  AS load_start,\n                -- CURRENT_TIMESTAMP()\n                '{{ res.timing|map(attribute=\"completed_at\")|max }}'\n                  AS load_end,\n                '{{ res.status }}'\n                  AS load_status,\n                '{{ res.message }}'\n                  AS load_message\n            {% endset %}\n  \n            {% set load_log_record = run_query(load_log_select) %}\n\n            {% do load_log_record.print_json(indent=2) %}\n            {{ log(\"operated on \" ~ res.adapter_response.rows_affected ~ \" rows\", info=True) }}\n        {% endfor %}\n        {{ log(\"finished updating audit table\", info=True) }}\n    {% endif %}",
+    "parameters" : {
+      "type" : "record",
+      "fields" : [ {
+        "name" : "results",
+        "kind" : {
+          "type" : "table"
+        },
+        "optional" : false,
+        "comment" : "",
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      } ]
+    },
+    "staleState" : "none",
+    "propertiesFile" : {
+      "name" : "macros",
+      "content" : "---\nversion: 2\nmacros:\n- name: \"log_results\"\n  arguments:\n  - name: \"results\"\n    type: \"table\"\n    description: \"{\\\"ProphecyType\\\": \\\"table\\\"}\"\n  macroType: \"expression\"\n",
+      "path" : "Onbe_microbatchSnowflake/macros/macros.yml",
+      "projectConfiguration" : null,
+      "folderConfiguration" : {
+        "version" : 2,
+        "macros" : [ {
+          "name" : "log_results",
+          "arguments" : [ {
+            "name" : "results",
+            "type" : "table",
+            "description" : "{\"ProphecyType\": \"table\"}"
+          } ],
+          "macroType" : "expression"
+        } ]
+      },
+      "packagesYml" : null,
+      "editable" : true
+    },
+    "version" : 0
+  }
+}

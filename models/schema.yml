@@ -1,0 +1,18 @@
+---
+version: 2
+models:
+- name: "IOT_BATCHES"
+  columns:
+  - name: "LOADED_AT"
+    dataType:
+      type: "Timestamp"
+  - name: "DATE"
+    dataType:
+      type: "Date"
+  - name: "N_RECORDS_LOADED"
+    dataType:
+      type: "Number"
+  - name: "REPORTED_AT"
+    dataType:
+      type: "Timestamp"
+  tests: []

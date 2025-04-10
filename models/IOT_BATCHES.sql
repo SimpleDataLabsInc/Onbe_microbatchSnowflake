@@ -1,11 +1,5 @@
 {{
   config({    
-    "materialized": "table"
-  })
-}}
-
-{{
-  config({    
     "materialized": "incremental",
     "incremental_strategy": "merge",
     "on_schema_change": 'fail',
@@ -39,7 +33,7 @@ iot_incremental AS (
     WHERE 
       LOADED_AT > (
         SELECT COALESCE( MAX(LOADED_AT), '1900-01-01')
-        FROM IOT_BATCHES_1
+        FROM IOT_BATCHES_1)
   {% endif %}
 
 ),

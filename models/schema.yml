@@ -1,7 +1,7 @@
 ---
 version: 2
 models:
-- name: "iot_batches"
+- name: "IOT_BATCHES"
   full_refresh: true
   columns:
   - name: "LOADED_AT"

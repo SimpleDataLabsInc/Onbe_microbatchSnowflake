@@ -2,7 +2,7 @@
   config({    
     "materialized": "incremental",
     "incremental_predicates": [],
-    "incremental_strategy": "delete+insert",
+    "incremental_strategy": "merge",
     "on_schema_change": 'append_new_columns',
     "unique_key": ["LOADED_AT", "YEAR", "MONTH"]
   })
@@ -51,7 +51,7 @@ SQLStatement_1 AS (
   
   {% if is_incremental() %}
     WHERE 
-      LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})
+      LOADED_AT > (SELECT max_loaded_at FROM default_loaded_at)
   {% endif %}
 
 ),
@@ -61,8 +61,7 @@ count_by_date AS (
   {#Tracks the number of records loaded over time, organized by year and month.#}
   SELECT 
     LOADED_AT AS LOADED_AT,
-    YEAR(TS) AS YEAR,
-    MONTH(TS) AS MONTH,
+    date( ts) AS date,
     COUNT(*) AS N_RECORDS_LOADED
   
   FROM SQLStatement_1 AS in0

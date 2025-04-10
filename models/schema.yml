@@ -2,7 +2,6 @@
 version: 2
 models:
 - name: "IOT_BATCHES"
-  full_refresh: true
   columns:
   - name: "LOADED_AT"
     dataType:
@@ -13,6 +12,21 @@ models:
   - name: "MONTH"
     dataType:
       type: "Number"
+  - name: "N_RECORDS_LOADED"
+    dataType:
+      type: "Number"
+  - name: "REPORTED_AT"
+    dataType:
+      type: "Timestamp"
+  tests: []
+- name: "iot_batches"
+  columns:
+  - name: "LOADED_AT"
+    dataType:
+      type: "Timestamp"
+  - name: "DATE"
+    dataType:
+      type: "Date"
   - name: "N_RECORDS_LOADED"
     dataType:
       type: "Number"

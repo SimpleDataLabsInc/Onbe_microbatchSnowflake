@@ -52,12 +52,28 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/iot_batches:
     name: iot_batches
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
+      - name: DATE
+        dataType:
+          type: Date
+      - name: N_RECORDS_LOADED
+        dataType:
+          type: Number
+      - name: REPORTED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:
     - models/iot_batches.sql
     - .prophecy/ide/models/iot_batches.json
+    - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []

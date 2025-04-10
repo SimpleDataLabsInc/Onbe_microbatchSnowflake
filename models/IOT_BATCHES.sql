@@ -1,6 +1,15 @@
 {{
   config({    
     "materialized": "incremental",
+    "incremental_strategy": "merge",
+    "on_schema_change": 'fail',
+    "unique_key": ["LOADED_AT", "DATE"]
+  })
+}}
+
+{{
+  config({    
+    "materialized": "incremental",
     "alias": "IOT_BATCHES",
     "incremental_predicates": [],
     "incremental_strategy": "merge",
@@ -19,7 +28,7 @@ WITH iot_incremental AS (
     WHERE 
       LOADED_AT > (
         SELECT COALESCE( MAX(LOADED_AT), '1900-01-01')
-        FROM IOT_BATCHES
+        FROM IOT_BATCHES_1
   {% endif %}
 
 ),
@@ -54,6 +63,7 @@ SELECT *
 
 FROM reported_at
 
+
 WITH IOT AS (
 
   SELECT * 
@@ -62,7 +72,7 @@ WITH IOT AS (
 
 ),
 
-IOT_BATCHES AS (
+IOT_BATCHES_1 AS (
 
   SELECT * 
   

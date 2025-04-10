@@ -56,28 +56,16 @@ sqlModels:
       entityType: ''
       providerType: Snowflake
       fields:
-      - name: DEVICE_ID
-        dataType:
-          type: String
-      - name: PLANT_ID
-        dataType:
-          type: String
-      - name: TAG_NAME
-        dataType:
-          type: String
-      - name: TS
+      - name: LOADED_AT
         dataType:
           type: Timestamp
-      - name: VALUE
-        dataType:
-          type: Float
-      - name: ENGINEERING_UNITS
-        dataType:
-          type: String
       - name: DATE
         dataType:
           type: Date
-      - name: LOADED_AT
+      - name: N_RECORDS_LOADED
+        dataType:
+          type: Number
+      - name: REPORTED_AT
         dataType:
           type: Timestamp
     description: null

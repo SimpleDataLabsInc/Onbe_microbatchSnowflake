@@ -1461,10 +1461,6 @@
     "dependencies" : { },
     "prophecyProjectDependencies" : { }
   },
-  "entitiesToSync" : [ {
-    "name" : "IOT_BATCHES",
-    "type" : "Model",
-    "syncedOnce" : true
-  } ],
+  "entitiesToSync" : [ ],
   "frontEndLanguage" : "sql"
 }

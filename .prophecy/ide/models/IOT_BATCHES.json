@@ -2,35 +2,750 @@
   "id" : "IOT_BATCHES",
   "metainfo" : {
     "label" : "IOT_BATCHES",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
-      "sources" : [ ]
+      "sources" : [ {
+        "source" : {
+          "table" : {
+            "name" : "EDW_LOAD_LOG",
+            "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+            "sourceType" : "ExternalSource"
+          }
+        },
+        "sourceComponentKind" : "ExternalSource",
+        "sourceLabel" : "EDW_LOAD_LOG",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "LOADED_AT" ],
+            "conditions" : [ {
+              "alias" : "EDW_LOAD_LOG",
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.LOAD_END = IOT_BATCHES_1.LOADED_AT"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.EDW_TABLE_NAME"
+              },
+              "alias" : "EDW_TABLE_NAME"
+            }, {
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.LOAD_START"
+              },
+              "alias" : "LOAD_START"
+            }, {
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.LOAD_STATUS"
+              },
+              "alias" : "LOAD_STATUS"
+            }, {
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.ERROR_MESSAGE"
+              },
+              "alias" : "ERROR_MESSAGE"
+            }, {
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.CREATE_DATE"
+              },
+              "alias" : "CREATE_DATE"
+            }, {
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.UPDATE_DATE"
+              },
+              "alias" : "UPDATE_DATE"
+            }, {
+              "expression" : {
+                "expression" : "EDW_LOAD_LOG.CREATED_BY_USER"
+              },
+              "alias" : "CREATED_BY_USER"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "EDW_LOAD_LOG",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "LOADED_AT" ],
+          "isRecommended" : true
+        } ]
+      }, {
+        "source" : {
+          "table" : {
+            "name" : "IOT",
+            "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+            "sourceType" : "Source"
+          }
+        },
+        "sourceComponentKind" : "Source",
+        "sourceLabel" : "IOT_1",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "LOADED_AT" ],
+            "conditions" : [ {
+              "alias" : "IOT_1",
+              "expression" : {
+                "expression" : "IOT_1.LOADED_AT = IOT_BATCHES_1.LOADED_AT"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "IOT_1.DEVICE_ID"
+              },
+              "alias" : "DEVICE_ID"
+            }, {
+              "expression" : {
+                "expression" : "IOT_1.PLANT_ID"
+              },
+              "alias" : "PLANT_ID"
+            }, {
+              "expression" : {
+                "expression" : "IOT_1.TAG_NAME"
+              },
+              "alias" : "TAG_NAME"
+            }, {
+              "expression" : {
+                "expression" : "IOT_1.TS"
+              },
+              "alias" : "TS"
+            }, {
+              "expression" : {
+                "expression" : "IOT_1.VALUE"
+              },
+              "alias" : "VALUE"
+            }, {
+              "expression" : {
+                "expression" : "IOT_1.ENGINEERING_UNITS"
+              },
+              "alias" : "ENGINEERING_UNITS"
+            }, {
+              "expression" : {
+                "expression" : "IOT_1.DATE"
+              },
+              "alias" : "DATE"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "IOT_1",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "LOADED_AT" ],
+          "isRecommended" : true
+        } ]
+      }, {
+        "source" : {
+          "table" : {
+            "name" : "IOT_V",
+            "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+            "sourceType" : "ExternalSource"
+          }
+        },
+        "sourceComponentKind" : "ExternalSource",
+        "sourceLabel" : "IOT_V",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "LOADED_AT" ],
+            "conditions" : [ {
+              "alias" : "IOT_V",
+              "expression" : {
+                "expression" : "IOT_V.LOADED_AT = IOT_BATCHES_1.LOADED_AT"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "IOT_V.DEVICE_ID"
+              },
+              "alias" : "DEVICE_ID"
+            }, {
+              "expression" : {
+                "expression" : "IOT_V.PLANT_ID"
+              },
+              "alias" : "PLANT_ID"
+            }, {
+              "expression" : {
+                "expression" : "IOT_V.TAG_NAME"
+              },
+              "alias" : "TAG_NAME"
+            }, {
+              "expression" : {
+                "expression" : "IOT_V.TS"
+              },
+              "alias" : "TS"
+            }, {
+              "expression" : {
+                "expression" : "IOT_V.VALUE"
+              },
+              "alias" : "VALUE"
+            }, {
+              "expression" : {
+                "expression" : "IOT_V.ENGINEERING_UNITS"
+              },
+              "alias" : "ENGINEERING_UNITS"
+            }, {
+              "expression" : {
+                "expression" : "IOT_V.DATE"
+              },
+              "alias" : "DATE"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "IOT_V",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "LOADED_AT" ],
+          "isRecommended" : true
+        } ]
+      }, {
+        "source" : {
+          "table" : {
+            "name" : "STG_PAYMENTS",
+            "sourceName" : "QA_DATABASE.PUBLIC",
+            "sourceType" : "ExternalSource"
+          }
+        },
+        "sourceComponentKind" : "ExternalSource",
+        "sourceLabel" : "STG_PAYMENTS",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "MONTH" ],
+            "conditions" : [ {
+              "alias" : "STG_PAYMENTS",
+              "expression" : {
+                "expression" : "STG_PAYMENTS.AMOUNT = IOT_BATCHES_1.MONTH"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "STG_PAYMENTS.PAYMENT_ID"
+              },
+              "alias" : "PAYMENT_ID"
+            }, {
+              "expression" : {
+                "expression" : "STG_PAYMENTS.ORDER_ID"
+              },
+              "alias" : "ORDER_ID"
+            }, {
+              "expression" : {
+                "expression" : "STG_PAYMENTS.PAYMENT_METHOD"
+              },
+              "alias" : "PAYMENT_METHOD"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "STG_PAYMENTS",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "MONTH" ],
+          "isRecommended" : true
+        } ]
+      }, {
+        "source" : {
+          "table" : {
+            "name" : "STG_PAYMENTS",
+            "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+            "sourceType" : "ExternalSource"
+          }
+        },
+        "sourceComponentKind" : "ExternalSource",
+        "sourceLabel" : "STG_PAYMENTS",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "MONTH" ],
+            "conditions" : [ {
+              "alias" : "STG_PAYMENTS",
+              "expression" : {
+                "expression" : "STG_PAYMENTS.AMOUNT = IOT_BATCHES_1.MONTH"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "STG_PAYMENTS.PAYMENT_ID"
+              },
+              "alias" : "PAYMENT_ID"
+            }, {
+              "expression" : {
+                "expression" : "STG_PAYMENTS.ORDER_ID"
+              },
+              "alias" : "ORDER_ID"
+            }, {
+              "expression" : {
+                "expression" : "STG_PAYMENTS.PAYMENT_METHOD"
+              },
+              "alias" : "PAYMENT_METHOD"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "STG_PAYMENTS",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "MONTH" ],
+          "isRecommended" : true
+        } ]
+      }, {
+        "source" : {
+          "table" : {
+            "name" : "ORDERS",
+            "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+            "sourceType" : "ExternalSource"
+          }
+        },
+        "sourceComponentKind" : "ExternalSource",
+        "sourceLabel" : "ORDERS",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "MONTH" ],
+            "conditions" : [ {
+              "alias" : "ORDERS",
+              "expression" : {
+                "expression" : "ORDERS.AMOUNT = IOT_BATCHES_1.MONTH"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "ORDERS.ORDER_ID"
+              },
+              "alias" : "ORDER_ID"
+            }, {
+              "expression" : {
+                "expression" : "ORDERS.CUSTOMER_ID"
+              },
+              "alias" : "CUSTOMER_ID"
+            }, {
+              "expression" : {
+                "expression" : "ORDERS.ORDER_DATE"
+              },
+              "alias" : "ORDER_DATE"
+            }, {
+              "expression" : {
+                "expression" : "ORDERS.STATUS"
+              },
+              "alias" : "STATUS"
+            }, {
+              "expression" : {
+                "expression" : "ORDERS.CREDIT_CARD_AMOUNT"
+              },
+              "alias" : "CREDIT_CARD_AMOUNT"
+            }, {
+              "expression" : {
+                "expression" : "ORDERS.COUPON_AMOUNT"
+              },
+              "alias" : "COUPON_AMOUNT"
+            }, {
+              "expression" : {
+                "expression" : "ORDERS.BANK_TRANSFER_AMOUNT"
+              },
+              "alias" : "BANK_TRANSFER_AMOUNT"
+            }, {
+              "expression" : {
+                "expression" : "ORDERS.GIFT_CARD_AMOUNT"
+              },
+              "alias" : "GIFT_CARD_AMOUNT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "ORDERS",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "MONTH" ],
+          "isRecommended" : false
+        } ]
+      }, {
+        "source" : {
+          "table" : {
+            "name" : "RAW_PAYMENTS",
+            "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+            "sourceType" : "ExternalSource"
+          }
+        },
+        "sourceComponentKind" : "ExternalSource",
+        "sourceLabel" : "RAW_PAYMENTS",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "MONTH" ],
+            "conditions" : [ {
+              "alias" : "RAW_PAYMENTS",
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.AMOUNT = IOT_BATCHES_1.MONTH"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.ID"
+              },
+              "alias" : "ID"
+            }, {
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.ORDER_ID"
+              },
+              "alias" : "ORDER_ID"
+            }, {
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.PAYMENT_METHOD"
+              },
+              "alias" : "PAYMENT_METHOD"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "RAW_PAYMENTS",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "MONTH" ],
+          "isRecommended" : false
+        } ]
+      }, {
+        "source" : {
+          "table" : {
+            "name" : "RAW_PAYMENTS",
+            "sourceName" : "QA_DATABASE.PUBLIC",
+            "sourceType" : "ExternalSource"
+          }
+        },
+        "sourceComponentKind" : "ExternalSource",
+        "sourceLabel" : "RAW_PAYMENTS",
+        "canJoinWith" : [ {
+          "processLabel" : "IOT_BATCHES_1",
+          "processId" : "uVkchmyTePz-_4P1qVbh7",
+          "properties" : {
+            "activeTab" : "conditions",
+            "columnsSelector" : [ "MONTH" ],
+            "conditions" : [ {
+              "alias" : "RAW_PAYMENTS",
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.AMOUNT = IOT_BATCHES_1.MONTH"
+              },
+              "joinType" : "inner"
+            } ],
+            "expressions" : [ {
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.ID"
+              },
+              "alias" : "ID"
+            }, {
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.ORDER_ID"
+              },
+              "alias" : "ORDER_ID"
+            }, {
+              "expression" : {
+                "expression" : "RAW_PAYMENTS.PAYMENT_METHOD"
+              },
+              "alias" : "PAYMENT_METHOD"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.MONTH"
+              },
+              "alias" : "MONTH"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.REPORTED_AT"
+              },
+              "alias" : "REPORTED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.YEAR"
+              },
+              "alias" : "YEAR"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.LOADED_AT"
+              },
+              "alias" : "LOADED_AT"
+            }, {
+              "expression" : {
+                "expression" : "IOT_BATCHES_1.N_RECORDS_LOADED"
+              },
+              "alias" : "N_RECORDS_LOADED"
+            } ],
+            "headAlias" : "RAW_PAYMENTS",
+            "allowSelection" : false
+          },
+          "joinColumns" : [ "MONTH" ],
+          "isRecommended" : false
+        } ]
+      } ]
+    },
+    "graphConfig" : {
+      "entityConfig" : {
+        "materialized" : "table",
+        "type" : "ModelConfig"
+      }
     },
     "version" : 3
   },
   "processes" : {
-    "fzsOthEN" : {
-      "id" : "fzsOthEN",
+    "Skuapc6N" : {
+      "id" : "Skuapc6N",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "IOT_BATCHES",
-        "phase" : 0
+        "x" : 220,
+        "y" : 120,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Retrieves all data from the IoT dataset for comprehensive analysis.",
+        "autoUpdateComment" : true
       },
       "properties" : {
         "customQueryDisabled" : true,
-        "customQuery" : true,
+        "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "{{\n  config({    \n    \"materialized\": \"incremental\",\n    \"incremental_predicates\": [],\n    \"incremental_strategy\": \"merge\",\n    \"on_schema_change\": 'fail',\n    \"unique_key\": [\"LOADED_AT\", \"DATE\"]\n  })\n}}\n\nWITH IOT AS (\n\n  SELECT *\n\n  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}\n\n),\n\nIOT_BATCHES_1 AS (\n\n  SELECT *\n\n  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT_BATCHES') }}\n\n),\n\niot_incremental AS (\n\n  SELECT *\n  \n  FROM IOT\n  \n  {% if is_incremental() %}\n    WHERE \n      LOADED_AT > (\n        SELECT COALESCE( MAX(LOADED_AT), '1900-01-01')\n        FROM IOT_BATCHES_1\n  {% endif %}\n\n),\n\ncount_by_date AS (\n\n  SELECT \n    LOADED_AT AS LOADED_AT,\n    DATE(ts) AS DATE,\n    COUNT(*) AS N_RECORDS_LOADED\n  \n  FROM iot_incremental\n  \n  GROUP BY \n    LOADED_AT, DATE(TS)\n\n),\n\nreported_at AS (\n\n  SELECT \n    LOADED_AT,\n    DATE,\n    N_RECORDS_LOADED,\n    current_timestamp() AS REPORTED_AT\n  \n  FROM count_by_date\n\n)\n\nSELECT *\n\nFROM reported_at\n",
+        "query" : "SELECT * \n\nFROM IOT\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
         }
       },
       "ports" : {
+        "inputs" : [ {
+          "id" : "G4Kf0LUxIiRtGvqO5jXGh$$ecahU0Z_u9aVTjqZtfLMP",
+          "slug" : "IOT"
+        } ],
+        "outputs" : [ {
+          "id" : "Wtd71umA",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "FuGNQ4SUamaDRXU1ddQqn" : {
+      "id" : "FuGNQ4SUamaDRXU1ddQqn",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IOT",
+        "slug" : "IOT",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT",
+          "sourceType" : "Source",
+          "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+          "alias" : ""
+        }
+      },
+      "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "T6WBrJ7I",
+          "id" : "Nmn6pLlPdCRpl06cx5Opf",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "uVkchmyTePz-_4P1qVbh7" : {
+      "id" : "uVkchmyTePz-_4P1qVbh7",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IOT_BATCHES_1",
+        "slug" : "IOT_BATCHES_1",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT_BATCHES",
+          "sourceType" : "Source",
+          "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "NaLumLWMu3Xv28cd0h69C",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
@@ -38,6 +753,12 @@
       }
     }
   },
-  "connections" : [ ],
+  "connections" : [ {
+    "id" : "REiBb1N6gRu4u08p4RTn3$$-JznWvIxurkTIYiiUzezh",
+    "source" : "FuGNQ4SUamaDRXU1ddQqn",
+    "sourcePort" : "Nmn6pLlPdCRpl06cx5Opf",
+    "target" : "Skuapc6N",
+    "targetPort" : "G4Kf0LUxIiRtGvqO5jXGh$$ecahU0Z_u9aVTjqZtfLMP"
+  } ],
   "component" : "Model"
 }

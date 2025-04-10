@@ -11,6 +11,8 @@
                 -- SPLIT_PART('{{ res.unique_id }}', '.', -1)
                 '{{ res.node.relation_name }}'
                   AS edw_table_name,
+                '{{ res.adapter_response.query_id }}'
+                  AS run_id,
                 -- DATEADD(SECOND, -{{ res.execution_time }}, CURRENT_TIMESTAMP())
                 '{{ res.timing|map(attribute="started_at")|min }}'
                   AS load_start,

@@ -23,7 +23,7 @@
         "label" : "IOT_BATCHES",
         "x" : 20,
         "y" : 20,
-        "phase" : 0,
+        "phase" : 1,
         "macroDependencies" : [ ],
         "comment" : "Tracks and reports the number of IoT records loaded over time, ensuring data integrity during updates.",
         "autoUpdateComment" : true

@@ -20,7 +20,7 @@ def iot_batches():
           "run_tests": True,
           "run_mode": "model",
           "entity_kind": "model",
-          "entity_name": "iot_batches",
+          "entity_name": "IOT_BATCHES",
           "project_id": "44652",
           "git_entity": "tag",
           "git_entity_value": "__PROJECT_FULL_RELEASE_TAG_PLACEHOLDER__",
@@ -29,7 +29,7 @@ def iot_batches():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake",
+          "run_props": " --profile snowflake -t DEV",
           "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins"}
         },
     )

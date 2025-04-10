@@ -33,7 +33,7 @@ jobs:
     createdAt: '2025-04-08 15:37:03'
     author: best.neil@prophecy.io
     models:
-    - iot_batches
+    - IOT_BATCHES
     sqlProjects: []
 gemContainer:
   languageVersion: ''

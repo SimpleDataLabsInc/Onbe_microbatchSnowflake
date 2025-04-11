@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4b8cf205fee7333dc7e440d128a78f720ecb3aba356ec311e898d1ffe049b191"
+            "sha256": "703823e240c1e43a29fb71b7c0e13a3af2b532f281a4cb2ae31417fc4f31a72d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -338,11 +338,12 @@
         },
         "dbt-adapters": {
             "hashes": [
-                "sha256:c72189b780eaa7ca83a73d0db3cb32b014112f21cdabbbc519937bfa8be1dae8",
-                "sha256:dc87762fa19de3a9f0f8d56a2709af0033f87a51b52e6850ec3cba55bda2d7f3"
+                "sha256:0ba2325bfdf00f084b635d373f2d89e392be257ca79c47280683a2612882c61b",
+                "sha256:11e480f48b63466ead8ae56698ac7a5541ffc64ec2b0392cec174e8d47b09a7f"
             ],
+            "index": "pypi",
             "markers": "python_full_version >= '3.9.0'",
-            "version": "==1.14.5"
+            "version": "==1.14.1"
         },
         "dbt-common": {
             "hashes": [
@@ -354,12 +355,12 @@
         },
         "dbt-core": {
             "hashes": [
-                "sha256:38c931dd5206fdb11a9db1decf1075ce891ad9f4692bd00a9ba760a6cfe4358d",
-                "sha256:a1db009c30f08a95fcf2620f70b2258aeca43a480229d7eb710e2243f5f622ea"
+                "sha256:cd1c7d379f43f8c7914798041bf5062af0070261dabb148775d77c62733bc5e5",
+                "sha256:f02aa336721e7ff7beae86b8269d0c81290e36aa1126dc6d7b52c327de8c94af"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==1.9.1"
+            "version": "==1.9.3"
         },
         "dbt-extractor": {
             "hashes": [
@@ -393,12 +394,12 @@
         },
         "dbt-snowflake": {
             "hashes": [
-                "sha256:70ad763e334119fb7af96a924f6a2c67a873ffc1c4f5a4723b7948825c4de399",
-                "sha256:bd1778a8d0108aadaeee9d155e0ab9695a740e06480c69103a65b533eb6eada4"
+                "sha256:4aec61a236a32b27eec6424700327820c9d1f34cd192308ad57d23e679012160",
+                "sha256:b19a4fa065d4b765e7e24491aad7e9b908dce7b91631895f5341574f87d2a5df"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.9'",
-            "version": "==1.9.0"
+            "markers": "python_full_version >= '3.9.0'",
+            "version": "==1.9.2"
         },
         "deepdiff": {
             "hashes": [

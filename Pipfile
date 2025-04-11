@@ -7,8 +7,9 @@ name = "pypi"
 python-dotenv = {extras = ["cli"], version = "*"}
 prophecy-build-tool = "==1.2.49"
 secretstorage = ">=3.2.0"
-dbt-core = "==1.9.1"
-dbt-snowflake = "==1.9.0"
+dbt-core = "==1.9.3"
+dbt-adapters = "==1.14.1"
+dbt-snowflake = "==1.9.2"
 
 [dev-packages]
 pyflakes = "*"

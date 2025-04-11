@@ -1,18 +1,54 @@
 {% macro log_results(results) %}
 
     {% if execute %}
+
         {{ log("updating audit table", info=True) }}
-        {% for res in results %}
 
-            {{ print( "result:\n" ~ res|pprint) }}
+        {%- set load_log_values -%}
 
-            {% set load_log_select %}
+          {%- for r in results -%}
+            {{ [ r.node.relation_name,
+                 r.adapter_response.query_id,
+                 r.timing|map(attribute="started_at")|min|string,
+                 r.timing|map(attribute="completed_at")|max|string,
+                 r.status.value|string,
+                 r.message
+               ] | join("',\n'")
+            }}
+          {%- endfor -%}
+        {%- endset -%}
+
+        {{ print( load_log_values ) }}
+
+        {%- set load_log_insert -%}
+            INSERT INTO ONBE_DEMO_DEV.EDW_LOAD_LOG (
+                EDW_TABLE_NAME,
+                LOAD_START,
+                LOAD_END,
+                LOAD_STATUS,
+                ERROR_MESSAGE,
+                CREATE_DATE,
+                UPDATE_DATE,
+                CREATED_BY_USER )
+            VALUES
+            ( '{{ [ load_log_values ]|join(",\n") }}' );
+        {% endset %}
+
+        {{ print( load_log_insert) }}
+
+        {{ print( "result:\n" ~ results|pprint) }}
+
+
+{#
+
+            {{- log("operated on " ~ r.adapter_response.rows_affected ~ " rows", info=True) -}}
+
             SELECT
                 -- SPLIT_PART('{{ res.unique_id }}', '.', -1)
                 '{{ res.node.relation_name }}'
                   AS edw_table_name,
                 '{{ res.adapter_response.query_id }}'
-                  AS run_id,
+                  AS query_id,
                 -- DATEADD(SECOND, -{{ res.execution_time }}, CURRENT_TIMESTAMP())
                 '{{ res.timing|map(attribute="started_at")|min }}'
                   AS load_start,
@@ -29,7 +65,6 @@
 
             {% do load_log_record.print_json(indent=2) %}
 
-            {#
             {% set load_log_query %}
             INSERT INTO EDW_LOAD_LOG (
                 EDW_TABLE_NAME, LOAD_START, LOAD_END, LOAD_STATUS, ERROR_MESSAGE, CREATE_DATE, UPDATE_DATE, CREATED_BY_USER)
@@ -63,9 +98,11 @@
             {% endif %}
 
             {{ log("Inserted row with RUN_ID: " ~ run_id, info=True) }}
+
             #}
-            {{ log("operated on " ~ res.adapter_response.rows_affected ~ " rows", info=True) }}
-        {% endfor %}
-        {{ log("finished updating audit table", info=True) }}
-    {% endif %}
-{% endmacro %}
+
+        {{- log("finished updating audit table", info=True) -}}
+
+    {%- endif -%}
+
+{%- endmacro -%}

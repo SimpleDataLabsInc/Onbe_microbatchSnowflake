@@ -29,7 +29,7 @@ jobs:
       clusterMode:
         Multi: {}
       clusterId: null
-    enabled: true
+    enabled: false
     createdAt: '2025-04-08 15:37:03'
     author: best.neil@prophecy.io
     models:
@@ -52,7 +52,22 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/IOT_BATCHES:
     name: IOT_BATCHES
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
+      - name: DATE
+        dataType:
+          type: Date
+      - name: N_RECORDS_LOADED
+        dataType:
+          type: Number
+      - name: REPORTED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:

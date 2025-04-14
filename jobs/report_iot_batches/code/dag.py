@@ -14,6 +14,7 @@ with DAG(
     dag_id = "best_neil_Onbe_microbatchSnowflake_report_iot_batches", 
     schedule_interval = None, 
     default_args = {"owner" : "Prophecy", "retries" : 0, "ignore_first_depends_on_past" : True, "do_xcom_push" : True}, 
+    params = {'DBT_TARGET' : Param("""DEV""", type = "string", title = """DBT_TARGET""")}, 
     start_date = pendulum.today('UTC'), 
     catchup = False, 
     max_active_runs = 1

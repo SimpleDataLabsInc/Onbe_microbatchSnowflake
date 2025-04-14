@@ -6,7 +6,7 @@ config-version: 2
 require-dbt-version:
 - ">=1.8.0"
 - "<2.0.0"
-version: "0.1.0"
+version: "0.2.1"
 profile: "prophecy-default"
 
 # ==================
@@ -24,6 +24,12 @@ model-paths:
 macro-paths:
 - "macros"
 target-path: "target"
+
+# ==================
+# Variable Configs
+# ==================
+vars:
+  DBT_TARGET: "{DEV,PROD}"
 
 # ============
 # Run Hooks

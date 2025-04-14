@@ -1,6 +1,6 @@
 name: Onbe_microbatchSnowflake
 description: ''
-version: 0.2.1
+version: 0.3.0
 author: best.neil@prophecy.io
 language: sql
 buildSystem: ''

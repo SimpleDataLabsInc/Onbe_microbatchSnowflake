@@ -21,7 +21,7 @@ def iot_batches():
           "run_mode": "model",
           "entity_kind": "model",
           "entity_name": "IOT_BATCHES",
-          "project_id": "78",
+          "project_id": "91",
           "git_entity": "tag",
           "git_entity_value": "__PROJECT_FULL_RELEASE_TAG_PLACEHOLDER__",
           "git_ssh_url": "https://github.com/SimpleDataLabsInc/Onbe_microbatchSnowflake",

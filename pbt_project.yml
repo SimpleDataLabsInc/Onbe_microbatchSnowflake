@@ -52,7 +52,22 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/IOT_BATCHES:
     name: IOT_BATCHES
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
+      - name: DATE
+        dataType:
+          type: Date
+      - name: N_RECORDS_LOADED
+        dataType:
+          type: Number
+      - name: REPORTED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:
@@ -102,7 +117,31 @@ sqlSources:
       schema:
         entityType: ''
         providerType: snowflake
-        fields: []
+        fields:
+        - name: DEVICE_ID
+          dataType:
+            type: String
+        - name: PLANT_ID
+          dataType:
+            type: String
+        - name: TAG_NAME
+          dataType:
+            type: String
+        - name: TS
+          dataType:
+            type: Timestamp
+        - name: VALUE
+          dataType:
+            type: Float
+        - name: ENGINEERING_UNITS
+          dataType:
+            type: String
+        - name: DATE
+          dataType:
+            type: Date
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
       description: IoT sensor data capturing measurements from devices across various
         plants, enabling real-time monitoring and analysis of operational metrics.
       author: best.neil@prophecy.io
@@ -112,7 +151,22 @@ sqlSources:
       schema:
         entityType: ''
         providerType: snowflake
-        fields: []
+        fields:
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
+        - name: YEAR
+          dataType:
+            type: Number
+        - name: MONTH
+          dataType:
+            type: Number
+        - name: N_RECORDS_LOADED
+          dataType:
+            type: Number
+        - name: REPORTED_AT
+          dataType:
+            type: Timestamp
       description: Records of IoT data batches, capturing the volume of data loaded
         and the associated timestamps for reporting and loading activities.
       author: best.neil@prophecy.io

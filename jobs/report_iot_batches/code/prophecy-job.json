@@ -6,7 +6,7 @@
     "name" : "report_iot_batches",
     "dagName" : "best_neil_Onbe_microbatchSnowflake_report_iot_batches",
     "schedule" : "None",
-    "enabled" : false,
+    "enabled" : true,
     "alerting" : {
       "emails" : "",
       "onStart" : false,

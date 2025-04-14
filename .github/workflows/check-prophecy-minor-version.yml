@@ -1,0 +1,74 @@
+name: Check Prophecy minor version
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths-ignore:
+      - '.github/workflows/**'
+
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.base_ref }}
+#   cancel-in-progress: true
+
+jobs:
+  compare_minor_version:
+    name: compare minor version; maybe bump it
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.VERSION_BUMPER_TOKEN }} # pending approval
+      - run: |
+          git fetch origin "$GITHUB_BASE_REF":"$GITHUB_BASE_REF"
+          git branch --list --verbose
+      - uses: actions/setup-python@19e4675e06535f6b54e894da5c1f044400bb4996
+        # this SHA is post-5.4.0 to get `.tool-versions` support from PR #1043
+        id: setup
+        with:
+          python-version-file: '.tool-versions'
+          cache: 'pipenv'
+      - name: Install `pipenv`, etc.
+        run: |
+          pip install 'pipenv==v2024.4.1' --user
+          pipenv install
+      - run: |
+          echo -n "Setup cache hit? : "
+          echo ${{ steps.setup.outputs.cache-hit }}
+      - name: Run versioning check and commit if changed
+        env:
+          GH_TOKEN: ${{ github.token }} # for GH CLI
+        run: |
+          if ! pipenv run \
+            pbt versioning \
+              --path "$GITHUB_WORKSPACE" \
+              --compare "$GITHUB_BASE_REF"
+          then
+              pipenv run \
+                pbt versioning \
+                  --path "$GITHUB_WORKSPACE" \
+                  --compare "$GITHUB_BASE_REF" \
+                  --bump minor
+              git config \
+                --global user.name "github-actions[bot]"
+              git config \
+                --global user.email \
+                  "github-actions[bot]@users.noreply.github.com"
+              # git checkout $GITHUB_REF
+              git add "$GITHUB_WORKSPACE"
+              git commit -m "Auto bump minor version"
+              git push origin "$GITHUB_HEAD_REF" --verbose
+              pipenv run \
+                pbt tag \
+                  --path "$GITHUB_WORKSPACE" \
+                  --branch "$(basename "$GITHUB_WORKSPACE")" \
+                  --no-push
+              git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
+              exit 1  # Fail the job to indicate changes were needed
+          fi

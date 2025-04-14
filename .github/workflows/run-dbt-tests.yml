@@ -1,0 +1,66 @@
+name: Run `dbt` via GitHub Actions
+on:
+  pull_request:
+    branches:
+      - main
+      types: [opened, synchronize]
+  push:
+    branches:
+      - dev
+
+jobs:
+  run_dbt_tests:
+    name: Run DBT tests
+    runs-on: ubuntu-latest
+    env:
+      DBT_TARGET: "${{ github.base_ref == 'main' && 'PROD' || 'DEV' }}"
+    steps:
+      - name: 'Install system libs'
+        env:
+          DEBIAN_FRONTEND: noninteractive
+          APT_GET_BE_QUIET: '-qq -o quiet::NoProgress=true -o Dpkg::Use-Pty=0'
+        run: |
+          sudo apt-get $APT_GET_BE_QUIET update && \
+            sudo apt-get $APT_GET_BE_QUIET install \
+              libbz2-dev \
+              liblzma-dev \
+              libreadline-dev
+      - uses: actions/checkout@v4.2.2
+      - name: 'Install asdf'
+        uses: ynab/asdf-action@v1.2
+        with:
+          version: 0.16.1
+        env:
+          WGETRC: "${{ github.workspace }}/.wgetrc"
+      - name: 'Install, configure, and test tools'
+        run: |
+          asdf plugin add python https://github.com/asdf-community/asdf-python
+          asdf install python
+          asdf current python
+          pip install 'pipenv==v2024.4.1' --user
+          pipenv install
+          for KV in \
+            "DBT_USER ${{ secrets.DBT_USER }}" \
+            "DBT_PASSWORD ${{ secrets.DBT_PASSWORD }}" \
+            "DBT_TARGET ${{ env.DBT_TARGET }}" \
+            "DBT_PROFILE snowflake" \
+            "DBT_PROFILES_DIR ${{ github.workspace }}" \
+            "DBT_LOG_FORMAT_FILE json" \
+            "DBT_LOG_LEVEL_FILE info"
+            do
+              pipenv run dotenv set $KV
+            done
+          pipenv run \
+            dbt debug \
+              --vars '{env: ${{ env.DBT_TARGET }}}' \
+              --connection
+      - name: 'Run the SQL tests'
+        id: dbt-test
+        run: |
+          pipenv run \
+            dbt test \
+              --vars '{env: ${{ env.DBT_TARGET }}}'
+      # - name: 'Show the result'
+      #   if: ${{ always() }}
+      #   run: echo "${{ steps.dbt-test.outputs.result }}"
+      #   shell: bash

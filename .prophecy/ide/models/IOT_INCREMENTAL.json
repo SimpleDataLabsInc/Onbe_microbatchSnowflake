@@ -1,0 +1,87 @@
+{
+  "id" : "IOT_INCREMENTAL",
+  "metainfo" : {
+    "label" : "IOT_INCREMENTAL",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "IOT##vjhuh3um" : {
+      "id" : "IOT##vjhuh3um",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "IOT",
+        "phase" : 0,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "out",
+          "language" : "sql",
+          "content" : "SELECT *\n\nFROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}\n\nWHERE LOADED_AT > (\n        SELECT coalesce(max(LOADED_AT), '1900-01-01')\n        \n        FROM ONBE_DEMO_{{ var(\"DBT_TARGET\") }}.PUBLIC.IOT_BATCHES\n       )\n"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "EkWxDR62",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "index" : 0
+    },
+    "final##aVvGBdVn" : {
+      "id" : "final##aVvGBdVn",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "IOT_INCREMENTAL",
+        "phase" : 0,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT *\n\nFROM IOT\n",
+        "isModel" : true,
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "jIEpRY5t",
+          "slug" : "IOT"
+        } ],
+        "outputs" : [ {
+          "id" : "EIqTXznB",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "index" : 1
+    }
+  },
+  "connections" : [ {
+    "id" : "EO0UD8aJ",
+    "source" : "IOT##vjhuh3um",
+    "sourcePort" : "EkWxDR62",
+    "target" : "final##aVvGBdVn",
+    "targetPort" : "jIEpRY5t"
+  } ],
+  "component" : "Model"
+}

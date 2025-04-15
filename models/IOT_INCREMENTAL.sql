@@ -1,0 +1,15 @@
+WITH IOT AS (
+
+  SELECT * 
+  
+  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}
+
+  WHERE LOADED_AT > (
+    SELECT coalesce( max( LOADED_AT), '1900-01-01')
+    FROM ONBE_DEMO_{{ var( "DBT_TARGET") }}.PUBLIC.IOT_BATCHES)
+
+)
+
+SELECT *
+
+FROM IOT

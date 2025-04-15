@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Composer",
-    "fabricId" : "62",
+    "fabricId" : "23283",
     "jobId" : "jobs/report_iot_batches",
     "name" : "report_iot_batches",
     "dagName" : "best_neil_Onbe_microbatchSnowflake_report_iot_batches",
@@ -70,7 +70,7 @@
       },
       "settings" : { },
       "properties" : {
-        "entityId" : "91/.prophecy/metadata/sqlmodels/IOT_BATCHES",
+        "entityId" : "44652/.prophecy/metadata/sqlmodels/IOT_BATCHES",
         "cacheSelectedOnly" : null,
         "gitSubPath" : null,
         "runModelWithParents" : false,
@@ -92,7 +92,7 @@
         "isAdhocRunFromSameProject" : null,
         "noPrint" : null,
         "quiet" : null,
-        "projectId" : "91",
+        "projectId" : "44652",
         "runMode" : "model",
         "runOnlyModel" : false,
         "favorState" : null,
@@ -113,7 +113,7 @@
         "noVersionCheck" : null,
         "noWriteJson" : null,
         "printerWidth" : null,
-        "sqlFabricId" : "65",
+        "sqlFabricId" : "22696",
         "gitEntityValue" : null,
         "logFormat" : null,
         "runModelWithChildren" : false,
@@ -133,7 +133,7 @@
         "currentProjectModels" : [ {
           "label" : "IOT_BATCHES",
           "value" : "IOT_BATCHES",
-          "id" : "91/.prophecy/metadata/sqlmodels/IOT_BATCHES",
+          "id" : "44652/.prophecy/metadata/sqlmodels/IOT_BATCHES",
           "name" : "IOT_BATCHES"
         } ],
         "profilesDir" : null,

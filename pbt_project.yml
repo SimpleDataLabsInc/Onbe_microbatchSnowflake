@@ -52,22 +52,7 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/IOT_BATCHES:
     name: IOT_BATCHES
-    schema:
-      entityType: ''
-      providerType: Snowflake
-      fields:
-      - name: LOADED_AT
-        dataType:
-          type: Timestamp
-      - name: DATE
-        dataType:
-          type: Date
-      - name: N_RECORDS_LOADED
-        dataType:
-          type: Number
-      - name: REPORTED_AT
-        dataType:
-          type: Timestamp
+    schema: null
     description: null
     author: best.neil@prophecy.io
     files:
@@ -117,64 +102,21 @@ sqlSources:
       schema:
         entityType: ''
         providerType: snowflake
-        fields:
-        - name: DEVICE_ID
-          dataType:
-            type: String
-        - name: PLANT_ID
-          dataType:
-            type: String
-        - name: TAG_NAME
-          dataType:
-            type: String
-        - name: TS
-          dataType:
-            type: Timestamp
-        - name: VALUE
-          dataType:
-            type: Float
-        - name: ENGINEERING_UNITS
-          dataType:
-            type: String
-        - name: DATE
-          dataType:
-            type: Date
-        - name: LOADED_AT
-          dataType:
-            type: Timestamp
+        fields: []
       description: IoT sensor data capturing measurements from devices across various
         plants, enabling real-time monitoring and analysis of operational metrics.
       author: best.neil@prophecy.io
-      tableType: null
       createdAt: '2025-04-07 15:59:33'
     - name: IOT_BATCHES
       schema:
         entityType: ''
         providerType: snowflake
-        fields:
-        - name: LOADED_AT
-          dataType:
-            type: Timestamp
-        - name: YEAR
-          dataType:
-            type: Number
-        - name: MONTH
-          dataType:
-            type: Number
-        - name: N_RECORDS_LOADED
-          dataType:
-            type: Number
-        - name: REPORTED_AT
-          dataType:
-            type: Timestamp
+        fields: []
       description: Records of IoT data batches, capturing the volume of data loaded
         and the associated timestamps for reporting and loading activities.
       author: best.neil@prophecy.io
-      tableType: null
       createdAt: '2025-04-08 18:33:22'
 sqlUnreferencedSources: {}
-sqlOrchestratorPipelines: {}
-sqlBusinessApps: {}
 sqlPipeline:
   name: sqlPipeline
   description: null

@@ -16,3 +16,30 @@ models:
     dataType:
       type: "Timestamp"
   tests: []
+- name: "IOT_INCREMENTAL"
+  columns:
+  - name: "PLANT_ID"
+    dataType:
+      type: "String"
+  - name: "VALUE"
+    dataType:
+      type: "Float"
+  - name: "DEVICE_ID"
+    dataType:
+      type: "String"
+  - name: "TAG_NAME"
+    dataType:
+      type: "String"
+  - name: "LOADED_AT"
+    dataType:
+      type: "Timestamp"
+  - name: "ENGINEERING_UNITS"
+    dataType:
+      type: "String"
+  - name: "DATE"
+    dataType:
+      type: "Date"
+  - name: "TS"
+    dataType:
+      type: "Timestamp"
+  tests: []

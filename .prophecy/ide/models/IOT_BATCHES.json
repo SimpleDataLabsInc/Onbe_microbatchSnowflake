@@ -11,7 +11,6 @@
       "entityConfig" : {
         "pre-hook" : "[\"{{ print( 'is_incremental(): ' ~ is_incremental())}}\"]",
         "materialized" : "incremental",
-        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
         "unique_key" : "[\"LOADED_AT\", \"DATE\"]",
         "incremental_strategy" : "\"merge\"",
         "type" : "ModelConfig"
@@ -23,34 +22,6 @@
     "version" : 3
   },
   "processes" : {
-    "IOT##zlebNQ2I" : {
-      "id" : "IOT##zlebNQ2I",
-      "component" : "Source",
-      "metadata" : {
-        "label" : "IOT",
-        "x" : 20,
-        "y" : 20,
-        "phase" : 0,
-        "isLabelGrayed" : false
-      },
-      "properties" : {
-        "table" : {
-          "name" : "IOT",
-          "sourceType" : "Table",
-          "sourceName" : "ONBE_DEMO_DEV.PUBLIC"
-        }
-      },
-      "ports" : {
-        "inputs" : [ ],
-        "outputs" : [ {
-          "id" : "JzHhfzKh",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      },
-      "index" : 0
-    },
     "records_per_load##fs7gZ9UF" : {
       "id" : "records_per_load##fs7gZ9UF",
       "component" : "Aggregate",
@@ -87,7 +58,7 @@
           "expression" : ""
         },
         "activeTab" : "aggregate",
-        "columnsSelector" : [ "UxKUEc4W##LOADED_AT", "UxKUEc4W##DATE" ],
+        "columnsSelector" : [ ],
         "groupBy" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
@@ -126,7 +97,7 @@
         "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ "gII4Wcvc##LOADED_AT", "gII4Wcvc##DATE", "gII4Wcvc##N_RECORDS_LOADED" ],
+        "columnsSelector" : [ ],
         "expressions" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
@@ -199,15 +170,36 @@
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
       }
+    },
+    "mRSRZwQ968pUHljoRREh7" : {
+      "id" : "mRSRZwQ968pUHljoRREh7",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "IOT_INCREMENTAL",
+        "slug" : "IOT_INCREMENTAL",
+        "x" : 40,
+        "y" : 20,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT_INCREMENTAL",
+          "sourceType" : "Model",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Sm6UwuKibsSqk2q-w0sov",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
     }
   },
   "connections" : [ {
-    "id" : "r51TtUm2",
-    "source" : "IOT##zlebNQ2I",
-    "sourcePort" : "JzHhfzKh",
-    "target" : "records_per_load##fs7gZ9UF",
-    "targetPort" : "UxKUEc4W"
-  }, {
     "id" : "JhgObaWq",
     "source" : "records_per_load##fs7gZ9UF",
     "sourcePort" : "YQxH3iCW",
@@ -219,6 +211,12 @@
     "sourcePort" : "hyHT4ZZb",
     "target" : "final##v4W8tk6z",
     "targetPort" : "qk9Z4N5h"
+  }, {
+    "id" : "q-I7sVm5ABLcnCT8bOXnt",
+    "source" : "mRSRZwQ968pUHljoRREh7",
+    "sourcePort" : "Sm6UwuKibsSqk2q-w0sov",
+    "target" : "records_per_load##fs7gZ9UF",
+    "targetPort" : "UxKUEc4W"
   } ],
   "component" : "Model"
 }

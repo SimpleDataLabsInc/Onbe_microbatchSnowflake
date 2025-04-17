@@ -1,32 +1,23 @@
 {{
   config({    
-    "materialized": "view",
-    "database": 'ONBE_DEMO_' ~ var('DBT_TARGET') 
+    "materialized": "view"
   })
 }}
 
-WITH IOT_BATCHES AS (
-
-  SELECT * 
-  
-  FROM {{ ref('IOT_BATCHES')}}
-
-),
-
-incremental_records AS (
+WITH incremental_filter AS (
 
   SELECT *
   
-  FROM PUBLIC.IOT
+  FROM ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT
   
   WHERE LOADED_AT > (
           SELECT MAX(LOADED_AT)
           
-          FROM IOT_BATCHES
+          FROM ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT_BATCHES
          )
 
 )
 
 SELECT *
 
-FROM incremental_records
+FROM incremental_filter

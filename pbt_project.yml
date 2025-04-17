@@ -116,6 +116,7 @@ sqlModels:
     files:
     - models/IOT_INCREMENTAL.sql
     - .prophecy/ide/models/IOT_INCREMENTAL.json
+    - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []
@@ -154,63 +155,7 @@ sqlSources:
     files:
     - prophecy-sources/sources.yml
     createdAt: '2025-04-07 15:59:33'
-    tables:
-    - name: IOT
-      schema:
-        entityType: ''
-        providerType: snowflake
-        fields:
-        - name: DEVICE_ID
-          dataType:
-            type: String
-        - name: PLANT_ID
-          dataType:
-            type: String
-        - name: TAG_NAME
-          dataType:
-            type: String
-        - name: TS
-          dataType:
-            type: Timestamp
-        - name: VALUE
-          dataType:
-            type: Float
-        - name: ENGINEERING_UNITS
-          dataType:
-            type: String
-        - name: DATE
-          dataType:
-            type: Date
-        - name: LOADED_AT
-          dataType:
-            type: Timestamp
-      description: IoT sensor data capturing measurements from devices across various
-        plants, enabling real-time monitoring and analysis of operational metrics.
-      author: best.neil@prophecy.io
-      createdAt: '2025-04-07 15:59:33'
-      tableType: table
-    - name: IOT_BATCHES
-      schema:
-        entityType: ''
-        providerType: snowflake
-        fields:
-        - name: LOADED_AT
-          dataType:
-            type: Timestamp
-        - name: DATE
-          dataType:
-            type: Date
-        - name: N_RECORDS_LOADED
-          dataType:
-            type: Number
-        - name: REPORTED_AT
-          dataType:
-            type: Timestamp
-      description: Records of IoT data batches, capturing the volume of data loaded
-        and the associated timestamps for reporting and loading activities.
-      author: best.neil@prophecy.io
-      createdAt: '2025-04-08 18:33:22'
-      tableType: table
+    tables: []
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

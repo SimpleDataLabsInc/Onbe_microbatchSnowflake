@@ -1,18 +1,17 @@
 {{
   config({    
     "materialized": "incremental",
-    "database": 'ONBE_DEMO_' ~ var('DBT_TARGET') ,
     "incremental_strategy": "merge",
     "pre-hook": ["{{ print( 'is_incremental(): ' ~ is_incremental())}}"],
     "unique_key": ["LOADED_AT", "DATE"]
   })
 }}
 
-WITH IOT AS (
+WITH IOT_INCREMENTAL AS (
 
   SELECT * 
   
-  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}
+  FROM {{ ref('IOT_INCREMENTAL')}}
 
 ),
 
@@ -23,7 +22,7 @@ records_per_loaded_at AS (
     DATE AS DATE,
     COUNT(*) AS N_RECORDS_LOADED
   
-  FROM IOT AS in0
+  FROM IOT_INCREMENTAL AS in0
   
   GROUP BY 
     LOADED_AT, DATE

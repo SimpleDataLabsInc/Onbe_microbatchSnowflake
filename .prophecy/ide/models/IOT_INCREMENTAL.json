@@ -2,12 +2,17 @@
   "id" : "IOT_INCREMENTAL",
   "metainfo" : {
     "label" : "IOT_INCREMENTAL",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
     "graphConfig" : {
+      "entityConfig" : {
+        "materialized" : "view",
+        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
+        "type" : "ModelConfig"
+      },
       "userDefinedConfig" : {
         "vars" : { }
       }
@@ -15,12 +20,16 @@
     "version" : 3
   },
   "processes" : {
-    "IOT##vjhuh3um" : {
-      "id" : "IOT##vjhuh3um",
+    "SQLStatement_1##IedjEcFl" : {
+      "id" : "SQLStatement_1##IedjEcFl",
       "component" : "SQLStatement",
       "metadata" : {
-        "label" : "IOT",
+        "label" : "incremental_records",
+        "slug" : "incremental_records",
+        "x" : 220,
+        "y" : 20,
         "phase" : 0,
+        "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
@@ -28,34 +37,38 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}\n\nWHERE LOADED_AT > (\n        SELECT coalesce(max(LOADED_AT), '1900-01-01')\n        \n        FROM ONBE_DEMO_{{ var(\"DBT_TARGET\") }}.PUBLIC.IOT_BATCHES\n       )\n"
+          "content" : "SELECT *\n\nFROM PUBLIC.IOT\n\nWHERE LOADED_AT > (\n        SELECT MAX(LOADED_AT)\n        \n        FROM IOT_BATCHES\n       )\n"
         } ]
       },
       "ports" : {
-        "inputs" : [ ],
+        "inputs" : [ {
+          "id" : "W8epYmqe",
+          "slug" : "IOT_BATCHES"
+        } ],
         "outputs" : [ {
-          "id" : "EkWxDR62",
+          "id" : "lhUIMSHN",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 0
+      }
     },
-    "final##aVvGBdVn" : {
-      "id" : "final##aVvGBdVn",
+    "final##Ccy7nDJ4" : {
+      "id" : "final##Ccy7nDJ4",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "IOT_INCREMENTAL",
+        "x" : 420,
+        "y" : 20,
         "phase" : 0,
+        "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM IOT\n",
-        "isModel" : true,
+        "query" : "SELECT * \n\nFROM incremental_records\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -63,25 +76,57 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "jIEpRY5t",
-          "slug" : "IOT"
+          "id" : "eSNg2XJF",
+          "slug" : "incremental_records"
         } ],
         "outputs" : [ {
-          "id" : "EIqTXznB",
+          "id" : "fi3k2D47",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
+      }
+    },
+    "zImf6fq4bJGVi5aCODEO3" : {
+      "id" : "zImf6fq4bJGVi5aCODEO3",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "IOT_BATCHES",
+        "slug" : "IOT_BATCHES",
+        "x" : 40,
+        "y" : 20,
+        "phase" : 0
       },
-      "index" : 1
+      "properties" : {
+        "table" : {
+          "name" : "IOT_BATCHES",
+          "sourceType" : "Model",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "65Vpnp20t5E8tzu6oVCFb",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
     }
   },
   "connections" : [ {
-    "id" : "EO0UD8aJ",
-    "source" : "IOT##vjhuh3um",
-    "sourcePort" : "EkWxDR62",
-    "target" : "final##aVvGBdVn",
-    "targetPort" : "jIEpRY5t"
+    "id" : "wIh44v3c",
+    "source" : "SQLStatement_1##IedjEcFl",
+    "sourcePort" : "lhUIMSHN",
+    "target" : "final##Ccy7nDJ4",
+    "targetPort" : "eSNg2XJF"
+  }, {
+    "id" : "mrhrX8h2EneymqBgBUjou$$3OalxX39Zu2E4NXw9bHlc",
+    "source" : "zImf6fq4bJGVi5aCODEO3",
+    "sourcePort" : "65Vpnp20t5E8tzu6oVCFb",
+    "target" : "SQLStatement_1##IedjEcFl",
+    "targetPort" : "W8epYmqe"
   } ],
   "component" : "Model"
 }

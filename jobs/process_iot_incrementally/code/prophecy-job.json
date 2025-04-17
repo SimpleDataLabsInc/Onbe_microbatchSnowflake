@@ -2,11 +2,11 @@
   "metainfo" : {
     "type" : "Composer",
     "fabricId" : "23283",
-    "jobId" : "jobs/report_iot_batches",
-    "name" : "report_iot_batches",
-    "dagName" : "best_neil_Onbe_microbatchSnowflake_report_iot_batches",
+    "jobId" : "jobs/process_iot_incrementally",
+    "name" : "process_iot_incrementally",
+    "dagName" : "Onbe_microbatchSnowflake_process_iot_incrementally",
     "schedule" : "None",
-    "enabled" : true,
+    "enabled" : false,
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -15,7 +15,6 @@
     },
     "maxConcurrentRuns" : 1,
     "processDefaultSettings" : {
-      "retries" : 0,
       "ignore_first_depends_on_past" : true,
       "do_xcom_push" : true
     },
@@ -49,34 +48,34 @@
     }
   },
   "processes" : {
-    "bzScJC7_BoRBM7ReW73E8$$n_UEXMERGVbRUUJ-_PQd6" : {
-      "id" : "bzScJC7_BoRBM7ReW73E8$$n_UEXMERGVbRUUJ-_PQd6",
+    "3TZPcB3eI23CWUcjmeHqR$$PxpMLENNJj-616N66x1LL" : {
+      "id" : "3TZPcB3eI23CWUcjmeHqR$$PxpMLENNJj-616N66x1LL",
       "component" : "Model",
       "metadata" : {
-        "label" : "iot_batches",
-        "slug" : "iot_batches",
+        "label" : "run_entire_project",
+        "slug" : "run_entire_project",
         "x" : -680,
         "y" : -280
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "OgTIZ7KfP7TzNnRxAyeDs$$fbgk9bdFKhdGUs-8dqRaH",
+          "id" : "VtHCAy9pOwPOhzQOGrQ06$$JW2yR4a59m4keG1V0K8tk",
           "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "fs6FT9Hz22GPyKDvH8Tg1$$mdsGEj7F48IPXBglMYc4i",
+          "id" : "PmHo7b7r7q7DrpHe6uztv$$Yde1pCm4Hig8j0ycmf125",
           "slug" : ""
         } ]
       },
       "settings" : { },
       "properties" : {
-        "entityId" : "44652/.prophecy/metadata/sqlmodels/IOT_BATCHES",
+        "entityId" : null,
         "cacheSelectedOnly" : null,
         "gitSubPath" : null,
         "runModelWithParents" : false,
         "defer" : null,
         "noDefer" : null,
-        "runSeed" : false,
+        "runSeed" : true,
         "gitEntity" : "branch",
         "noPartialParse" : null,
         "model" : null,
@@ -93,7 +92,7 @@
         "noPrint" : null,
         "quiet" : null,
         "projectId" : "44652",
-        "runMode" : "model",
+        "runMode" : "project",
         "runOnlyModel" : false,
         "favorState" : null,
         "failFast" : null,
@@ -102,8 +101,8 @@
         "runTest" : true,
         "select" : null,
         "recordTimingInfo" : null,
-        "fullRefresh" : false,
-        "entityName" : "IOT_BATCHES",
+        "fullRefresh" : null,
+        "entityName" : null,
         "noCacheSelectedOnly" : null,
         "gitEntityValueTag" : null,
         "noFavorState" : null,
@@ -131,6 +130,11 @@
         "threads" : null,
         "warnError" : null,
         "currentProjectModels" : [ {
+          "label" : "IOT_INCREMENTAL",
+          "value" : "IOT_INCREMENTAL",
+          "id" : "44652/.prophecy/metadata/sqlmodels/IOT_INCREMENTAL",
+          "name" : "IOT_INCREMENTAL"
+        }, {
           "label" : "IOT_BATCHES",
           "value" : "IOT_BATCHES",
           "id" : "44652/.prophecy/metadata/sqlmodels/IOT_BATCHES",
@@ -140,7 +144,7 @@
         "taskId" : null,
         "logPath" : null,
         "storeFailures" : null,
-        "entityKind" : "model"
+        "entityKind" : null
       },
       "connections" : [ ],
       "processes" : { }

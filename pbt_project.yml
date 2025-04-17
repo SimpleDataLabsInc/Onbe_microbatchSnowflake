@@ -9,8 +9,8 @@ pipelines: {}
 datasets: {}
 templates: {}
 jobs:
-  jobs/report_iot_batches:
-    name: report_iot_batches
+  jobs/process_iot_incrementally:
+    name: process_iot_incrementally
     description: ''
     fabricUID: 23283
     scheduler:
@@ -29,12 +29,12 @@ jobs:
       clusterMode:
         Multi: {}
       clusterId: null
-    enabled: true
-    createdAt: '2025-04-08 15:37:03'
+    enabled: false
+    createdAt: '2025-04-15 19:42:08'
     author: best.neil@prophecy.io
-    models:
-    - IOT_BATCHES
-    sqlProjects: []
+    models: []
+    sqlProjects:
+    - '44652'
 gemContainer:
   languageVersion: ''
   gemLibsVersion: ''
@@ -80,23 +80,49 @@ sqlModels:
       seeds: []
       sources: []
       snapshots: []
-    createdAt: '2025-04-10 14:07:33'
+    createdAt: '2025-04-15 23:52:40'
   .prophecy/metadata/sqlmodels/IOT_INCREMENTAL:
     name: IOT_INCREMENTAL
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: DEVICE_ID
+        dataType:
+          type: String
+      - name: PLANT_ID
+        dataType:
+          type: String
+      - name: TAG_NAME
+        dataType:
+          type: String
+      - name: TS
+        dataType:
+          type: Timestamp
+      - name: VALUE
+        dataType:
+          type: Float
+      - name: ENGINEERING_UNITS
+        dataType:
+          type: String
+      - name: DATE
+        dataType:
+          type: Date
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:
     - models/IOT_INCREMENTAL.sql
     - .prophecy/ide/models/IOT_INCREMENTAL.json
-    - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []
       seeds: []
       sources: []
       snapshots: []
-    createdAt: '2025-04-15 18:59:06'
+    createdAt: '2025-04-15 23:53:48'
 sqlSnapshots: {}
 sqlTests: {}
 sqlMacros:
@@ -162,6 +188,7 @@ sqlSources:
         plants, enabling real-time monitoring and analysis of operational metrics.
       author: best.neil@prophecy.io
       createdAt: '2025-04-07 15:59:33'
+      tableType: table
     - name: IOT_BATCHES
       schema:
         entityType: ''
@@ -170,12 +197,9 @@ sqlSources:
         - name: LOADED_AT
           dataType:
             type: Timestamp
-        - name: YEAR
+        - name: DATE
           dataType:
-            type: Number
-        - name: MONTH
-          dataType:
-            type: Number
+            type: Date
         - name: N_RECORDS_LOADED
           dataType:
             type: Number
@@ -186,6 +210,7 @@ sqlSources:
         and the associated timestamps for reporting and loading activities.
       author: best.neil@prophecy.io
       createdAt: '2025-04-08 18:33:22'
+      tableType: table
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

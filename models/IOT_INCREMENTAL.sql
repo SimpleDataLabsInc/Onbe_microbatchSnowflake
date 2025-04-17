@@ -1,15 +1,32 @@
-WITH IOT AS (
+{{
+  config({    
+    "materialized": "view",
+    "database": 'ONBE_DEMO_' ~ var('DBT_TARGET') 
+  })
+}}
+
+WITH IOT_BATCHES AS (
 
   SELECT * 
   
-  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}
+  FROM {{ ref('IOT_BATCHES')}}
 
+),
+
+incremental_records AS (
+
+  SELECT *
+  
+  FROM PUBLIC.IOT
+  
   WHERE LOADED_AT > (
-    SELECT coalesce( max( LOADED_AT), '1900-01-01')
-    FROM ONBE_DEMO_{{ var( "DBT_TARGET") }}.PUBLIC.IOT_BATCHES)
+          SELECT MAX(LOADED_AT)
+          
+          FROM IOT_BATCHES
+         )
 
 )
 
 SELECT *
 
-FROM IOT
+FROM incremental_records

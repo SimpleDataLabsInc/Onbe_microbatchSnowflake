@@ -1,6 +1,6 @@
-from best_neil_onbe_microbatchsnowflake_report_iot_batches.utils import *
+from onbe_microbatchsnowflake_process_iot_incrementally.utils import *
 
-def iot_batches():
+def run_entire_project():
     from airflow.operators.python import PythonOperator
     from datetime import timedelta
     import os
@@ -8,19 +8,19 @@ def iot_batches():
     import tempfile
 
     return PythonOperator(
-        task_id = "iot_batches",
+        task_id = "run_entire_project",
         python_callable = invoke_dbt_runner,
         op_kwargs = {
           "is_adhoc_run_from_same_project": False,
           "is_prophecy_managed": False,
           "run_deps": False,
-          "run_seeds": False,
+          "run_seeds": True,
           "run_parents": False,
           "run_children": False,
           "run_tests": True,
-          "run_mode": "model",
-          "entity_kind": "model",
-          "entity_name": "IOT_BATCHES",
+          "run_mode": "project",
+          "entity_kind": None,
+          "entity_name": None,
           "project_id": "44652",
           "git_entity": "tag",
           "git_entity_value": "__PROJECT_FULL_RELEASE_TAG_PLACEHOLDER__",

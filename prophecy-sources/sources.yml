@@ -10,8 +10,6 @@ sources:
   - name: "IOT"
     description: "IoT sensor data capturing measurements from devices across various\
       \ plants, enabling real-time monitoring and analysis of operational metrics."
-    quoting:
-      identifier: true
     columns:
     - name: "DEVICE_ID"
       description: "Unique identifier for the IoT device"
@@ -45,6 +43,7 @@ sources:
       description: "Timestamp indicating when the data was loaded into the system"
       dataType:
         type: "Timestamp"
+    type: "table"
   - name: "IOT_BATCHES"
     description: "Records of IoT data batches, capturing the volume of data loaded\
       \ and the associated timestamps for reporting and loading activities."
@@ -53,19 +52,16 @@ sources:
       description: "Timestamp indicating when the batch was loaded"
       dataType:
         type: "Timestamp"
-    - name: "YEAR"
-      description: "The year in which the records were loaded"
+    - name: "DATE"
+      description: "The date when the records were loaded into the system"
       dataType:
-        type: "Number"
-    - name: "MONTH"
-      description: "The month during which the records were loaded"
-      dataType:
-        type: "Number"
+        type: "Date"
     - name: "N_RECORDS_LOADED"
-      description: "Total number of records successfully loaded in the batch"
+      description: "The number of records successfully loaded in the batch"
       dataType:
         type: "Number"
     - name: "REPORTED_AT"
       description: "Timestamp indicating when the batch was reported"
       dataType:
         type: "Timestamp"
+    type: "table"

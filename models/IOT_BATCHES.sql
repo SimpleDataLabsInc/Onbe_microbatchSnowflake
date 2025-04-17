@@ -1,8 +1,9 @@
 {{
   config({    
     "materialized": "incremental",
+    "database": 'ONBE_DEMO_' ~ var('DBT_TARGET') ,
     "incremental_strategy": "merge",
-    "on_schema_change": 'fail',
+    "pre-hook": ["{{ print( 'is_incremental(): ' ~ is_incremental())}}"],
     "unique_key": ["LOADED_AT", "DATE"]
   })
 }}
@@ -15,36 +16,35 @@ WITH IOT AS (
 
 ),
 
-count_by_date AS (
+records_per_loaded_at AS (
 
   SELECT 
     LOADED_AT AS LOADED_AT,
-    DATE(ts) AS DATE,
+    DATE AS DATE,
     COUNT(*) AS N_RECORDS_LOADED
   
-  FROM IOT AS iot_incremental
+  FROM IOT AS in0
   
   GROUP BY 
-    LOADED_AT, DATE(TS)
+    LOADED_AT, DATE
 
 ),
 
-reported_at AS (
+with_reported_at AS (
 
-  {#Generates a report of records loaded by date, ensuring all dates are accounted for.#}
   SELECT 
-    COALESCE(LOADED_AT, '1900-01-01') AS LOADED_AT,
-    DATE,
-    N_RECORDS_LOADED,
-    current_timestamp() AS REPORTED_AT
+    LOADED_AT AS LOADED_AT,
+    DATE AS DATE,
+    N_RECORDS_LOADED AS N_RECORDS_LOADED,
+    CURRENT_TIMESTAMP() AS REPORTED_AT
   
-  FROM count_by_date
+  FROM records_per_loaded_at AS in0
 
 )
 
 SELECT *
 
-FROM reported_at
+FROM with_reported_at
 
 {% if is_incremental() %}
   WHERE 

@@ -14,7 +14,7 @@ def run_entire_project():
           "is_adhoc_run_from_same_project": False,
           "is_prophecy_managed": False,
           "run_deps": False,
-          "run_seeds": True,
+          "run_seeds": False,
           "run_parents": False,
           "run_children": False,
           "run_tests": True,

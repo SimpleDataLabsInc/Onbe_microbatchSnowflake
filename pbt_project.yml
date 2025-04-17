@@ -17,7 +17,7 @@ jobs:
       Composer: {}
     cloudProvider: null
     jobSize: null
-    scheduleCron: None
+    scheduleCron: 0/10 * * * *
     timeout: null
     alerting:
       emails: ''
@@ -29,7 +29,7 @@ jobs:
       clusterMode:
         Multi: {}
       clusterId: null
-    enabled: false
+    enabled: true
     createdAt: '2025-04-15 19:42:08'
     author: best.neil@prophecy.io
     models: []

@@ -7,11 +7,16 @@
   })
 }}
 
-WITH IOT_INCREMENTAL AS (
+WITH iot_incremental AS (
 
-  SELECT * 
+  SELECT *
   
-  FROM {{ ref('IOT_INCREMENTAL')}}
+  FROM ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT
+  
+  {% if is_incremental() %}
+    WHERE 
+      LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})
+  {% endif %}
 
 ),
 
@@ -22,7 +27,7 @@ records_per_loaded_at AS (
     DATE AS DATE,
     COUNT(*) AS N_RECORDS_LOADED
   
-  FROM IOT_INCREMENTAL AS in0
+  FROM iot_incremental AS in0
   
   GROUP BY 
     LOADED_AT, DATE
@@ -44,8 +49,3 @@ with_reported_at AS (
 SELECT *
 
 FROM with_reported_at
-
-{% if is_incremental() %}
-  WHERE 
-    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})
-{% endif %}

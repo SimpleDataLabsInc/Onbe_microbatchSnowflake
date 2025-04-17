@@ -17,7 +17,8 @@
       },
       "userDefinedConfig" : {
         "vars" : { }
-      }
+      },
+      "mergeApproach" : "columns"
     },
     "version" : 3
   },
@@ -58,7 +59,7 @@
           "expression" : ""
         },
         "activeTab" : "aggregate",
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "UxKUEc4W##LOADED_AT", "UxKUEc4W##DATE" ],
         "groupBy" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
@@ -97,7 +98,7 @@
         "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "gII4Wcvc##LOADED_AT", "gII4Wcvc##DATE", "gII4Wcvc##N_RECORDS_LOADED" ],
         "expressions" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
@@ -151,9 +152,10 @@
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
-        "incrementalEditorDisabled" : false,
-        "query" : "SELECT * \n\nFROM with_reported_at\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}",
-        "incrementalKey" : true,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM with_reported_at\n",
+        "isModel" : true,
+        "incrementalKey" : false,
         "incremental" : {
           "expression" : "LOADED_AT > (\n  SELECT MAX(LOADED_AT)\n  \n  FROM {{this}}\n )"
         }
@@ -171,27 +173,30 @@
         "autoUpdateOnRun" : false
       }
     },
-    "mRSRZwQ968pUHljoRREh7" : {
-      "id" : "mRSRZwQ968pUHljoRREh7",
-      "component" : "Model",
+    "IKw_2gIUbX3FADGtX5H5O$$j6TPRAw0eOjOriLsNajXx" : {
+      "id" : "IKw_2gIUbX3FADGtX5H5O$$j6TPRAw0eOjOriLsNajXx",
+      "component" : "SQLStatement",
       "metadata" : {
-        "label" : "IOT_INCREMENTAL",
-        "slug" : "IOT_INCREMENTAL",
-        "x" : 40,
+        "label" : "iot_incremental",
+        "slug" : "iot_incremental",
+        "x" : 20,
         "y" : 20,
-        "phase" : 0
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "isLabelGrayed" : false
       },
       "properties" : {
-        "table" : {
-          "name" : "IOT_INCREMENTAL",
-          "sourceType" : "Model",
-          "alias" : ""
-        }
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "out",
+          "language" : "sql",
+          "content" : "SELECT *\n\nFROM ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT\n\n{% if is_incremental () %}\nWHERE LOADED_AT > (\n    SELECT MAX( LOADED_AT)\n    FROM {{ this}}\n)\n{% endif %}"
+        } ]
       },
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "Sm6UwuKibsSqk2q-w0sov",
+          "id" : "cXB4jIM6y5X6mEMW6Agps$$OoDv4Hi1GFAy0su8qftWO",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
@@ -212,9 +217,9 @@
     "target" : "final##v4W8tk6z",
     "targetPort" : "qk9Z4N5h"
   }, {
-    "id" : "q-I7sVm5ABLcnCT8bOXnt",
-    "source" : "mRSRZwQ968pUHljoRREh7",
-    "sourcePort" : "Sm6UwuKibsSqk2q-w0sov",
+    "id" : "FRAf97JsWoieTtM3Jps4y$$a28qVg562j07FuZeGgO7v",
+    "source" : "IKw_2gIUbX3FADGtX5H5O$$j6TPRAw0eOjOriLsNajXx",
+    "sourcePort" : "cXB4jIM6y5X6mEMW6Agps$$OoDv4Hi1GFAy0su8qftWO",
     "target" : "records_per_load##fs7gZ9UF",
     "targetPort" : "UxKUEc4W"
   } ],

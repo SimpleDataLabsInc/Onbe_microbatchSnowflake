@@ -1,6 +1,6 @@
 name: Onbe_microbatchSnowflake
 description: ''
-version: 0.7.0
+version: 0.8.0
 author: best.neil@prophecy.io
 language: sql
 buildSystem: ''
@@ -12,7 +12,7 @@ jobs:
   jobs/process_iot_incrementally:
     name: process_iot_incrementally
     description: ''
-    fabricUID: 23284
+    fabricUID: 23283
     scheduler:
       Composer: {}
     cloudProvider: null

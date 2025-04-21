@@ -54,16 +54,17 @@ jobs:
       - name: Run versioning check and commit if changed
         env:
           GH_TOKEN: ${{ github.token }} # for GH CLI
+          PBT_COMPARE: ${{ github.base_ref || github.ref_name }}
         run: |
           if ! pipenv run \
             pbt versioning \
               --path "$GITHUB_WORKSPACE" \
-              --compare "$GITHUB_BASE_REF"
+              --compare "$PBT_COMPARE"
           then
               pipenv run \
                 pbt versioning \
                   --path "$GITHUB_WORKSPACE" \
-                  --compare "$GITHUB_BASE_REF" \
+                  --compare "$PBT_COMPARE" \
                   --bump minor
               git config \
                 --global user.name "github-actions[bot]"
@@ -73,12 +74,6 @@ jobs:
               git add "$GITHUB_WORKSPACE"
               git commit -m "Auto bump minor version to $( yq eval .version dbt_project.yml)"
               git diff dbt_project.yml
-              git push origin "$GITHUB_HEAD_REF" --verbose
-              # pipenv run \
-              #   pbt tag \
-              #     --path "$GITHUB_WORKSPACE" \
-              #     --branch "$(basename "$GITHUB_WORKSPACE")" \
-              #     --no-push
-              # git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
+              git push origin "$GITHUB_REF_NAME" --verbose
               exit 1  # Fail the job to indicate changes were needed
           fi

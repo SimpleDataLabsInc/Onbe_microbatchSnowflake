@@ -37,7 +37,7 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM ONBE_DEMO_{{ var('DBT_TARGET')}}.PUBLIC.IOT\n\nWHERE LOADED_AT > (\n        SELECT MAX(LOADED_AT)\n        \n        FROM ONBE_DEMO_{{ var('DBT_TARGET')}}.PUBLIC.IOT_BATCHES\n\n       )\n"
+          "content" : "SELECT *\n\nFROM IOT\n\nWHERE LOADED_AT > (\n        SELECT MAX(LOADED_AT)\n        \n        FROM IOT_BATCHES\n\n       )\n"
         } ]
       },
       "ports" : {

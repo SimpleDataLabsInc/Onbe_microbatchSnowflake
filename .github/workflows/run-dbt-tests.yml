@@ -46,12 +46,13 @@ jobs:
       #     asdf plugin add python https://github.com/asdf-community/asdf-python
       #     asdf install python
       #     asdf current python
-      - name: "Setup Python, `pipenv`, `dotenv`, `dbt`, etc."
+      - name: "Setup Python"
         uses: actions/setup-python@v5.5.0
         id: setup
         with:
           python-version-file: '.tool-versions'
           cache: 'pipenv'
+      - name: "Install `pipenv`, `dotenv`, `dbt`, etc."
         run: |
           echo -n "Setup cache hit? : "
           echo ${{ steps.setup.outputs.cache-hit }}

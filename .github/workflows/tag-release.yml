@@ -42,7 +42,7 @@ jobs:
         with:
           python-version-file: '.tool-versions'
           cache: 'pipenv'
-      # - name: Install `pipenv`; `pipenv install`
+      - name: Install `pipenv`; `pipenv install`
         run: |
           pip install 'pipenv==v2024.4.1' --user
           pipenv install

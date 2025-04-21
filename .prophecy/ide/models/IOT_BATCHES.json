@@ -11,14 +11,14 @@
       "entityConfig" : {
         "pre-hook" : "[\"{{ print( 'is_incremental(): ' ~ is_incremental())}}\"]",
         "materialized" : "incremental",
-        "unique_key" : "[\"LOADED_AT\", \"DATE\"]",
+        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
+        "unique_key" : [ "\"LOADED_AT\"", "\"DATE\"" ],
         "incremental_strategy" : "\"merge\"",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
         "vars" : { }
-      },
-      "mergeApproach" : "columns"
+      }
     },
     "version" : 3
   },
@@ -154,7 +154,6 @@
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
         "query" : "SELECT * \n\nFROM with_reported_at\n",
-        "isModel" : true,
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "LOADED_AT > (\n  SELECT MAX(LOADED_AT)\n  \n  FROM {{this}}\n )"
@@ -190,7 +189,7 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT\n\n{% if is_incremental () %}\nWHERE LOADED_AT > (\n    SELECT MAX( LOADED_AT)\n    FROM {{ this}}\n)\n{% endif %}"
+          "content" : "SELECT *\n\nFROM ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT\n\n{% if is_incremental () %}\nWHERE LOADED_AT > (\n    SELECT MAX( LOADED_AT)\n    FROM {{ this }}\n)\n{% endif %}"
         } ]
       },
       "ports" : {

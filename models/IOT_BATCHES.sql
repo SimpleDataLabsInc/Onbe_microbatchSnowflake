@@ -1,6 +1,7 @@
 {{
   config({    
     "materialized": "incremental",
+    "database": 'ONBE_DEMO_' ~ var('DBT_TARGET') ,
     "incremental_strategy": "merge",
     "pre-hook": ["{{ print( 'is_incremental(): ' ~ is_incremental())}}"],
     "unique_key": ["LOADED_AT", "DATE"]

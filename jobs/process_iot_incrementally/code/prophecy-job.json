@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Composer",
-    "fabricId" : "23283",
+    "fabricId" : "23284",
     "jobId" : "jobs/process_iot_incrementally",
     "name" : "process_iot_incrementally",
     "dagName" : "Onbe_microbatchSnowflake_process_iot_incrementally",
@@ -15,6 +15,7 @@
     },
     "maxConcurrentRuns" : 1,
     "processDefaultSettings" : {
+      "retries" : 0,
       "ignore_first_depends_on_past" : true,
       "do_xcom_push" : true
     },
@@ -24,7 +25,7 @@
     "dagParams" : {
       "instances" : {
         "default" : {
-          "DBT_TARGET" : "DEV"
+          "DBT_TARGET" : "PROD"
         }
       },
       "params" : {
@@ -32,7 +33,7 @@
           "type" : "StringParam",
           "properties" : {
             "title" : "DBT_TARGET",
-            "value" : "DEV",
+            "value" : "PROD",
             "canBeNull" : false
           }
         }
@@ -112,7 +113,7 @@
         "noVersionCheck" : null,
         "noWriteJson" : null,
         "printerWidth" : null,
-        "sqlFabricId" : "22696",
+        "sqlFabricId" : "23673",
         "gitEntityValue" : null,
         "logFormat" : null,
         "runModelWithChildren" : false,

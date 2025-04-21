@@ -4,14 +4,14 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - closed
     paths-ignore:
       - '.github/**'
       - './Pipfile*'
       - './.*'
       - './README.md'
       - './ddl/**'
-    types:
-      - closed
   push:
     branches:
       - main
@@ -35,6 +35,7 @@ jobs:
           ref: ${{ github.base_ref }}
           # token: ${{ secrets.GIT_ACCESS_TOKEN }} # pending approval
           token: ${{ secrets.VERSION_BUMPER_TOKEN }}
+          fetch-tags: true
       - name: Setup Python
         uses: actions/setup-python@v5.5.0
         id: setup
@@ -69,6 +70,7 @@ jobs:
                   # --branch is just a label; not a target for git
                   # --no-push
               # git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
+              echo "Pushed new tag `$(git tag --contains)` onto branch `$GITHUB_REF_NAME`"
           else
               echo "`pbt versioning --sync-check` failed; please check Prophecy metadata"
               exit 1  # Fail the job to indicate changes were needed

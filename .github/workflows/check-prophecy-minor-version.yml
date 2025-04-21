@@ -9,7 +9,16 @@ on:
       - synchronize
       - reopened
     paths-ignore:
-      - '.github/workflows/**'
+      - '.github/**'
+      - './Pipfile*'
+      - './.*'
+      - './README.md'
+      - './ddl/**'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/**'
 
 # concurrency:
 #   group: ${{ github.workflow }}-${{ github.base_ref }}
@@ -29,12 +38,13 @@ jobs:
       - run: |
           git fetch origin "$GITHUB_BASE_REF":"$GITHUB_BASE_REF"
           git branch --list --verbose
-      - uses: actions/setup-python@v5.5.0
+      - name: Setup Python
+        uses: actions/setup-python@v5.5.0
         id: setup
         with:
           python-version-file: '.tool-versions'
           cache: 'pipenv'
-      - name: Install `pipenv`, etc.
+      - name: Install `pipenv`, `pbt`, etc.
         run: |
           pip install 'pipenv==v2024.4.1' --user
           pipenv install
@@ -61,13 +71,14 @@ jobs:
                 --global user.email \
                   "github-actions[bot]@users.noreply.github.com"
               git add "$GITHUB_WORKSPACE"
-              git commit -m "Auto bump minor version"
+              git commit -m "Auto bump minor version to $( yq eval .version dbt_project.yml)"
+              git diff dbt_project.yml
               git push origin "$GITHUB_HEAD_REF" --verbose
-              pipenv run \
-                pbt tag \
-                  --path "$GITHUB_WORKSPACE" \
-                  --branch "$(basename "$GITHUB_WORKSPACE")" \
-                  --no-push
-              git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
+              # pipenv run \
+              #   pbt tag \
+              #     --path "$GITHUB_WORKSPACE" \
+              #     --branch "$(basename "$GITHUB_WORKSPACE")" \
+              #     --no-push
+              # git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
               exit 1  # Fail the job to indicate changes were needed
           fi

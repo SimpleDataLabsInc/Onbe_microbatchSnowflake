@@ -11,7 +11,8 @@
       "entityConfig" : {
         "pre-hook" : "[\"{{ print( 'is_incremental(): ' ~ is_incremental())}}\"]",
         "materialized" : "incremental",
-        "unique_key" : "[\"LOADED_AT\", \"DATE\"]",
+        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
+        "unique_key" : [ "\"LOADED_AT\"", "\"DATE\"" ],
         "incremental_strategy" : "\"merge\"",
         "type" : "ModelConfig"
       },
@@ -190,7 +191,7 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT\n\n{% if is_incremental () %}\nWHERE LOADED_AT > (\n    SELECT MAX( LOADED_AT)\n    FROM {{ this}}\n)\n{% endif %}"
+          "content" : "SELECT *\n\nFROM IOT\n\n{% if is_incremental () %}\nWHERE LOADED_AT > (\n    SELECT MAX( LOADED_AT)\n    FROM {{ this }}\n)\n{% endif %}"
         } ]
       },
       "ports" : {

@@ -122,7 +122,7 @@
         "runModelWithChildren" : false,
         "dbtProfileSecret" : null,
         "gitEntityValueCommit" : null,
-        "target" : "{{ params.DBT_TARGET }}",
+        "target" : "{{ var.value.AIRFLOW_INSTANCE_ENV }}",
         "exclude" : null,
         "runDeps" : null,
         "sqlProjectType" : "snowflake",

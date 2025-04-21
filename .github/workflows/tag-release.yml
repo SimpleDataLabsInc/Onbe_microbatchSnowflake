@@ -25,8 +25,8 @@ on:
 
 jobs:
   tag-release:
-    name: "On merge: pbt tag; git push"
-    if: ${{ github.event.pull_request.merged }}
+    name: "After merge: pbt tag; git push"
+    if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

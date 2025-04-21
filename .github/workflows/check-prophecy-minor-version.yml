@@ -27,6 +27,7 @@ on:
 jobs:
   compare_minor_version:
     name: compare minor version; maybe bump it
+    if: github.base_ref
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

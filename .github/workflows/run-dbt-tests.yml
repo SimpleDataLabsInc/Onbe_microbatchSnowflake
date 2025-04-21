@@ -19,33 +19,12 @@ jobs:
     env:
       DBT_TARGET: "${{ github.base_ref == 'main' && 'PROD' || 'DEV' }}"
     steps:
-      # - name: 'Install system libs'
-      #   env:
-      #     DEBIAN_FRONTEND: noninteractive
-      #     APT_GET_BE_QUIET: '-qq -o quiet::NoProgress=true -o Dpkg::Use-Pty=0'
-      #   run: |
-      #     sudo apt-get $APT_GET_BE_QUIET update && \
-      #       sudo apt-get $APT_GET_BE_QUIET install \
-      #         libbz2-dev \
-      #         liblzma-dev \
-      #         libreadline-dev
       - name: "Checkout code"
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
           # token: ${{ secrets.GIT_ACCESS_TOKEN }} # pending approval
           token: ${{ secrets.VERSION_BUMPER_TOKEN }}
-      # - name: 'Install asdf'
-      #   uses: ynab/asdf-action@v1.2
-      #   with:
-      #     version: 0.16.1
-      #   env:
-      #     WGETRC: "${{ github.workspace }}/.wgetrc"
-      # - name: 'Install, configure, and test tools'
-      #   run: |
-      #     asdf plugin add python https://github.com/asdf-community/asdf-python
-      #     asdf install python
-      #     asdf current python
       - name: "Setup Python"
         uses: actions/setup-python@v5.5.0
         id: setup

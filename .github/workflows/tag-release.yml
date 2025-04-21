@@ -29,7 +29,7 @@ jobs:
     if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: "Checkout code"
         uses: actions/checkout@v4
         with:
           ref: ${{ github.base_ref }}
@@ -42,13 +42,12 @@ jobs:
         with:
           python-version-file: '.tool-versions'
           cache: 'pipenv'
-      - name: Install `pipenv`; `pipenv install`
+      - name: "Install `pipenv`; `pipenv install`"
         run: |
-          pip install 'pipenv==v2024.4.1' --user
-          pipenv install
-      # - run: |
           echo -n "Setup cache hit? : "
           echo ${{ steps.setup.outputs.cache-hit }}
+          pip install 'pipenv==v2024.4.1' --user
+          pipenv install
       - name: "If `pbt --check-sync` then `pbt tag`"
         run: |
           if pipenv run \

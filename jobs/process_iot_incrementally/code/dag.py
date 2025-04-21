@@ -14,7 +14,7 @@ with DAG(
     dag_id = "Onbe_microbatchSnowflake_process_iot_incrementally", 
     schedule_interval = "0/10 * * * *", 
     default_args = {"owner" : "Prophecy", "retries" : 0, "ignore_first_depends_on_past" : True, "do_xcom_push" : True}, 
-    params = {'DBT_TARGET' : Param("""PROD""", type = "string", title = """DBT_TARGET""")}, 
+    params = {'DBT_TARGET' : Param("""DEV""", type = "string", title = """DBT_TARGET""")}, 
     start_date = pendulum.today('UTC'), 
     catchup = False, 
     max_active_runs = 1

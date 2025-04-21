@@ -24,23 +24,10 @@
     "scheduleTimeZone" : "UTC",
     "dagParams" : {
       "instances" : {
-        "default" : {
-          "DBT_TARGET" : "DEV"
-        },
-        "dev" : {
-          "DBT_TARGET" : "DEV"
-        }
+        "default" : { },
+        "dev" : { }
       },
-      "params" : {
-        "DBT_TARGET" : {
-          "type" : "StringParam",
-          "properties" : {
-            "title" : "DBT_TARGET",
-            "value" : "DEV",
-            "canBeNull" : false
-          }
-        }
-      },
+      "params" : { },
       "selected" : "default"
     },
     "airflowFunctions" : [ ],
@@ -122,7 +109,7 @@
         "runModelWithChildren" : false,
         "dbtProfileSecret" : null,
         "gitEntityValueCommit" : null,
-        "target" : "{{ params.DBT_TARGET }}",
+        "target" : "{{ var.value.AIRFLOW_INSTANCE_ENV }}",
         "exclude" : null,
         "runDeps" : null,
         "sqlProjectType" : "snowflake",

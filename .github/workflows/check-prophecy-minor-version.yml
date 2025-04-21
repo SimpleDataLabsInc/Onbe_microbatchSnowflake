@@ -75,6 +75,6 @@ jobs:
               git add "$GITHUB_WORKSPACE"
               git commit -m "Auto bump minor version to $( yq eval .version dbt_project.yml)"
               git diff dbt_project.yml
-              git push origin "$GITHUB_REF_NAME" --verbose
+              git push origin "$GITHUB_BASE_REF" --verbose
               exit 1  # Fail the job to indicate changes were needed
           fi

@@ -29,8 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-          # token: ${{ secrets.GIT_ACCESS_TOKEN }} # pending approval
-          token: ${{ secrets.VERSION_BUMPER_TOKEN }}
+          # token: ${{ secrets.VERSION_BUMPER_TOKEN }}
       - run: |
           git fetch origin "$GITHUB_BASE_REF":"$GITHUB_BASE_REF"
           git branch --list --verbose
@@ -48,19 +47,16 @@ jobs:
           echo -n "Setup cache hit? : "
           echo ${{ steps.setup.outputs.cache-hit }}
       - name: Run versioning check and commit if changed
-        env:
-          GH_TOKEN: ${{ github.token }} # for GH CLI
-          PBT_COMPARE: ${{ github.base_ref || github.ref_name }}
         run: |
           if ! pipenv run \
             pbt versioning \
               --path "$GITHUB_WORKSPACE" \
-              --compare "$PBT_COMPARE"
+              --compare "$GITHUB_BASE_REF"
           then
               pipenv run \
                 pbt versioning \
                   --path "$GITHUB_WORKSPACE" \
-                  --compare "$PBT_COMPARE" \
+                  --compare "$GITHUB_BASE_REF" \
                   --bump minor
               git config \
                 --global user.name "github-actions[bot]"

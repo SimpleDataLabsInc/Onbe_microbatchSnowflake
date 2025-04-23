@@ -1,4 +1,4 @@
-name: Check Prophecy minor version
+name: "Check Prophecy minor version"
 
 on:
   pull_request:
@@ -14,23 +14,18 @@ on:
       - './.*'
       - './README.md'
       - './ddl/**'
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/**'
 
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.base_ref }}
-#   cancel-in-progress: true
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   compare_minor_version:
-    name: compare minor version; maybe bump it
+    name: "Compare minor version; maybe bump it"
     if: github.base_ref
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: "Checkout code"
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
@@ -39,13 +34,13 @@ jobs:
       - run: |
           git fetch origin "$GITHUB_BASE_REF":"$GITHUB_BASE_REF"
           git branch --list --verbose
-      - name: Setup Python
+      - name: "Setup Python"
         uses: actions/setup-python@v5.5.0
         id: setup
         with:
           python-version-file: '.tool-versions'
           cache: 'pipenv'
-      - name: Install `pipenv`, `pbt`, etc.
+      - name: "Install `pipenv`, `pbt`, etc."
         run: |
           pip install 'pipenv==v2024.4.1' --user
           pipenv install

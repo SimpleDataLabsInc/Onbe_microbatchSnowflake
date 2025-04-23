@@ -1,4 +1,4 @@
-name: Run `dbt` via GitHub Actions
+name: "Run DBT tests"
 on:
   pull_request:
     branches:
@@ -11,6 +11,10 @@ on:
       - main
     paths:
       - '.github/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   run_dbt_tests:

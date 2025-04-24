@@ -12,7 +12,7 @@ jobs:
   jobs/process_iot_incrementally:
     name: process_iot_incrementally
     description: ''
-    fabricUID: 23284
+    fabricUID: 23283
     scheduler:
       Composer: {}
     cloudProvider: null
@@ -34,7 +34,7 @@ jobs:
     author: best.neil@prophecy.io
     models: []
     sqlProjects:
-    - '44652'
+    - '45856'
 gemContainer:
   languageVersion: ''
   gemLibsVersion: ''
@@ -52,7 +52,22 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/IOT_BATCHES:
     name: IOT_BATCHES
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
+      - name: DATE
+        dataType:
+          type: Date
+      - name: N_RECORDS_LOADED
+        dataType:
+          type: Number
+      - name: REPORTED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:
@@ -68,7 +83,34 @@ sqlModels:
     createdAt: '2025-04-15 23:52:40'
   .prophecy/metadata/sqlmodels/IOT_INCREMENTAL:
     name: IOT_INCREMENTAL
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: DEVICE_ID
+        dataType:
+          type: String
+      - name: PLANT_ID
+        dataType:
+          type: String
+      - name: TAG_NAME
+        dataType:
+          type: String
+      - name: TS
+        dataType:
+          type: Timestamp
+      - name: VALUE
+        dataType:
+          type: Float
+      - name: ENGINEERING_UNITS
+        dataType:
+          type: String
+      - name: DATE
+        dataType:
+          type: Date
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:

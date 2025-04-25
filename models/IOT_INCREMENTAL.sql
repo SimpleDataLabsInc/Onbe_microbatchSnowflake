@@ -1,7 +1,6 @@
 {{
   config({    
-    "materialized": "view",
-    "database": 'ONBE_DEMO_' ~ var('DBT_TARGET') 
+    "materialized": "view"
   })
 }}
 

@@ -19,7 +19,7 @@ def run_entire_project():
           "run_children": False,
           "run_tests": True,
           "run_mode": "project",
-          "entity_kind": None,
+          "entity_kind": "model",
           "entity_name": None,
           "project_id": "44652",
           "git_entity": "tag",
@@ -29,7 +29,7 @@ def run_entire_project():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake -t {{ var.value.AIRFLOW_INSTANCE_ENV }}",
+          "run_props": " --profile snowflake",
           "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins"}
         },
     )

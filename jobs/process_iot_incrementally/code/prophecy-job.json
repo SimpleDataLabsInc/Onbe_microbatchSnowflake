@@ -104,17 +104,16 @@
         "noWriteJson" : null,
         "printerWidth" : null,
         "sqlFabricId" : "22696",
-        "gitEntityValue" : null,
+        "gitEntityValue" : "main",
         "logFormat" : null,
         "runModelWithChildren" : false,
         "dbtProfileSecret" : null,
         "gitEntityValueCommit" : null,
-        "target" : "{{ var.value.AIRFLOW_INSTANCE_ENV }}",
         "exclude" : null,
         "runDeps" : null,
         "sqlProjectType" : "snowflake",
         "loadingSnapshots" : false,
-        "gitEntityValueBranch" : null,
+        "gitEntityValueBranch" : "main",
         "noAnonymousUsageStats" : null,
         "selector" : null,
         "targetPath" : null,
@@ -135,7 +134,7 @@
         "taskId" : null,
         "logPath" : null,
         "storeFailures" : null,
-        "entityKind" : null
+        "entityKind" : "model"
       },
       "connections" : [ ],
       "processes" : { }

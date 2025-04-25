@@ -28,8 +28,7 @@ target-path: "target"
 # ==================
 # Variable Configs
 # ==================
-vars:
-  DBT_TARGET: "{DEV,PROD}"
+vars: {}
 
 # ============
 # Run Hooks

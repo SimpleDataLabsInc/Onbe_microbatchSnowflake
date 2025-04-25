@@ -10,7 +10,6 @@
     "graphConfig" : {
       "entityConfig" : {
         "materialized" : "view",
-        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -66,7 +65,6 @@
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
         "query" : "SELECT * \n\nFROM incremental_filter\n",
-        "isModel" : true,
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"

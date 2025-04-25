@@ -21,15 +21,15 @@ def run_entire_project():
           "run_mode": "project",
           "entity_kind": None,
           "entity_name": None,
-          "project_id": "44652",
+          "project_id": "45856",
           "git_entity": "tag",
           "git_entity_value": "__PROJECT_FULL_RELEASE_TAG_PLACEHOLDER__",
-          "git_ssh_url": "https://github.com/SimpleDataLabsInc/Onbe_microbatchSnowflake.git",
+          "git_ssh_url": "https://github.com/ashvjit-prophecy/Onbe_microbatchSnowflake",
           "git_sub_path": "",
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake -t {{ var.value.AIRFLOW_INSTANCE_ENV }} --vars {\"DBT_TARGET\":\"{{ var.value.AIRFLOW_INSTANCE_ENV }}\"}",
+          "run_props": " --profile snowflake -t {{ var.value.AIRFLOW_INSTANCE_ENV }}",
           "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins"}
         },
     )

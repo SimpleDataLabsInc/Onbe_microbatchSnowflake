@@ -11,7 +11,7 @@
       "entityConfig" : {
         "pre-hook" : "[\"{{ print( 'is_incremental(): ' ~ is_incremental())}}\"]",
         "materialized" : "incremental",
-        "unique_key" : [ "\"LOADED_AT\"", "\"DATE\"" ],
+        "unique_key" : "[\"LOADED_AT\", \"DATE\"]",
         "incremental_strategy" : "\"merge\"",
         "type" : "ModelConfig"
       },
@@ -22,8 +22,37 @@
     "version" : 3
   },
   "processes" : {
-    "records_per_load##fs7gZ9UF" : {
-      "id" : "records_per_load##fs7gZ9UF",
+    "iot_incremental##M6HCkjrx" : {
+      "id" : "iot_incremental##M6HCkjrx",
+      "component" : "SQLStatement",
+      "metadata" : {
+        "label" : "iot_incremental",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0,
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "out",
+          "language" : "sql",
+          "content" : "SELECT *\n\nFROM IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "jO2MHiuJ",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "index" : 0
+    },
+    "records_per_load##FFzprpRB" : {
+      "id" : "records_per_load##FFzprpRB",
       "component" : "Aggregate",
       "metadata" : {
         "label" : "records_per_loaded_at",
@@ -39,57 +68,57 @@
             "expression" : "LOADED_AT"
           },
           "alias" : "LOADED_AT",
-          "_row_id" : "125528003"
+          "_row_id" : "821578647"
         }, {
           "expression" : {
             "expression" : "DATE"
           },
           "alias" : "DATE",
-          "_row_id" : "1807040630"
+          "_row_id" : "389030994"
         }, {
           "expression" : {
             "expression" : "COUNT(*)"
           },
           "alias" : "N_RECORDS_LOADED",
-          "_row_id" : "1486451604"
+          "_row_id" : "118126835"
         } ],
         "allowSelection" : true,
         "condition" : {
           "expression" : ""
         },
         "activeTab" : "aggregate",
-        "columnsSelector" : [ "UxKUEc4W##LOADED_AT", "UxKUEc4W##DATE" ],
+        "columnsSelector" : [ ],
         "groupBy" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
           },
-          "_row_id" : "119525708"
+          "_row_id" : "263112630"
         }, {
           "expression" : {
             "expression" : "DATE"
           },
-          "_row_id" : "1486476116"
+          "_row_id" : "2119037741"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "UxKUEc4W",
+          "id" : "vCSU95n4",
           "slug" : "in0"
         } ],
         "outputs" : [ {
-          "id" : "YQxH3iCW",
+          "id" : "LsrTJjVK",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 1
     },
-    "records_summary##MHpVvy2K" : {
-      "id" : "records_summary##MHpVvy2K",
+    "with_reported_at##AvzjgVm7" : {
+      "id" : "with_reported_at##AvzjgVm7",
       "component" : "Reformat",
       "metadata" : {
         "label" : "with_reported_at",
-        "slug" : "with_reported_at",
         "x" : 420,
         "y" : 20,
         "phase" : 0,
@@ -97,129 +126,100 @@
         "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ "gII4Wcvc##LOADED_AT", "gII4Wcvc##DATE", "gII4Wcvc##N_RECORDS_LOADED" ],
+        "columnsSelector" : [ ],
         "expressions" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
           },
           "alias" : "LOADED_AT",
-          "_row_id" : "1810723184"
+          "_row_id" : "897594188"
         }, {
           "expression" : {
             "expression" : "DATE"
           },
           "alias" : "DATE",
-          "_row_id" : "349311541"
+          "_row_id" : "661285216"
         }, {
           "expression" : {
             "expression" : "N_RECORDS_LOADED"
           },
           "alias" : "N_RECORDS_LOADED",
-          "_row_id" : "336946124"
+          "_row_id" : "1113692446"
         }, {
           "expression" : {
             "expression" : "CURRENT_TIMESTAMP()"
           },
           "alias" : "REPORTED_AT",
-          "_row_id" : "409480829"
+          "_row_id" : "336334335"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "gII4Wcvc",
+          "id" : "XJBpibF0",
           "slug" : "in0"
         } ],
         "outputs" : [ {
-          "id" : "hyHT4ZZb",
+          "id" : "yNWqv5Yl",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 2
     },
-    "final##v4W8tk6z" : {
-      "id" : "final##v4W8tk6z",
+    "final##YOTlxowW" : {
+      "id" : "final##YOTlxowW",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "IOT_BATCHES",
         "x" : 620,
         "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT * \n\nFROM with_reported_at\n",
+        "query" : "SELECT *\n\nFROM with_reported_at\n",
         "incrementalKey" : false,
         "incremental" : {
-          "expression" : "LOADED_AT > (\n  SELECT MAX(LOADED_AT)\n  \n  FROM {{this}}\n )"
+          "expression" : "true"
         }
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "qk9Z4N5h",
+          "id" : "ooqZzN2H",
           "slug" : "with_reported_at"
         } ],
         "outputs" : [ {
-          "id" : "G6FAMkYH",
+          "id" : "ymuARSxP",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
-    },
-    "IKw_2gIUbX3FADGtX5H5O$$j6TPRAw0eOjOriLsNajXx" : {
-      "id" : "IKw_2gIUbX3FADGtX5H5O$$j6TPRAw0eOjOriLsNajXx",
-      "component" : "SQLStatement",
-      "metadata" : {
-        "label" : "iot_incremental",
-        "slug" : "iot_incremental",
-        "x" : 20,
-        "y" : 20,
-        "phase" : 0,
-        "macroDependencies" : [ ],
-        "isLabelGrayed" : false
       },
-      "properties" : {
-        "fileTabs" : [ {
-          "path" : "out",
-          "id" : "out",
-          "language" : "sql",
-          "content" : "SELECT *\n\nFROM IOT\n\n{% if is_incremental () %}\nWHERE LOADED_AT > (\n    SELECT MAX( LOADED_AT)\n    FROM {{ this }}\n)\n{% endif %}"
-        } ]
-      },
-      "ports" : {
-        "inputs" : [ ],
-        "outputs" : [ {
-          "id" : "cXB4jIM6y5X6mEMW6Agps$$OoDv4Hi1GFAy0su8qftWO",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      }
+      "index" : 3
     }
   },
   "connections" : [ {
-    "id" : "JhgObaWq",
-    "source" : "records_per_load##fs7gZ9UF",
-    "sourcePort" : "YQxH3iCW",
-    "target" : "records_summary##MHpVvy2K",
-    "targetPort" : "gII4Wcvc"
+    "id" : "Cpsa99az",
+    "source" : "iot_incremental##M6HCkjrx",
+    "sourcePort" : "jO2MHiuJ",
+    "target" : "records_per_load##FFzprpRB",
+    "targetPort" : "vCSU95n4"
   }, {
-    "id" : "KYeoKMR4",
-    "source" : "records_summary##MHpVvy2K",
-    "sourcePort" : "hyHT4ZZb",
-    "target" : "final##v4W8tk6z",
-    "targetPort" : "qk9Z4N5h"
+    "id" : "a99R01kE",
+    "source" : "records_per_load##FFzprpRB",
+    "sourcePort" : "LsrTJjVK",
+    "target" : "with_reported_at##AvzjgVm7",
+    "targetPort" : "XJBpibF0"
   }, {
-    "id" : "FRAf97JsWoieTtM3Jps4y$$a28qVg562j07FuZeGgO7v",
-    "source" : "IKw_2gIUbX3FADGtX5H5O$$j6TPRAw0eOjOriLsNajXx",
-    "sourcePort" : "cXB4jIM6y5X6mEMW6Agps$$OoDv4Hi1GFAy0su8qftWO",
-    "target" : "records_per_load##fs7gZ9UF",
-    "targetPort" : "UxKUEc4W"
+    "id" : "bQfbDWaU",
+    "source" : "with_reported_at##AvzjgVm7",
+    "sourcePort" : "yNWqv5Yl",
+    "target" : "final##YOTlxowW",
+    "targetPort" : "ooqZzN2H"
   } ],
   "component" : "Model"
 }

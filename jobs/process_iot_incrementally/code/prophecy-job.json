@@ -78,7 +78,6 @@
         "gitSshUrl" : null,
         "indirectSelection" : null,
         "partialParse" : null,
-        "vars" : "{\"DBT_TARGET\":\"{{ var.value.AIRFLOW_INSTANCE_ENV }}\"}",
         "isAdhocRunFromSameProject" : null,
         "customVersion" : false,
         "noPrint" : null,

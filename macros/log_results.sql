@@ -1,22 +1,28 @@
-{% macro log_results(results) -%}
+{% macro log_results(results) %}
 
-{%- if execute -%}
 
-    {%- set load_log_table -%}
+{% if execute %}
+
+{#
+    {% set load_log_table %}
 ONBE_DEMO_{{- var('DBT_TARGET') -}}.PUBLIC.DBT_LOAD_LOG
-    {%- endset -%}
+#}
+
+    {% set load_log_table %}
+{{- target.database ~ '.' ~ target.schema -}}.DBT_LOAD_LOG
+    {% endset %}
 
     {{- log( 'Updating audit table ' ~ load_log_table, info=True) -}}
     {{- log( 'DBT invocation ID is ' ~ invocation_id, info=True ) -}}
 
 
-    {% for r in results -%}
+    {% for r in results %}
        {{ log( 'DBT Model "' ~
                r.node.relation_name ~
                '" operated on ' ~
                r.adapter_response.rows_affected ~
                ' rows.', info=True) }}
-    {% endfor -%}
+    {% endfor %}
 
     {% set load_log_insert %}
 
@@ -34,7 +40,7 @@ INSERT INTO {{ load_log_table }} (
     CREATED_BY_USER )
 VALUES
 
-        {%- for r in results %}
+        {% for r in results %}
 (
     '{{ invocation_id }}',
     '{{ r.adapter_response.query_id }}',
@@ -49,64 +55,22 @@ VALUES
     CURRENT_USER()
 )
 
-            {%- if not loop.last %},
-            {%- else %};
-            {%- endif %}
+            {% if not loop.last %},
+            {% else %};
+            {% endif %}
 
-        {%- endfor %}
+        {% endfor %}
 
-    {%- endset %}
+    {% endset %}
 
     {{ print( load_log_insert) }}
 
-    {%- do run_query( load_log_insert) -%}
+    {% do run_query( load_log_insert) %}
 
     {{ log( 'Audit table update complete', info=True) }}
 
-    {#
 
-    {{ print( "Run results:\n\n" ~ results|pprint) }}
-
-    #}
-
-
-{%- endif -%}
-
-{%- endmacro -%}
-
-
-
-{#     everything below is commented out
-
-{% do run_query( load_log_insert) %}
-
-.print_json(indent=2) %}
-
-
-
-
-
-
-
-{% set run_id_query %}
-SELECT RUN_ID FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
-{% endset %}
-
-{% set run_id_result = run_query(run_id_query) %}
-{% set run_id = run_id_result['data'][0][0] %}
-
-{% if res.status != 'success' %}
-    {% set error_log_query %}
-    INSERT INTO AUDIT.EDW_ERROR_LOG (
-        ERROR_MESSAGE, ORIGINAL_RUN_ID)
-    VALUES (
-        '{{ res.message }}', '{{ run_id }}')
-    {% endset %}
-
-    {% do run_query(error_log_query) %}
 {% endif %}
+{% endmacro %}
 
-{{ log("Inserted row with RUN_ID: " ~ run_id, info=True) }}
-
-#}
-
+ 

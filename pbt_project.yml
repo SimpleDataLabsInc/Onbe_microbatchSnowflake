@@ -34,7 +34,7 @@ jobs:
     author: best.neil@prophecy.io
     models: []
     sqlProjects:
-    - '45856'
+    - '44652'
 gemContainer:
   languageVersion: ''
   gemLibsVersion: ''

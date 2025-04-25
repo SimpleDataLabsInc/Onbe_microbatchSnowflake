@@ -32,9 +32,9 @@ jobs:
     enabled: true
     createdAt: '2025-04-15 19:42:08'
     author: best.neil@prophecy.io
-    models: []
-    sqlProjects:
-    - '44652'
+    models:
+    - IOT_INCREMENTAL
+    sqlProjects: []
 gemContainer:
   languageVersion: ''
   gemLibsVersion: ''

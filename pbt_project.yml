@@ -1,6 +1,6 @@
 name: Onbe_microbatchSnowflake
 description: ''
-version: 0.10.2
+version: 0.11.0
 author: best.neil@prophecy.io
 language: sql
 buildSystem: ''
@@ -34,7 +34,7 @@ jobs:
     author: best.neil@prophecy.io
     models: []
     sqlProjects:
-    - '45856'
+    - '44652'
 gemContainer:
   languageVersion: ''
   gemLibsVersion: ''

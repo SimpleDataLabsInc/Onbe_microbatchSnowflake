@@ -18,11 +18,6 @@ on:
     paths:
       - '.github/**'
 
-
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.base_ref }}
-#   cancel-in-progress: true
-
 jobs:
   tag-release:
     name: "After merge: pbt tag; git push"

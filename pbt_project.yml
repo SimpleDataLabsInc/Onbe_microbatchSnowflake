@@ -148,13 +148,13 @@ sqlMacros:
     createdAt: '2025-04-07 20:21:17'
 sqlSeeds: {}
 sqlSources:
-  .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:
-    name: ONBE_DEMO_DEV.PUBLIC
+  .prophecy/metadata/sqlsources/ONBE_DEMO____env_var__DBT_TARGET____DEV______PUBLIC:
+    name: ONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}.PUBLIC
     description: null
     author: best.neil@prophecy.io
     files:
     - prophecy-sources/sources.yml
-    createdAt: '2025-04-07 15:59:33'
+    createdAt: '2025-04-30 14:47:14'
     tables: []
 sqlUnreferencedSources: {}
 sqlPipeline:

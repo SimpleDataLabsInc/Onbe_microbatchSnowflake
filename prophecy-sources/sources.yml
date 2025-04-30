@@ -1,9 +1,7 @@
 ---
 version: 2
 sources:
-- name: "ONBE_DEMO_DEV.PUBLIC"
-  database: "ONBE_DEMO_DEV"
+- name: "ONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}.PUBLIC"
+  database: "ONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}"
   schema: "PUBLIC"
-  config:
-    enabled: true
   tables: []

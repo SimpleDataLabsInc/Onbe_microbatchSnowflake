@@ -46,26 +46,32 @@ jobs:
       - run: |
           echo -n "Setup cache hit? : "
           echo ${{ steps.setup.outputs.cache-hit }}
-      - name: Run versioning check and commit if changed
-        run: |
-          if ! pipenv run \
-            pbt versioning \
-              --path "$GITHUB_WORKSPACE" \
-              --compare "$GITHUB_BASE_REF"
-          then
-              pipenv run \
-                pbt versioning \
-                  --path "$GITHUB_WORKSPACE" \
-                  --compare "$GITHUB_BASE_REF" \
-                  --bump minor
-              git config \
-                --global user.name "github-actions[bot]"
-              git config \
-                --global user.email \
-                  "github-actions[bot]@users.noreply.github.com"
-              git add "$GITHUB_WORKSPACE"
-              git commit -m "Auto bump minor version to $( yq eval .version dbt_project.yml)"
-              git diff dbt_project.yml
-              git push origin "$GITHUB_HEAD_REF" --verbose
-              exit 1  # Fail the job to indicate changes were needed
-          fi
+      - name: Compare versions; commit, push, and retry if changed
+        uses: nick-fields/retry@v3.0.2
+        with:
+          max_attempts: 2
+          retry_on: error
+          retry_on_exit_code: 1
+          retry_wait_seconds: 0
+          command: |
+            if ! pipenv run \
+              pbt versioning \
+                --path "$GITHUB_WORKSPACE" \
+                --compare "$GITHUB_BASE_REF"
+            then
+                pipenv run \
+                  pbt versioning \
+                    --path "$GITHUB_WORKSPACE" \
+                    --compare "$GITHUB_BASE_REF" \
+                    --bump minor
+                git config \
+                  --global user.name "github-actions[bot]"
+                git config \
+                  --global user.email \
+                    "github-actions[bot]@users.noreply.github.com"
+                git add "$GITHUB_WORKSPACE"
+                git commit -m "Auto bump minor version to $( yq eval .version dbt_project.yml)"
+                git diff dbt_project.yml
+                git push origin "$GITHUB_HEAD_REF" --verbose
+                exit 1  # Fail the job to indicate changes were needed
+            fi

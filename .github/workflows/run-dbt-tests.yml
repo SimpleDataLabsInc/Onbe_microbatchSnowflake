@@ -20,8 +20,8 @@ jobs:
   run_dbt_tests:
     name: "Run DBT tests"
     runs-on: ubuntu-latest
-    env:
-      DBT_TARGET: "${{ github.base_ref == 'main' && 'PROD' || 'DEV' }}"
+    # env:
+      # DBT_TARGET: "${{ github.base_ref == 'main' && 'PROD' || 'DEV' }}"
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
@@ -43,10 +43,11 @@ jobs:
           pipenv install
       - name: "Populate `.env` file"
         run: |
+          # "DBT_TARGET ${{ env.DBT_TARGET }}" \
           for KV in \
             "DBT_USER ${{ secrets.DBT_USER }}" \
             "DBT_PASSWORD ${{ secrets.DBT_PASSWORD }}" \
-            "DBT_TARGET ${{ env.DBT_TARGET }}" \
+            "DBT_TARGET DEV" \
             "DBT_PROFILE snowflake" \
             "DBT_PROFILES_DIR ${{ github.workspace }}" \
             "DBT_LOG_FORMAT_FILE json" \

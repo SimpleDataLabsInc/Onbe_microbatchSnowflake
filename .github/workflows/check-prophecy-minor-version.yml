@@ -49,6 +49,7 @@ jobs:
       - name: Compare versions; commit, push, and retry if changed
         uses: nick-fields/retry@v3.0.2
         with:
+          timeout_minutes: 9999
           max_attempts: 2
           retry_on: error
           retry_on_exit_code: 1

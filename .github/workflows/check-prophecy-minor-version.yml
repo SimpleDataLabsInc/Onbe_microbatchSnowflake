@@ -15,10 +15,6 @@ on:
       - './README.md'
       - './ddl/**'
 
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.ref_name }}
-#   cancel-in-progress: true
-
 jobs:
   compare_minor_version:
     name: "Compare minor version; maybe bump it"
@@ -29,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-          # token: ${{ secrets.VERSION_BUMPER_TOKEN }}
+          # token: ${{ secrets.VERSION_BUMPER_TOKEN }}  # pending approval
       - run: |
           git fetch origin "$GITHUB_BASE_REF":"$GITHUB_BASE_REF"
           git branch --list --verbose

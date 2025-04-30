@@ -1,6 +1,6 @@
 name: Onbe_microbatchSnowflake
 description: ''
-version: 0.12.0
+version: 0.13.0
 author: best.neil@prophecy.io
 language: sql
 buildSystem: ''
@@ -83,7 +83,34 @@ sqlModels:
     createdAt: '2025-04-15 23:52:40'
   .prophecy/metadata/sqlmodels/IOT_INCREMENTAL:
     name: IOT_INCREMENTAL
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: DEVICE_ID
+        dataType:
+          type: String
+      - name: PLANT_ID
+        dataType:
+          type: String
+      - name: TAG_NAME
+        dataType:
+          type: String
+      - name: TS
+        dataType:
+          type: Timestamp
+      - name: VALUE
+        dataType:
+          type: Float
+      - name: ENGINEERING_UNITS
+        dataType:
+          type: String
+      - name: DATE
+        dataType:
+          type: Date
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:
@@ -121,13 +148,13 @@ sqlMacros:
     createdAt: '2025-04-07 20:21:17'
 sqlSeeds: {}
 sqlSources:
-  .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:
-    name: ONBE_DEMO_DEV.PUBLIC
+  .prophecy/metadata/sqlsources/ONBE_DEMO____env_var__DBT_TARGET____DEV______PUBLIC:
+    name: ONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}.PUBLIC
     description: null
     author: best.neil@prophecy.io
     files:
     - prophecy-sources/sources.yml
-    createdAt: '2025-04-07 15:59:33'
+    createdAt: '2025-04-30 14:47:14'
     tables: []
 sqlUnreferencedSources: {}
 sqlPipeline:

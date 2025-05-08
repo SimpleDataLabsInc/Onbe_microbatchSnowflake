@@ -27,8 +27,8 @@
       "component" : "SQLStatement",
       "metadata" : {
         "label" : "iot_incremental",
-        "x" : 20,
-        "y" : 20,
+        "x" : -20,
+        "y" : -120,
         "phase" : 0,
         "macroDependencies" : [ "env_var" ],
         "isLabelGrayed" : false

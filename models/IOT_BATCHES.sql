@@ -12,7 +12,7 @@ WITH iot_incremental AS (
   SELECT *
   
   FROM -- FROM IOT
-  ONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}.PUBLIC.IOT
+  ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT
   
   {% if is_incremental() %}
     WHERE 

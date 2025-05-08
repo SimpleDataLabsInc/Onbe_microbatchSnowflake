@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Composer",
-    "fabricId" : "23283",
+    "fabricId" : "25547",
     "jobId" : "jobs/process_iot_incrementally",
     "name" : "process_iot_incrementally",
     "dagName" : "Onbe_microbatchSnowflake_process_iot_incrementally",
@@ -15,6 +15,8 @@
     },
     "maxConcurrentRuns" : 1,
     "processDefaultSettings" : {
+      "email" : "best.neil@prophecy.io",
+      "email_on_failure" : true,
       "retries" : 0,
       "ignore_first_depends_on_past" : true,
       "do_xcom_push" : true
@@ -138,7 +140,45 @@
       },
       "connections" : [ ],
       "processes" : { }
+    },
+    "L0DpDjSDAAZsQ2twqN6fE$$nZQCsaaHZkYfEz7nZAT6P" : {
+      "id" : "L0DpDjSDAAZsQ2twqN6fE$$nZQCsaaHZkYfEz7nZAT6P",
+      "component" : "Email",
+      "metadata" : {
+        "label" : "Email_1",
+        "slug" : "Email_1",
+        "x" : -560,
+        "y" : -280
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "ZqrkSF0nkbCvoBixLTpZr$$OvrDo51d8SEoPe8HvVmCT",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "IfN7x-VOd2aekjH7iKbJN$$pHc8gXi3vRUoseMTUVqHR",
+          "slug" : ""
+        } ]
+      },
+      "settings" : { },
+      "properties" : {
+        "emailCC" : null,
+        "subject" : "test",
+        "emailBCC" : null,
+        "emailTo" : "best.neil@prophecy.io",
+        "emailConnectionId" : "gmail_conn",
+        "htmlContent" : "test",
+        "taskId" : null
+      },
+      "connections" : [ ],
+      "processes" : { }
     }
   },
-  "connections" : [ ]
+  "connections" : [ {
+    "id" : "acAZkClpe7pEFBm2784mx$$cTkyEJMlkBAZ00lA5-A8c",
+    "source" : "3TZPcB3eI23CWUcjmeHqR$$PxpMLENNJj-616N66x1LL",
+    "target" : "L0DpDjSDAAZsQ2twqN6fE$$nZQCsaaHZkYfEz7nZAT6P",
+    "sourcePort" : "PmHo7b7r7q7DrpHe6uztv$$Yde1pCm4Hig8j0ycmf125",
+    "targetPort" : "ZqrkSF0nkbCvoBixLTpZr$$OvrDo51d8SEoPe8HvVmCT"
+  } ]
 }

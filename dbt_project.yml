@@ -28,7 +28,8 @@ target-path: "target"
 # ==================
 # Variable Configs
 # ==================
-vars: {}
+vars:
+  DBT_TARGET: "{{ env_var( 'DBT_TARGET', 'DEV') }}"
 
 # ============
 # Run Hooks

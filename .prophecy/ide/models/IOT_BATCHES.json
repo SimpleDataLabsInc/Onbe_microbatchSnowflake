@@ -27,10 +27,10 @@
       "component" : "SQLStatement",
       "metadata" : {
         "label" : "iot_incremental",
-        "x" : -20,
-        "y" : -120,
+        "x" : 20,
+        "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ "env_var" ],
+        "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
@@ -38,7 +38,7 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM -- FROM IOT\nONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}.PUBLIC.IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
+          "content" : "SELECT *\n\nFROM -- FROM IOT\nONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
         } ]
       },
       "ports" : {

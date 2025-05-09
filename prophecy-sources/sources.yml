@@ -5,3 +5,42 @@ sources:
   database: "ONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}"
   schema: "PUBLIC"
   tables: []
+- name: "'ONBE_DEMO_' ~ var( 'DBT_TARGET').PUBLIC"
+  database: "'ONBE_DEMO_' ~ var( 'DBT_TARGET')"
+  schema: "PUBLIC"
+  tables: []
+- name: "{{ 'ONBE_DEMO_' ~ var( 'DBT_TARGET', 'DEV') }}.PUBLIC"
+  database: "{{ 'ONBE_DEMO_' ~ var( 'DBT_TARGET', 'DEV') }}"
+  schema: "PUBLIC"
+  tables: []
+- name: "'ONBE_DEMO_' ~ var( 'DBT_TARGET', 'DEV').PUBLIC"
+  database: "'ONBE_DEMO_' ~ var( 'DBT_TARGET', 'DEV')"
+  schema: "PUBLIC"
+  tables: []
+- name: "ONBE_DEMO_DEV' ~ var( 'DBT_TARGET', 'DEV').PUBLIC"
+  database: "ONBE_DEMO_DEV' ~ var( 'DBT_TARGET', 'DEV')"
+  schema: "PUBLIC"
+  tables: []
+- name: "ONBE_DEMO_' ~ var( 'DBT_TARGET', 'DEV') ~ '.PUBLIC"
+  database: "ONBE_DEMO_' ~ var( 'DBT_TARGET', 'DEV') ~ '"
+  schema: "PUBLIC"
+  tables: []
+- name: "var( 'DBT_TARGET').PUBLIC"
+  database: "var( 'DBT_TARGET')"
+  schema: "PUBLIC"
+  tables: []
+- name: "var( 'DBT_TARGET', 'ONBE_DEMO_DEV') ~ '.PUBLIC"
+  database: "var( 'DBT_TARGET', 'ONBE_DEMO_DEV') ~ '"
+  schema: "PUBLIC"
+  tables: []
+- name: "' ~ var( 'DBT_TARGET', 'ONBE_DEMO_DEV') ~ '.PUBLIC"
+  database: "' ~ var( 'DBT_TARGET', 'ONBE_DEMO_DEV') ~ '"
+  schema: "PUBLIC"
+  tables: []
+- name: "ONBE_DEMO_' ~ var( 'DBT_TARGET') ~ '.PUBLIC"
+  database: "ONBE_DEMO_' ~ var( 'DBT_TARGET') ~ '"
+  schema: "PUBLIC"
+  tables:
+  - name: "IOT"
+    columns: []
+    type: "table"

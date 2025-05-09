@@ -11,8 +11,8 @@ WITH iot_incremental AS (
 
   SELECT *
   
-  FROM -- FROM IOT
-  ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT
+  FROM IOT
+  -- ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT
   
   {% if is_incremental() %}
     WHERE 
@@ -32,6 +32,14 @@ records_per_loaded_at AS (
   
   GROUP BY 
     LOADED_AT, DATE
+
+),
+
+IOT AS (
+
+  SELECT * 
+  
+  FROM {{ source('ONBE_DEMO_' ~ var('DBT_TARGET')  ~ '.PUBLIC', 'IOT') }}
 
 ),
 

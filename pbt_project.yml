@@ -12,7 +12,7 @@ jobs:
   jobs/process_iot_incrementally:
     name: process_iot_incrementally
     description: ''
-    fabricUID: 25547
+    fabricUID: 23284
     scheduler:
       Composer: {}
     cloudProvider: null
@@ -166,6 +166,7 @@ sqlSources:
       description: null
       author: best.neil@prophecy.io
       createdAt: '2025-05-09 16:10:00'
+      tableType: table
   .prophecy/metadata/sqlsources/ONBE_DEMO_PROD_PUBLIC:
     name: ONBE_DEMO_PROD.PUBLIC
     description: null
@@ -178,10 +179,36 @@ sqlSources:
       schema:
         entityType: ''
         providerType: snowflake
-        fields: []
-      description: null
+        fields:
+        - name: DEVICE_ID
+          dataType:
+            type: String
+        - name: PLANT_ID
+          dataType:
+            type: String
+        - name: TAG_NAME
+          dataType:
+            type: String
+        - name: TS
+          dataType:
+            type: Timestamp
+        - name: VALUE
+          dataType:
+            type: Float
+        - name: ENGINEERING_UNITS
+          dataType:
+            type: String
+        - name: DATE
+          dataType:
+            type: Date
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
+      description: IoT sensor data capturing measurements from devices across various
+        plants, enabling monitoring and analysis of operational performance.
       author: best.neil@prophecy.io
       createdAt: '2025-05-09 16:10:00'
+      tableType: table
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

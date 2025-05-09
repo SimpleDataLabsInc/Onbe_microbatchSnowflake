@@ -7,7 +7,7 @@ from airflow import DAG
 from airflow.models.param import Param
 from airflow.decorators import task
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-from onbe_microbatchsnowflake_process_iot_incrementally.tasks import Email_1, run_entire_project
+from onbe_microbatchsnowflake_process_iot_incrementally.tasks import run_entire_project
 PROPHECY_RELEASE_TAG = "__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__"
 
 with DAG(
@@ -26,5 +26,3 @@ with DAG(
     max_active_runs = 1
 ) as dag:
     run_entire_project_op = run_entire_project()
-    Email_1_op = Email_1()
-    run_entire_project_op >> Email_1_op

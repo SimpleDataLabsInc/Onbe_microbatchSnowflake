@@ -1,14 +1,6 @@
 ---
 version: 2
 sources:
-- name: "ONBE_DEMO_DEV.PUBLIC"
-  database: "ONBE_DEMO_DEV"
-  schema: "PUBLIC"
-  tables: []
-- name: "ONBE_DEMO_PROD.PUBLIC"
-  database: "ONBE_DEMO_PROD"
-  schema: "PUBLIC"
-  tables: []
 - name: "_ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC"
   database: "{{ 'ONBE_DEMO_' ~ env_var( 'DBT_TARGET', 'DEV') }}"
   schema: "PUBLIC"

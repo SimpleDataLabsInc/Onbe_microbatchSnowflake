@@ -148,22 +148,6 @@ sqlMacros:
     createdAt: '2025-04-07 20:21:17'
 sqlSeeds: {}
 sqlSources:
-  .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:
-    name: ONBE_DEMO_DEV.PUBLIC
-    description: null
-    author: best.neil@prophecy.io
-    files:
-    - prophecy-sources/sources.yml
-    createdAt: '2025-05-09 16:10:00'
-    tables: []
-  .prophecy/metadata/sqlsources/ONBE_DEMO_PROD_PUBLIC:
-    name: ONBE_DEMO_PROD.PUBLIC
-    description: null
-    author: best.neil@prophecy.io
-    files:
-    - prophecy-sources/sources.yml
-    createdAt: '2025-05-09 16:10:00'
-    tables: []
   .prophecy/metadata/sqlsources/_ONBE_DEMO_env_var_DBT_TARGET_DEV__PUBLIC:
     name: _ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC
     description: null

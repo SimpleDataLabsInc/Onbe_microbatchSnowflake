@@ -59,6 +59,7 @@ sqlModels:
     - models/IOT_BATCHES.sql
     - .prophecy/ide/models/IOT_BATCHES.json
     - models/schema.yml
+    - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []
@@ -102,6 +103,7 @@ sqlModels:
     - models/IOT_INCREMENTAL.sql
     - .prophecy/ide/models/IOT_INCREMENTAL.json
     - models/schema.yml
+    - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []
@@ -130,39 +132,16 @@ sqlMacros:
     - macros/log_results.sql
     - .prophecy/ide/macros/log_results.json
     - macros/macros.yml
+    - macros/macros.yml
     createdAt: '2025-04-07 20:21:17'
 sqlSeeds: {}
 sqlSources:
-  .prophecy/metadata/sqlsources/_ONBE_DEMO_env_var_DBT_TARGET_DEV__PUBLIC:
-    name: _ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC
-    description: null
-    author: best.neil@prophecy.io
-    files:
-    - prophecy-sources/sources.yml
-    createdAt: '2025-05-12 16:48:16'
-    tables:
-    - name: IOT
-      schema:
-        entityType: ''
-        providerType: snowflake
-        fields: []
-      description: null
-      author: best.neil@prophecy.io
-      createdAt: '2025-05-12 16:48:16'
-      tableType: table
-  .prophecy/metadata/sqlsources/_ONBE_DEMO_var_DBT_TARGET__PUBLIC:
-    name: _ONBE_DEMO_var_DBT_TARGET_.PUBLIC
-    description: null
-    author: best.neil@prophecy.io
-    files:
-    - prophecy-sources/sources.yml
-    createdAt: '2025-05-12 15:48:44'
-    tables: []
   .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:
     name: ONBE_DEMO_DEV.PUBLIC
     description: null
     author: best.neil@prophecy.io
     files:
+    - prophecy-sources/sources.yml
     - prophecy-sources/sources.yml
     createdAt: '2025-05-09 16:10:00'
     tables:
@@ -180,6 +159,7 @@ sqlSources:
     description: null
     author: best.neil@prophecy.io
     files:
+    - prophecy-sources/sources.yml
     - prophecy-sources/sources.yml
     createdAt: '2025-05-09 16:10:00'
     tables:
@@ -217,14 +197,24 @@ sqlSources:
       author: best.neil@prophecy.io
       createdAt: '2025-05-09 16:10:00'
       tableType: table
-  .prophecy/metadata/sqlsources/ONBE_DEMO_____var___DBT_TARGET_______PUBLIC:
-    name: ONBE_DEMO_' ~ var( 'DBT_TARGET') ~ '.PUBLIC
+  .prophecy/metadata/sqlsources/_ONBE_DEMO_env_var_DBT_TARGET_DEV__PUBLIC:
+    name: _ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC
     description: null
     author: best.neil@prophecy.io
     files:
     - prophecy-sources/sources.yml
-    createdAt: '2025-05-08 22:54:50'
-    tables: []
+    - prophecy-sources/sources.yml
+    createdAt: '2025-05-12 16:48:16'
+    tables:
+    - name: IOT
+      schema:
+        entityType: ''
+        providerType: snowflake
+        fields: []
+      description: null
+      author: best.neil@prophecy.io
+      createdAt: '2025-05-12 16:48:16'
+      tableType: table
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

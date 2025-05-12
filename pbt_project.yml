@@ -155,41 +155,7 @@ sqlSources:
     files:
     - prophecy-sources/sources.yml
     createdAt: '2025-05-09 16:10:00'
-    tables:
-    - name: IOT
-      schema:
-        entityType: ''
-        providerType: snowflake
-        fields:
-        - name: DEVICE_ID
-          dataType:
-            type: String
-        - name: PLANT_ID
-          dataType:
-            type: String
-        - name: TAG_NAME
-          dataType:
-            type: String
-        - name: TS
-          dataType:
-            type: Timestamp
-        - name: VALUE
-          dataType:
-            type: Float
-        - name: ENGINEERING_UNITS
-          dataType:
-            type: String
-        - name: DATE
-          dataType:
-            type: Date
-        - name: LOADED_AT
-          dataType:
-            type: Timestamp
-      description: IoT sensor data capturing measurements from devices across various
-        plants, enabling monitoring and analysis of operational performance.
-      author: best.neil@prophecy.io
-      createdAt: '2025-05-09 16:10:00'
-      tableType: table
+    tables: []
   .prophecy/metadata/sqlsources/ONBE_DEMO_PROD_PUBLIC:
     name: ONBE_DEMO_PROD.PUBLIC
     description: null
@@ -197,41 +163,7 @@ sqlSources:
     files:
     - prophecy-sources/sources.yml
     createdAt: '2025-05-09 16:10:00'
-    tables:
-    - name: IOT
-      schema:
-        entityType: ''
-        providerType: snowflake
-        fields:
-        - name: DEVICE_ID
-          dataType:
-            type: String
-        - name: PLANT_ID
-          dataType:
-            type: String
-        - name: TAG_NAME
-          dataType:
-            type: String
-        - name: TS
-          dataType:
-            type: Timestamp
-        - name: VALUE
-          dataType:
-            type: Float
-        - name: ENGINEERING_UNITS
-          dataType:
-            type: String
-        - name: DATE
-          dataType:
-            type: Date
-        - name: LOADED_AT
-          dataType:
-            type: Timestamp
-      description: IoT sensor data capturing measurements from devices across various
-        plants, enabling monitoring and analysis of operational performance.
-      author: best.neil@prophecy.io
-      createdAt: '2025-05-09 16:10:00'
-      tableType: table
+    tables: []
   .prophecy/metadata/sqlsources/_ONBE_DEMO_env_var_DBT_TARGET_DEV__PUBLIC:
     name: _ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC
     description: null

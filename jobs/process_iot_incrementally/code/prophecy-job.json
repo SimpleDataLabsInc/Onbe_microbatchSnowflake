@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Composer",
-    "fabricId" : "25547",
+    "fabricId" : "23283",
     "jobId" : "jobs/process_iot_incrementally",
     "name" : "process_iot_incrementally",
     "dagName" : "Onbe_microbatchSnowflake_process_iot_incrementally",
@@ -15,8 +15,6 @@
     },
     "maxConcurrentRuns" : 1,
     "processDefaultSettings" : {
-      "email" : "best.neil@prophecy.io",
-      "email_on_failure" : true,
       "retries" : 0,
       "ignore_first_depends_on_past" : true,
       "do_xcom_push" : true

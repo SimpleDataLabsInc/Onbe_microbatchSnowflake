@@ -3,7 +3,7 @@
   "metainfo" : {
     "label" : "IOT_BATCHES",
     "autoLayout" : false,
-    "staleState" : "none",
+    "staleState" : "file",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
@@ -84,6 +84,34 @@
         "autoUpdateOnRun" : false
       }
     },
+    "a4yeyNDZii8dXMH_1d37K" : {
+      "id" : "a4yeyNDZii8dXMH_1d37K",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IOT",
+        "slug" : "IOT",
+        "x" : 60,
+        "y" : 20,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT",
+          "sourceType" : "Table",
+          "sourceName" : "_ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "rRpSp7LSqnOZCPoZmM5mT",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
     "final##WbhHL6wJ" : {
       "id" : "final##WbhHL6wJ",
       "component" : "TargetModel",
@@ -143,47 +171,7 @@
           "schema" : {
             "entityType" : "",
             "providerType" : "snowflake",
-            "fields" : [ {
-              "name" : "DEVICE_ID",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "PLANT_ID",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "TAG_NAME",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "TS",
-              "dataType" : {
-                "type" : "Timestamp"
-              }
-            }, {
-              "name" : "VALUE",
-              "dataType" : {
-                "type" : "Float"
-              }
-            }, {
-              "name" : "ENGINEERING_UNITS",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "DATE",
-              "dataType" : {
-                "type" : "Date"
-              }
-            }, {
-              "name" : "LOADED_AT",
-              "dataType" : {
-                "type" : "Timestamp"
-              }
-            } ]
+            "fields" : [ ]
           },
           "slug" : "IOT"
         } ],
@@ -238,34 +226,6 @@
         } ],
         "isCustomOutputSchema" : true,
         "autoUpdateOnRun" : true
-      }
-    },
-    "TElHjy7ZCwGf_CzXf8HtJ" : {
-      "id" : "TElHjy7ZCwGf_CzXf8HtJ",
-      "component" : "Source",
-      "metadata" : {
-        "label" : "IOT",
-        "slug" : "IOT",
-        "x" : 20,
-        "y" : 20,
-        "phase" : 0
-      },
-      "properties" : {
-        "table" : {
-          "name" : "IOT",
-          "sourceType" : "Table",
-          "sourceName" : "_ONBE_DEMO_var_DBT_TARGET_.PUBLIC",
-          "alias" : ""
-        }
-      },
-      "ports" : {
-        "inputs" : [ ],
-        "outputs" : [ {
-          "id" : "9Qjz50ZHlknnyRT8o2H2I",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
       }
     },
     "with_reported_at##oZyDFhfM" : {
@@ -340,9 +300,9 @@
     "target" : "final##WbhHL6wJ",
     "targetPort" : "olHDaUGZ"
   }, {
-    "id" : "Zhf4x7e_dSRuNOlOQKlVB$$1xgYQxM1fgWop7OuvUX9M",
-    "source" : "TElHjy7ZCwGf_CzXf8HtJ",
-    "sourcePort" : "9Qjz50ZHlknnyRT8o2H2I",
+    "id" : "btLgcKGDbXbEeQzk5dxyA$$zLDri-8c5pPc84eQFQj53",
+    "source" : "a4yeyNDZii8dXMH_1d37K",
+    "sourcePort" : "rRpSp7LSqnOZCPoZmM5mT",
     "target" : "iot_incremental##qIxTc8xX",
     "targetPort" : "7589ACBIKOsKsRzI9_Dea$$JY0uii7KqSWmpCidjSNb8"
   } ],

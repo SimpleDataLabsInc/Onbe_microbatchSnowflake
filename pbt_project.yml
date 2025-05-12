@@ -52,7 +52,22 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/IOT_BATCHES:
     name: IOT_BATCHES
-    schema: null
+    schema:
+      entityType: ''
+      providerType: Snowflake
+      fields:
+      - name: LOADED_AT
+        dataType:
+          type: Timestamp
+      - name: DATE
+        dataType:
+          type: Date
+      - name: N_RECORDS_LOADED
+        dataType:
+          type: Number
+      - name: REPORTED_AT
+        dataType:
+          type: Timestamp
     description: null
     author: best.neil@prophecy.io
     files:
@@ -140,16 +155,7 @@ sqlSources:
     files:
     - prophecy-sources/sources.yml
     createdAt: '2025-05-08 22:54:50'
-    tables:
-    - name: IOT
-      schema:
-        entityType: ''
-        providerType: snowflake
-        fields: []
-      description: null
-      author: best.neil@prophecy.io
-      createdAt: '2025-05-09 15:50:55'
-      tableType: table
+    tables: []
   .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:
     name: ONBE_DEMO_DEV.PUBLIC
     description: null
@@ -208,6 +214,48 @@ sqlSources:
         plants, enabling monitoring and analysis of operational performance.
       author: best.neil@prophecy.io
       createdAt: '2025-05-09 16:10:00'
+      tableType: table
+  .prophecy/metadata/sqlsources/_ONBE_DEMO_var_DBT_TARGET__PUBLIC:
+    name: _ONBE_DEMO_var_DBT_TARGET_.PUBLIC
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2025-05-12 15:48:44'
+    tables:
+    - name: IOT
+      schema:
+        entityType: ''
+        providerType: snowflake
+        fields:
+        - name: DEVICE_ID
+          dataType:
+            type: String
+        - name: PLANT_ID
+          dataType:
+            type: String
+        - name: TAG_NAME
+          dataType:
+            type: String
+        - name: TS
+          dataType:
+            type: Timestamp
+        - name: VALUE
+          dataType:
+            type: Float
+        - name: ENGINEERING_UNITS
+          dataType:
+            type: String
+        - name: DATE
+          dataType:
+            type: Date
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
+      description: IoT sensor data capturing measurements from devices across various
+        plants, enabling monitoring and analysis of operational performance.
+      author: best.neil@prophecy.io
+      createdAt: '2025-05-12 15:48:44'
       tableType: table
 sqlUnreferencedSources: {}
 sqlPipeline:

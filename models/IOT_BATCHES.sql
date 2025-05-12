@@ -7,7 +7,15 @@
   })
 }}
 
-WITH iot_incremental AS (
+WITH IOT AS (
+
+  SELECT * 
+  
+  FROM {{ source('_ONBE_DEMO_var_DBT_TARGET_.PUBLIC', 'IOT') }}
+
+),
+
+iot_incremental AS (
 
   SELECT *
   
@@ -32,14 +40,6 @@ records_per_loaded_at AS (
   
   GROUP BY 
     LOADED_AT, DATE
-
-),
-
-IOT AS (
-
-  SELECT * 
-  
-  FROM {{ source('ONBE_DEMO_' ~ var('DBT_TARGET')  ~ '.PUBLIC', 'IOT') }}
 
 ),
 

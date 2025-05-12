@@ -3,7 +3,7 @@
   "metainfo" : {
     "label" : "IOT_BATCHES",
     "autoLayout" : false,
-    "staleState" : "file",
+    "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
@@ -90,7 +90,7 @@
       "metadata" : {
         "label" : "IOT",
         "slug" : "IOT",
-        "x" : 60,
+        "x" : 20,
         "y" : 20,
         "phase" : 0
       },
@@ -171,7 +171,47 @@
           "schema" : {
             "entityType" : "",
             "providerType" : "snowflake",
-            "fields" : [ ]
+            "fields" : [ {
+              "name" : "DEVICE_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "PLANT_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TAG_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TS",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            }, {
+              "name" : "VALUE",
+              "dataType" : {
+                "type" : "Float"
+              }
+            }, {
+              "name" : "ENGINEERING_UNITS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "LOADED_AT",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            } ]
           },
           "slug" : "IOT"
         } ],

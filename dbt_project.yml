@@ -29,8 +29,7 @@ target-path: "target"
 # Variable Configs
 # ==================
 vars:
-  DBT_TARGET: "PROD"
-  __DBT_TARGET__: "{{ env_var( 'DBT_TARGET', 'DEV') }}"
+  DBT_TARGET: "{{ env_var( 'DBT_TARGET', 'DEV') }}"
 
 # ============
 # Run Hooks

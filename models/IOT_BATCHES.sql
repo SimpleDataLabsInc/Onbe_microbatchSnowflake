@@ -20,7 +20,6 @@ iot_incremental AS (
   SELECT *
   
   FROM IOT
-  -- ONBE_DEMO_{{ var('DBT_TARGET') }}.PUBLIC.IOT
   
   {% if is_incremental() %}
     WHERE 

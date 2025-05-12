@@ -12,7 +12,7 @@ jobs:
   jobs/process_iot_incrementally:
     name: process_iot_incrementally
     description: ''
-    fabricUID: 23284
+    fabricUID: 25547
     scheduler:
       Composer: {}
     cloudProvider: null

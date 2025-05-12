@@ -59,7 +59,6 @@ sqlModels:
     - models/IOT_BATCHES.sql
     - .prophecy/ide/models/IOT_BATCHES.json
     - models/schema.yml
-    - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []
@@ -103,7 +102,6 @@ sqlModels:
     - models/IOT_INCREMENTAL.sql
     - .prophecy/ide/models/IOT_INCREMENTAL.json
     - models/schema.yml
-    - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []
@@ -132,7 +130,6 @@ sqlMacros:
     - macros/log_results.sql
     - .prophecy/ide/macros/log_results.json
     - macros/macros.yml
-    - macros/macros.yml
     createdAt: '2025-04-07 20:21:17'
 sqlSeeds: {}
 sqlSources:
@@ -141,7 +138,6 @@ sqlSources:
     description: null
     author: best.neil@prophecy.io
     files:
-    - prophecy-sources/sources.yml
     - prophecy-sources/sources.yml
     createdAt: '2025-05-09 16:10:00'
     tables:
@@ -159,7 +155,6 @@ sqlSources:
     description: null
     author: best.neil@prophecy.io
     files:
-    - prophecy-sources/sources.yml
     - prophecy-sources/sources.yml
     createdAt: '2025-05-09 16:10:00'
     tables:
@@ -203,15 +198,39 @@ sqlSources:
     author: best.neil@prophecy.io
     files:
     - prophecy-sources/sources.yml
-    - prophecy-sources/sources.yml
     createdAt: '2025-05-12 16:48:16'
     tables:
     - name: IOT
       schema:
         entityType: ''
         providerType: snowflake
-        fields: []
-      description: null
+        fields:
+        - name: DEVICE_ID
+          dataType:
+            type: String
+        - name: PLANT_ID
+          dataType:
+            type: String
+        - name: TAG_NAME
+          dataType:
+            type: String
+        - name: TS
+          dataType:
+            type: Timestamp
+        - name: VALUE
+          dataType:
+            type: Float
+        - name: ENGINEERING_UNITS
+          dataType:
+            type: String
+        - name: DATE
+          dataType:
+            type: Date
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
+      description: IoT sensor data capturing measurements from devices across various
+        plants, enabling monitoring and analysis of operational performance.
       author: best.neil@prophecy.io
       createdAt: '2025-05-12 16:48:16'
       tableType: table

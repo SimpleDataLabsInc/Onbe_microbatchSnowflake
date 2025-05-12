@@ -4,15 +4,19 @@ models:
 - name: "IOT_BATCHES"
   columns:
   - name: "LOADED_AT"
+    tests: []
     dataType:
       type: "Timestamp"
   - name: "DATE"
+    tests: []
     dataType:
       type: "Date"
   - name: "N_RECORDS_LOADED"
+    tests: []
     dataType:
       type: "Number"
   - name: "REPORTED_AT"
+    tests: []
     dataType:
       type: "Timestamp"
   tests: []

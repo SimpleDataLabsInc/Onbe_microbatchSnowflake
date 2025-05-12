@@ -61,9 +61,9 @@ jobs:
                   # --branch is just a label; not a target for git
                   # --no-push
               # git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
-              echo "Pushed new tag `$(git tag --contains)` onto branch `$GITHUB_REF_NAME`"
+              echo "Pushed new tag \`$(git tag --contains)\` onto branch \`$GITHUB_REF_NAME\`"
           else
-              echo "`pbt versioning --sync-check` failed; please check Prophecy metadata"
+              echo "\`pbt versioning --sync-check\` failed; please check Prophecy metadata"
               # Fail the job to indicate changes were needed
               exit 1
           fi

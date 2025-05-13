@@ -22,15 +22,141 @@
     "version" : 3
   },
   "processes" : {
+    "records_per_load##Xnxy20JI" : {
+      "id" : "records_per_load##Xnxy20JI",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "records_per_loaded_at",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "aggregate" : [ {
+          "expression" : {
+            "expression" : "LOADED_AT"
+          },
+          "alias" : "LOADED_AT",
+          "_row_id" : "2017320469"
+        }, {
+          "expression" : {
+            "expression" : "DATE"
+          },
+          "alias" : "DATE",
+          "_row_id" : "548003776"
+        }, {
+          "expression" : {
+            "expression" : "COUNT(*)"
+          },
+          "alias" : "N_RECORDS_LOADED",
+          "_row_id" : "255099427"
+        } ],
+        "allowSelection" : true,
+        "condition" : {
+          "expression" : ""
+        },
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "GgBUHvk6##LOADED_AT", "GgBUHvk6##DATE" ],
+        "groupBy" : [ {
+          "expression" : {
+            "expression" : "LOADED_AT"
+          },
+          "_row_id" : "846313047"
+        }, {
+          "expression" : {
+            "expression" : "DATE"
+          },
+          "_row_id" : "555788314"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "GgBUHvk6",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "mJj5XIeW",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "index" : 1
+    },
+    "gcEW503vweIlKoq78AKIV" : {
+      "id" : "gcEW503vweIlKoq78AKIV",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IOT",
+        "slug" : "IOT",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT",
+          "sourceType" : "Table",
+          "sourceName" : "_ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "1ZU2psBdxsVal1suZBp7A",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "final##WbhHL6wJ" : {
+      "id" : "final##WbhHL6wJ",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "IOT_BATCHES",
+        "x" : 820,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "isLabelGrayed" : false
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM with_reported_at\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "olHDaUGZ",
+          "slug" : "with_reported_at"
+        } ],
+        "outputs" : [ {
+          "id" : "v2IpmBUl",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "index" : 3
+    },
     "iot_incremental##qIxTc8xX" : {
       "id" : "iot_incremental##qIxTc8xX",
       "component" : "SQLStatement",
       "metadata" : {
         "label" : "iot_incremental",
-        "x" : 20,
+        "x" : 220,
         "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ "env_var" ],
+        "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
@@ -38,11 +164,59 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM -- FROM IOT\nONBE_DEMO_{{ env_var('DBT_TARGET', 'DEV') }}.PUBLIC.IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
+          "content" : "SELECT *\n\nIOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
         } ]
       },
       "ports" : {
-        "inputs" : [ ],
+        "inputs" : [ {
+          "id" : "gsZS0GygppREVKyxyTpPv$$ruJG_QgRbB2mw1U9Pim1r",
+          "schema" : {
+            "entityType" : "",
+            "providerType" : "snowflake",
+            "fields" : [ {
+              "name" : "DEVICE_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "PLANT_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TAG_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TS",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            }, {
+              "name" : "VALUE",
+              "dataType" : {
+                "type" : "Float"
+              }
+            }, {
+              "name" : "ENGINEERING_UNITS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "LOADED_AT",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            } ]
+          },
+          "slug" : "IOT"
+        } ],
         "outputs" : [ {
           "id" : "zdBnIast",
           "schema" : {
@@ -96,82 +270,19 @@
         "autoUpdateOnRun" : true
       }
     },
-    "records_per_load##Xnxy20JI" : {
-      "id" : "records_per_load##Xnxy20JI",
-      "component" : "Aggregate",
-      "metadata" : {
-        "label" : "records_per_loaded_at",
-        "x" : 220,
-        "y" : 20,
-        "phase" : 0,
-        "macroDependencies" : [ ],
-        "isLabelGrayed" : false
-      },
-      "properties" : {
-        "aggregate" : [ {
-          "expression" : {
-            "expression" : "LOADED_AT"
-          },
-          "alias" : "LOADED_AT",
-          "_row_id" : "2017320469"
-        }, {
-          "expression" : {
-            "expression" : "DATE"
-          },
-          "alias" : "DATE",
-          "_row_id" : "548003776"
-        }, {
-          "expression" : {
-            "expression" : "COUNT(*)"
-          },
-          "alias" : "N_RECORDS_LOADED",
-          "_row_id" : "255099427"
-        } ],
-        "allowSelection" : true,
-        "condition" : {
-          "expression" : ""
-        },
-        "activeTab" : "aggregate",
-        "columnsSelector" : [ ],
-        "groupBy" : [ {
-          "expression" : {
-            "expression" : "LOADED_AT"
-          },
-          "_row_id" : "846313047"
-        }, {
-          "expression" : {
-            "expression" : "DATE"
-          },
-          "_row_id" : "555788314"
-        } ]
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "GgBUHvk6",
-          "slug" : "in0"
-        } ],
-        "outputs" : [ {
-          "id" : "mJj5XIeW",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      },
-      "index" : 1
-    },
     "with_reported_at##oZyDFhfM" : {
       "id" : "with_reported_at##oZyDFhfM",
       "component" : "Reformat",
       "metadata" : {
         "label" : "with_reported_at",
-        "x" : 420,
+        "x" : 620,
         "y" : 20,
         "phase" : 0,
         "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "yS3yl5lt##LOADED_AT", "yS3yl5lt##DATE", "yS3yl5lt##N_RECORDS_LOADED" ],
         "expressions" : [ {
           "expression" : {
             "expression" : "LOADED_AT"
@@ -211,40 +322,6 @@
         "autoUpdateOnRun" : false
       },
       "index" : 2
-    },
-    "final##WbhHL6wJ" : {
-      "id" : "final##WbhHL6wJ",
-      "component" : "TargetModel",
-      "metadata" : {
-        "label" : "IOT_BATCHES",
-        "x" : 620,
-        "y" : 20,
-        "phase" : 0,
-        "isLabelGrayed" : false
-      },
-      "properties" : {
-        "customQueryDisabled" : true,
-        "customQuery" : false,
-        "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM with_reported_at\n",
-        "incrementalKey" : false,
-        "incremental" : {
-          "expression" : "true"
-        }
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "olHDaUGZ",
-          "slug" : "with_reported_at"
-        } ],
-        "outputs" : [ {
-          "id" : "v2IpmBUl",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      },
-      "index" : 3
     }
   },
   "connections" : [ {
@@ -265,6 +342,12 @@
     "sourcePort" : "iba7TAPF",
     "target" : "final##WbhHL6wJ",
     "targetPort" : "olHDaUGZ"
+  }, {
+    "id" : "fQwGsOH4_OGYEqlvG6YJP",
+    "source" : "gcEW503vweIlKoq78AKIV",
+    "sourcePort" : "1ZU2psBdxsVal1suZBp7A",
+    "target" : "iot_incremental##qIxTc8xX",
+    "targetPort" : "gsZS0GygppREVKyxyTpPv$$ruJG_QgRbB2mw1U9Pim1r"
   } ],
   "component" : "Model"
 }

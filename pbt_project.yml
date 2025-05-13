@@ -156,6 +156,48 @@ sqlSources:
     - prophecy-sources/sources.yml
     createdAt: '2025-04-30 14:47:14'
     tables: []
+  .prophecy/metadata/sqlsources/_ONBE_DEMO_env_var_DBT_TARGET_DEV__PUBLIC:
+    name: _ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2025-05-13 16:41:26'
+    tables:
+    - name: IOT
+      schema:
+        entityType: ''
+        providerType: snowflake
+        fields:
+        - name: DEVICE_ID
+          dataType:
+            type: String
+        - name: PLANT_ID
+          dataType:
+            type: String
+        - name: TAG_NAME
+          dataType:
+            type: String
+        - name: TS
+          dataType:
+            type: Timestamp
+        - name: VALUE
+          dataType:
+            type: Float
+        - name: ENGINEERING_UNITS
+          dataType:
+            type: String
+        - name: DATE
+          dataType:
+            type: Date
+        - name: LOADED_AT
+          dataType:
+            type: Timestamp
+      description: IoT sensor data capturing measurements from devices across plants,
+        enabling real-time monitoring and analysis of operational performance.
+      author: best.neil@prophecy.io
+      createdAt: '2025-05-13 16:41:26'
+      tableType: table
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

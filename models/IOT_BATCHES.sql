@@ -17,7 +17,9 @@ WITH IOT AS (
 
 iot_incremental AS (
 
-  SELECT * IOT
+  SELECT *
+  
+  FROM IOT
   
   {% if is_incremental() %}
     WHERE 

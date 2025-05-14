@@ -85,34 +85,6 @@
       },
       "index" : 1
     },
-    "gcEW503vweIlKoq78AKIV" : {
-      "id" : "gcEW503vweIlKoq78AKIV",
-      "component" : "Source",
-      "metadata" : {
-        "label" : "IOT",
-        "slug" : "IOT",
-        "x" : 20,
-        "y" : 20,
-        "phase" : 0
-      },
-      "properties" : {
-        "table" : {
-          "name" : "IOT",
-          "sourceType" : "Table",
-          "sourceName" : "_ONBE_DEMO_env_var_DBT_TARGET_DEV_.PUBLIC",
-          "alias" : ""
-        }
-      },
-      "ports" : {
-        "inputs" : [ ],
-        "outputs" : [ {
-          "id" : "1ZU2psBdxsVal1suZBp7A",
-          "slug" : "out"
-        } ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      }
-    },
     "final##WbhHL6wJ" : {
       "id" : "final##WbhHL6wJ",
       "component" : "TargetModel",
@@ -164,59 +136,11 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM\n\n  IOT\n\n{% if is_incremental() %}\nWHERE\n \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
+          "content" : "SELECT *\n\nFROM\n\n  {{ var('TARGET_DATABASE') }}.PUBLIC.IOT\n\n{% if is_incremental() %}\nWHERE\n \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
         } ]
       },
       "ports" : {
-        "inputs" : [ {
-          "id" : "gsZS0GygppREVKyxyTpPv$$ruJG_QgRbB2mw1U9Pim1r",
-          "schema" : {
-            "entityType" : "",
-            "providerType" : "snowflake",
-            "fields" : [ {
-              "name" : "DEVICE_ID",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "PLANT_ID",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "TAG_NAME",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "TS",
-              "dataType" : {
-                "type" : "Timestamp"
-              }
-            }, {
-              "name" : "VALUE",
-              "dataType" : {
-                "type" : "Float"
-              }
-            }, {
-              "name" : "ENGINEERING_UNITS",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "DATE",
-              "dataType" : {
-                "type" : "Date"
-              }
-            }, {
-              "name" : "LOADED_AT",
-              "dataType" : {
-                "type" : "Timestamp"
-              }
-            } ]
-          },
-          "slug" : "IOT"
-        } ],
+        "inputs" : [ ],
         "outputs" : [ {
           "id" : "zdBnIast",
           "schema" : {
@@ -342,12 +266,6 @@
     "sourcePort" : "iba7TAPF",
     "target" : "final##WbhHL6wJ",
     "targetPort" : "olHDaUGZ"
-  }, {
-    "id" : "fQwGsOH4_OGYEqlvG6YJP",
-    "source" : "gcEW503vweIlKoq78AKIV",
-    "sourcePort" : "1ZU2psBdxsVal1suZBp7A",
-    "target" : "iot_incremental##qIxTc8xX",
-    "targetPort" : "gsZS0GygppREVKyxyTpPv$$ruJG_QgRbB2mw1U9Pim1r"
   } ],
   "component" : "Model"
 }

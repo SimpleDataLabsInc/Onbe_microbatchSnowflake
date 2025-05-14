@@ -28,7 +28,8 @@ target-path: "target"
 # ==================
 # Variable Configs
 # ==================
-vars: {}
+vars:
+  TARGET_DATABASE: "{{ 'ONBE_DEMO_' ~ env_var('DBT_TARGET','DEV') }}"
 
 # ============
 # Run Hooks

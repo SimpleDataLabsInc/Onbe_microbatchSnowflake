@@ -7,11 +7,19 @@
   })
 }}
 
-WITH iot_incremental AS (
+WITH IOT AS (
+
+  SELECT * 
+  
+  FROM {{ source('ONBE_DEMO_DEV.PUBLIC', 'IOT') }}
+
+),
+
+iot_incremental AS (
 
   SELECT *
   
-  FROM {{ var('TARGET_DATABASE') }}.PUBLIC.IOT
+  FROM IOT
   
   {% if is_incremental() %}
     WHERE 

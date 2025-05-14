@@ -22,6 +22,34 @@
     "version" : 3
   },
   "processes" : {
+    "9bOKxLcU74XoVBj13_MJk" : {
+      "id" : "9bOKxLcU74XoVBj13_MJk",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IOT",
+        "slug" : "IOT",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "IOT",
+          "sourceType" : "Table",
+          "sourceName" : "ONBE_DEMO_DEV.PUBLIC",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "tUGg-ov8nj41Bd-sjMuUe",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
     "records_per_load##Xnxy20JI" : {
       "id" : "records_per_load##Xnxy20JI",
       "component" : "Aggregate",
@@ -82,8 +110,7 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 1
+      }
     },
     "final##WbhHL6wJ" : {
       "id" : "final##WbhHL6wJ",
@@ -117,8 +144,7 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 3
+      }
     },
     "iot_incremental##qIxTc8xX" : {
       "id" : "iot_incremental##qIxTc8xX",
@@ -136,11 +162,59 @@
           "path" : "out",
           "id" : "out",
           "language" : "sql",
-          "content" : "SELECT *\n\nFROM\n\n  {{ var('TARGET_DATABASE') }}.PUBLIC.IOT\n\n{% if is_incremental() %}\nWHERE\n \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
+          "content" : "SELECT *\n\nFROM\n\n  IOT\n\n{% if is_incremental() %}\nWHERE\n \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
         } ]
       },
       "ports" : {
-        "inputs" : [ ],
+        "inputs" : [ {
+          "id" : "9aUiw7PTDZwfwjujx0Qp3$$Pe3kz1wDB09-heUJof25p",
+          "schema" : {
+            "entityType" : "",
+            "providerType" : "snowflake",
+            "fields" : [ {
+              "name" : "DEVICE_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "PLANT_ID",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TAG_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "TS",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            }, {
+              "name" : "VALUE",
+              "dataType" : {
+                "type" : "Float"
+              }
+            }, {
+              "name" : "ENGINEERING_UNITS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "LOADED_AT",
+              "dataType" : {
+                "type" : "Timestamp"
+              }
+            } ]
+          },
+          "slug" : "IOT"
+        } ],
         "outputs" : [ {
           "id" : "zdBnIast",
           "schema" : {
@@ -244,8 +318,7 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 2
+      }
     }
   },
   "connections" : [ {
@@ -266,6 +339,12 @@
     "sourcePort" : "iba7TAPF",
     "target" : "final##WbhHL6wJ",
     "targetPort" : "olHDaUGZ"
+  }, {
+    "id" : "6XcAQ2oeq9wo9LvIgb1HG$$z-SpiTiKUllOag7dG0Ntu",
+    "source" : "9bOKxLcU74XoVBj13_MJk",
+    "sourcePort" : "tUGg-ov8nj41Bd-sjMuUe",
+    "target" : "iot_incremental##qIxTc8xX",
+    "targetPort" : "9aUiw7PTDZwfwjujx0Qp3$$Pe3kz1wDB09-heUJof25p"
   } ],
   "component" : "Model"
 }

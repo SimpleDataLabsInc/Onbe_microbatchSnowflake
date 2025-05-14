@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Composer",
-    "fabricId" : "23283",
+    "fabricId" : "25547",
     "jobId" : "jobs/process_iot_incrementally",
     "name" : "process_iot_incrementally",
     "dagName" : "Onbe_microbatchSnowflake_process_iot_incrementally",

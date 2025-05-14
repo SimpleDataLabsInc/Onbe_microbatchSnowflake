@@ -12,7 +12,7 @@ jobs:
   jobs/process_iot_incrementally:
     name: process_iot_incrementally
     description: ''
-    fabricUID: 23283
+    fabricUID: 25547
     scheduler:
       Composer: {}
     cloudProvider: null
@@ -52,22 +52,7 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/IOT_BATCHES:
     name: IOT_BATCHES
-    schema:
-      entityType: ''
-      providerType: Snowflake
-      fields:
-      - name: LOADED_AT
-        dataType:
-          type: Timestamp
-      - name: DATE
-        dataType:
-          type: Date
-      - name: N_RECORDS_LOADED
-        dataType:
-          type: Number
-      - name: REPORTED_AT
-        dataType:
-          type: Timestamp
+    schema: null
     description: null
     author: best.neil@prophecy.io
     files:
@@ -147,49 +132,7 @@ sqlMacros:
     - macros/macros.yml
     createdAt: '2025-04-07 20:21:17'
 sqlSeeds: {}
-sqlSources:
-  .prophecy/metadata/sqlsources/ONBE_DEMO_DEV_PUBLIC:
-    name: ONBE_DEMO_DEV.PUBLIC
-    description: null
-    author: best.neil@prophecy.io
-    files:
-    - prophecy-sources/sources.yml
-    createdAt: '2025-05-14 18:45:59'
-    tables:
-    - name: IOT
-      schema:
-        entityType: ''
-        providerType: snowflake
-        fields:
-        - name: DEVICE_ID
-          dataType:
-            type: String
-        - name: PLANT_ID
-          dataType:
-            type: String
-        - name: TAG_NAME
-          dataType:
-            type: String
-        - name: TS
-          dataType:
-            type: Timestamp
-        - name: VALUE
-          dataType:
-            type: Float
-        - name: ENGINEERING_UNITS
-          dataType:
-            type: String
-        - name: DATE
-          dataType:
-            type: Date
-        - name: LOADED_AT
-          dataType:
-            type: Timestamp
-      description: IoT sensor data capturing measurements from devices across plants,
-        enabling real-time monitoring and analysis of operational performance.
-      author: best.neil@prophecy.io
-      createdAt: '2025-05-14 18:45:59'
-      tableType: table
+sqlSources: {}
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

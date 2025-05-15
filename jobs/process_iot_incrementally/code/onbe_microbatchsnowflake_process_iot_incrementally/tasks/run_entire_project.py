@@ -29,7 +29,7 @@ def run_entire_project():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake",
+          "run_props": " --profile snowflake --vars {\"TARGET_DATABASE\":\"ONBE_DEMO_{{ var.value.DBT_TARGET }}\"}",
           "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins"}
         },
     )

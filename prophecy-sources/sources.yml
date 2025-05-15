@@ -1,8 +1,8 @@
 ---
 version: 2
 sources:
-- name: "_TARGET_DATABASE_.PUBLIC"
-  database: "{{ 'ONBE_DEMO_' ~ env_var( 'DBT_TARGET', 'DEV') }}"
+- name: "_var_TARGET_DATABASE_.PUBLIC"
+  database: "{{var('TARGET_DATABASE')}}"
   schema: "PUBLIC"
   tables:
   - name: "IOT"

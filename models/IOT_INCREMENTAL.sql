@@ -4,18 +4,24 @@
   })
 }}
 
-{% set TARGET_DATABASE = 'ONBE_DEMO_' ~ env_var( 'DBT_TARGET', 'DEV') %}
+WITH IOT AS (
 
-WITH incremental_filter AS (
-
-  SELECT *
+  SELECT * 
   
-  FROM {{TARGET_DATABASE}}.PUBLIC.IOT
+  FROM {{ source('_var_TARGET_DATABASE_.PUBLIC', 'IOT') }}
+
+),
+
+incremental_filter AS (
+
+  SELECT * 
+  
+  FROM IOT AS in0
   
   WHERE LOADED_AT > (
           SELECT MAX(LOADED_AT)
           
-          FROM {{TARGET_DATABASE}}.PUBLIC.IOT_BATCHES
+          FROM IOT
          )
 
 )

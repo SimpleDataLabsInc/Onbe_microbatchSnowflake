@@ -78,6 +78,7 @@
         "gitSshUrl" : null,
         "indirectSelection" : null,
         "partialParse" : null,
+        "vars" : "{\"TARGET_DATABASE\":\"ONBE_DEMO_{{ var.value.DBT_TARGET }}\"}",
         "isAdhocRunFromSameProject" : null,
         "customVersion" : false,
         "noPrint" : null,

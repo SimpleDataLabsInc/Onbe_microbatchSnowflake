@@ -7,13 +7,19 @@
   })
 }}
 
-{% set TARGET_DATABASE = 'ONBE_DEMO_' ~ env_var( 'DBT_TARGET', 'DEV') %}
+WITH IOT AS (
 
-WITH iot_incremental AS (
+  SELECT * 
+  
+  FROM {{ source('_var_TARGET_DATABASE_.PUBLIC', 'IOT') }}
+
+),
+
+iot_incremental AS (
 
   SELECT *
   
-  FROM {{TARGET_DATABASE}}.PUBLIC.IOT
+  FROM IOT
   
   {% if is_incremental() %}
     WHERE 

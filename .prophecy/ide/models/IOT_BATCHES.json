@@ -11,6 +11,7 @@
       "entityConfig" : {
         "pre-hook" : "[\"{{ print( 'is_incremental(): ' ~ is_incremental())}}\"]",
         "materialized" : "incremental",
+        "database" : "\"{{ TARGET_DATABASE }}\"",
         "unique_key" : "[\"LOADED_AT\", \"DATE\"]",
         "incremental_strategy" : "\"merge\"",
         "type" : "ModelConfig"
@@ -24,34 +25,85 @@
     "version" : 3
   },
   "processes" : {
-    "iot_incremental##UuRWhvu3" : {
-      "id" : "iot_incremental##UuRWhvu3",
-      "component" : "SQLStatement",
+    "gLDL-vrmegu7sk1kzkqWz" : {
+      "id" : "gLDL-vrmegu7sk1kzkqWz",
+      "component" : "Source",
       "metadata" : {
-        "label" : "iot_incremental",
-        "x" : 20,
+        "label" : "IOT",
+        "slug" : "IOT",
+        "x" : -160,
         "y" : 20,
-        "phase" : 0,
-        "isLabelGrayed" : false
+        "phase" : 0
       },
       "properties" : {
-        "fileTabs" : [ {
-          "path" : "out",
-          "id" : "out",
-          "language" : "sql",
-          "content" : "SELECT *\n\nFROM {{TARGET_DATABASE}}.PUBLIC.IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
-        } ]
+        "table" : {
+          "name" : "IOT",
+          "sourceType" : "Table",
+          "sourceName" : "_TARGET_DATABASE_.PUBLIC",
+          "alias" : ""
+        }
       },
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "Wo2sgLX8",
+          "id" : "ahRIco-dOk5I-BWxzzFCf",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
+      }
+    },
+    "with_reported_at##JgQ5aA0s" : {
+      "id" : "with_reported_at##JgQ5aA0s",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "with_reported_at",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ],
+        "isLabelGrayed" : false
       },
-      "index" : 0
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "LOADED_AT"
+          },
+          "alias" : "LOADED_AT",
+          "_row_id" : "1297811306"
+        }, {
+          "expression" : {
+            "expression" : "DATE"
+          },
+          "alias" : "DATE",
+          "_row_id" : "1436675426"
+        }, {
+          "expression" : {
+            "expression" : "N_RECORDS_LOADED"
+          },
+          "alias" : "N_RECORDS_LOADED",
+          "_row_id" : "2091695480"
+        }, {
+          "expression" : {
+            "expression" : "CURRENT_TIMESTAMP()"
+          },
+          "alias" : "REPORTED_AT",
+          "_row_id" : "1093113044"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "YwDMS5uE",
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "dYOtjbNZ",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
     },
     "records_per_load##DoDbEaqb" : {
       "id" : "records_per_load##DoDbEaqb",
@@ -113,61 +165,39 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 1
+      }
     },
-    "with_reported_at##JgQ5aA0s" : {
-      "id" : "with_reported_at##JgQ5aA0s",
-      "component" : "Reformat",
+    "iot_incremental##UuRWhvu3" : {
+      "id" : "iot_incremental##UuRWhvu3",
+      "component" : "SQLStatement",
       "metadata" : {
-        "label" : "with_reported_at",
-        "x" : 420,
+        "label" : "iot_incremental",
+        "x" : 20,
         "y" : 20,
         "phase" : 0,
         "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
-        "expressions" : [ {
-          "expression" : {
-            "expression" : "LOADED_AT"
-          },
-          "alias" : "LOADED_AT",
-          "_row_id" : "1297811306"
-        }, {
-          "expression" : {
-            "expression" : "DATE"
-          },
-          "alias" : "DATE",
-          "_row_id" : "1436675426"
-        }, {
-          "expression" : {
-            "expression" : "N_RECORDS_LOADED"
-          },
-          "alias" : "N_RECORDS_LOADED",
-          "_row_id" : "2091695480"
-        }, {
-          "expression" : {
-            "expression" : "CURRENT_TIMESTAMP()"
-          },
-          "alias" : "REPORTED_AT",
-          "_row_id" : "1093113044"
+        "fileTabs" : [ {
+          "path" : "out",
+          "id" : "out",
+          "language" : "sql",
+          "content" : "SELECT *\n\nFROM IOT\n\n{% if is_incremental() %}\n  WHERE \n    LOADED_AT > (SELECT MAX(LOADED_AT) FROM {{ this }})\n{% endif %}"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "YwDMS5uE",
-          "slug" : "in0"
+          "id" : "vdyUHJSd-gvhfU3MXwe3R$$SsQQolIcek99Qm5kMlebG",
+          "slug" : "IOT"
         } ],
         "outputs" : [ {
-          "id" : "dYOtjbNZ",
+          "id" : "Wo2sgLX8",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 2
+      }
     },
     "final##d7pHoITF" : {
       "id" : "final##d7pHoITF",
@@ -177,13 +207,14 @@
         "x" : 620,
         "y" : 20,
         "phase" : 0,
+        "macroDependencies" : [ ],
         "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM with_reported_at\n",
+        "query" : "SELECT * \n\nFROM with_reported_at\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -200,8 +231,7 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 3
+      }
     }
   },
   "connections" : [ {
@@ -222,6 +252,12 @@
     "sourcePort" : "dYOtjbNZ",
     "target" : "final##d7pHoITF",
     "targetPort" : "yhY9HK5n"
+  }, {
+    "id" : "pfyoGNwa_cBWqGlb7_mC8$$RVt9GKZE_V90t9KA8WUJR",
+    "source" : "gLDL-vrmegu7sk1kzkqWz",
+    "sourcePort" : "ahRIco-dOk5I-BWxzzFCf",
+    "target" : "iot_incremental##UuRWhvu3",
+    "targetPort" : "vdyUHJSd-gvhfU3MXwe3R$$SsQQolIcek99Qm5kMlebG"
   } ],
   "component" : "Model"
 }
